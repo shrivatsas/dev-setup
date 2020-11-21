@@ -27,35 +27,47 @@ brew cask install dbeaver-community
 brew cask install visual-studio-code  
 cat ./vscode-extensions.txt | xargs -L1 code — install-extension
 brew cask install intellij-idea
-
-brew cask install docker
+brew install maven
+brew install jq
 
 #### Infra
+brew cask install docker
 brew cask install vagrant
 brew cask install virtualbox
 brew cask install vagrant-manager
-brew install slack
+
+#### Cloud
+brew install awscli
+brew install azure-cli
+
+#### Apps
 brew install dropbox
 brew cask install postman  
 brew cask install rescuetime  
 brew cask install drawio  
 
-brew cask install tla-plus-toolbox  
+#### Formal Methods
+brew cask install tla-plus-toolbox
+brew cask install alloy
 
 #### Languages and Frameworks
+brew install elixir
 brew cask install dotnet-sdk 
-brew cask install go
+brew install go
 brew install cabal-install
 brew install sbt
 brew install leiningen
 brew install adoptopenjdk8
+env add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
 brew cask install graalvm/tap/graalvm-ce-java11
+jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.3.0/Contents/Home
 
 #### http://www.mediaatelier.com/CheatSheet/
 brew cask install cheatsheet 
 
 #### Communication
 brew cask install zoomus
+brew install slack
 
 #### References:
 https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
