@@ -48,9 +48,18 @@ brew cask install go
 brew install cabal-install
 brew install sbt
 brew install leiningen
+brew install adoptopenjdk8
+brew cask install graalvm/tap/graalvm-ce-java11
 
 #### http://www.mediaatelier.com/CheatSheet/
 brew cask install cheatsheet 
 
+#### Communication
+brew cask install zoomus
+
 #### References:
 https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
+
+#### TODO
+#### IntelliJ plugins
+wget -qO-  https://plugins.jetbrains.com/files/$(curl https://plugins.jetbrains.com/api/plugins/4415/updates | jq -r '.[0].file') | bsdtar -xvf- -C ~/.PhpStorm2018.3/config/plugins
