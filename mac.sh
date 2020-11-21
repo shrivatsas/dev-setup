@@ -1,18 +1,19 @@
-+ Homebrew  
+#### Homebrew  
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew update
 
-+ iTerm2  
+#### iTerm2  
 brew cask install iTerm2
 
-+ ZSH and oh-my-zsh  
+#### ZSH and oh-my-zsh  
 brew install zsh  
 chsh -s /bin/zsh && sudo chsh -s /bin/zsh   
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh  
 
-+ Firefox  
+#### Firefox  
 brew install firefox-developer-edition  
 
-+ Package Managers  
+#### Package Managers  
 brew install nvm jenv  
 brew cask install miniconda  
 
@@ -22,14 +23,14 @@ brew install mysql
 brew services start mysql  
 brew cask install dbeaver-community  
 
-+ IDEs and Editors
+#### IDEs and Editors
 brew cask install visual-studio-code  
-vs-code extensions  
+cat ./vscode-extensions.txt | xargs -L1 code — install-extension
 brew cask install intellij-idea
 
 brew cask install docker
 
-+ Infra
+#### Infra
 brew cask install vagrant
 brew cask install virtualbox
 brew cask install vagrant-manager
@@ -37,12 +38,19 @@ brew install slack
 brew install dropbox
 brew cask install postman  
 brew cask install rescuetime  
-draw.io   
+brew cask install drawio  
 
-brew cask install tla-plus-toolbox
+brew cask install tla-plus-toolbox  
 
-+ http://www.mediaatelier.com/CheatSheet/
+#### Languages and Frameworks
+brew cask install dotnet-sdk 
+brew cask install go
+brew install cabal-install
+brew install sbt
+brew install leiningen
+
+#### http://www.mediaatelier.com/CheatSheet/
 brew cask install cheatsheet 
 
-## References:
+#### References:
 https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
