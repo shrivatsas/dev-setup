@@ -11,7 +11,7 @@ chsh -s /bin/zsh && sudo chsh -s /bin/zsh
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh  
 
 #### Firefox  
-brew install firefox-developer-edition  
+brew install homebrew/cask-versions/firefox-developer-edition  
 
 #### Package Managers  
 brew install nvm jenv  
@@ -19,15 +19,16 @@ brew cask install miniconda
 
 brew install git  
 
-brew install mysql  
-brew services start mysql  
+brew install mysql redis  
+brew services start mysql redis  
 brew cask install dbeaver-community  
 
 #### IDEs and Editors
 brew cask install visual-studio-code  
 cat ./vscode-extensions.txt | xargs -L1 code — install-extension
 brew cask install intellij-idea
-brew install maven
+
+#### Utilities
 brew install jq
 
 #### Infra
@@ -51,6 +52,7 @@ brew cask install tla-plus-toolbox
 brew cask install alloy
 
 #### Languages and Frameworks
+brew install maven  
 brew install elixir
 brew cask install dotnet-sdk 
 brew install go
