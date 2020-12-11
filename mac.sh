@@ -3,7 +3,7 @@
 brew update
 
 #### iTerm2  
-brew cask install iTerm2
+brew install --cask iTerm2
 
 #### ZSH and oh-my-zsh  
 brew install zsh  
@@ -15,27 +15,32 @@ brew install homebrew/cask-versions/firefox-developer-edition
 
 #### Package Managers  
 brew install nvm jenv  
-brew cask install miniconda  
+brew install --cask miniconda
+cat ./conda-packages.txt | xargs -L1 conda install
 
 brew install git  
+echo 'alias gs=‘git status’ gc=‘git checkout’ ga=‘git add’ gsl=‘git stash list’ gss=‘git stash save’ gm=‘git commit -m’ gd=‘git diff’' >> ~/.zshrc
 
 brew install mysql redis  
 brew services start mysql redis  
-brew cask install dbeaver-community  
+brew install --cask dbeaver-community  
+# Copy .dbeaver directory from old installation if available
+# https://dbeaver.com/docs/wiki/Admin-Manage-Connections/
 
 #### IDEs and Editors
-brew cask install visual-studio-code  
-cat ./vscode-extensions.txt | xargs -L1 code — install-extension
-brew cask install intellij-idea
+brew install --cask visual-studio-code  
+cat ./vscode-extensions.txt | xargs -L1 code —-install-extension
+brew install --cask intellij-idea
 
 #### Utilities
-brew install jq
+brew install jq tree
+brew install --cask microsoft-excel
 
 #### Infra
-brew cask install docker
-brew cask install vagrant
-brew cask install virtualbox
-brew cask install vagrant-manager
+brew install --cask docker
+brew install --cask vagrant
+brew install --cask virtualbox
+brew install --cask vagrant-manager
 
 #### Cloud
 brew install awscli
@@ -43,32 +48,33 @@ brew install azure-cli
 
 #### Apps
 brew install dropbox
-brew cask install postman  
-brew cask install rescuetime  
-brew cask install drawio  
+brew install --cask postman  
+brew install --cask rescuetime  
+brew install --cask drawio  
 
 #### Formal Methods
-brew cask install tla-plus-toolbox
-brew cask install alloy
+brew install --cask tla-plus-toolbox
+brew install --cask alloy
 
 #### Languages and Frameworks
 brew install maven  
 brew install elixir
-brew cask install dotnet-sdk 
+brew install --cask dotnet-sdk 
 brew install go
 brew install cabal-install
 brew install sbt
 brew install leiningen
 brew install adoptopenjdk8
-env add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
-brew cask install graalvm/tap/graalvm-ce-java11
+jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
+brew install --cask graalvm/tap/graalvm-ce-java11
+xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.3.0
 jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.3.0/Contents/Home
 
 #### http://www.mediaatelier.com/CheatSheet/
-brew cask install cheatsheet 
+brew install --cask cheatsheet 
 
 #### Communication
-brew cask install zoomus
+brew install --cask zoomus
 brew install slack
 
 #### References:
