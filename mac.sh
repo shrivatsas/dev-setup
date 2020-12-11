@@ -19,7 +19,7 @@ brew install --cask miniconda
 cat ./conda-packages.txt | xargs -L1 conda install
 
 brew install git  
-echo 'alias gs=‘git status’ gc=‘git checkout’ ga=‘git add’ gsl=‘git stash list’ gss=‘git stash save’ gm=‘git commit -m’ gd=‘git diff’' >> ~/.zshrc
+echo "alias gs='git status' gc='git checkout' ga='git add' gsl='git stash list' gss='git stash save' gm='git commit -m' gd='git diff'" >> ~/.zshrc
 
 brew install mysql redis  
 brew services start mysql redis  
@@ -28,9 +28,10 @@ brew install --cask dbeaver-community
 # https://dbeaver.com/docs/wiki/Admin-Manage-Connections/
 
 #### IDEs and Editors
-brew install --cask visual-studio-code  
+brew install --cask visual-studio-code
 cat ./vscode-extensions.txt | xargs -L1 code —-install-extension
 brew install --cask intellij-idea
+brew install --cask visual-studio
 
 #### Utilities
 brew install jq tree
@@ -38,6 +39,7 @@ brew install --cask microsoft-excel
 
 #### Infra
 brew install --cask docker
+brew install docker-compose
 brew install --cask vagrant
 brew install --cask virtualbox
 brew install --cask vagrant-manager
