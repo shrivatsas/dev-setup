@@ -16,3 +16,4 @@ yzhang.markdown-all-in-one
 andyyaldoo.vscode-json
 jock.svg
 dotjoshjohnson.xml
+ballerina.ballerina

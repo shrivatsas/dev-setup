@@ -34,7 +34,7 @@ brew install --cask intellij-idea
 brew install --cask visual-studio
 
 #### Utilities
-brew install jq tree
+brew install jq tree libevent
 brew install --cask microsoft-excel
 
 #### Infra
@@ -66,6 +66,7 @@ brew install go
 brew install cabal-install
 brew install sbt
 brew install leiningen
+brew install ballerina
 brew install adoptopenjdk8
 jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
 brew install --cask graalvm/tap/graalvm-ce-java11
