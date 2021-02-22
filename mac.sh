@@ -1,5 +1,5 @@
 #### Homebrew  
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"  
 brew update
 
 #### iTerm2  
@@ -15,8 +15,8 @@ brew install homebrew/cask-versions/firefox-developer-edition
 
 #### Package Managers  
 brew install nvm jenv  
-brew install --cask miniconda
-cat ./conda-packages.txt | xargs -L1 conda install
+brew install --cask miniconda  
+cat ./conda-packages.txt | xargs -L1 conda install  
 
 brew install git  
 echo "alias gs='git status' gc='git checkout' ga='git add' gsl='git stash list' gss='git stash save' gm='git commit -m' gd='git diff'" >> ~/.zshrc
