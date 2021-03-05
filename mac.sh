@@ -30,7 +30,7 @@ brew install --cask dbeaver-community
 #### IDEs and Editors
 brew install --cask visual-studio-code
 cat ./vscode-extensions.txt | xargs -L1 code —-install-extension
-brew install --cask intellij-idea
+brew install --cask intellij-idea-ce
 brew install --cask visual-studio
 
 #### Utilities
@@ -70,14 +70,14 @@ brew install ballerina
 brew install adoptopenjdk8
 jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
 brew install --cask graalvm/tap/graalvm-ce-java11
-xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.3.0
-jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.3.0/Contents/Home
+xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0
+jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Home
 
 #### http://www.mediaatelier.com/CheatSheet/
 brew install --cask cheatsheet 
 
 #### Communication
-brew install --cask zoomus
+brew install zoom
 brew install slack
 
 #### References:
