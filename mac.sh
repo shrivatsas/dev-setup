@@ -68,6 +68,7 @@ brew install sbt
 brew install leiningen
 brew install ballerina
 brew install adoptopenjdk8
+nvm install --lts
 jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
 brew install --cask graalvm/tap/graalvm-ce-java11
 xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0
