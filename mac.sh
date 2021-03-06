@@ -62,6 +62,7 @@ brew install --cask tla-plus-toolbox
 brew install --cask alloy
 
 #### Languages and Frameworks
+brew install prest
 brew install maven  
 brew install elixir
 brew install --cask dotnet-sdk 
