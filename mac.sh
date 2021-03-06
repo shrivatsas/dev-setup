@@ -2,6 +2,8 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"  
 brew update
 
+xcode-select --install
+
 #### iTerm2  
 brew install --cask iTerm2
 
