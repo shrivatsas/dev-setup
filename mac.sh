@@ -55,6 +55,7 @@ brew install dropbox
 brew install --cask postman  
 brew install --cask rescuetime  
 brew install --cask drawio  
+brew install --cask notion
 
 #### Formal Methods
 brew install --cask tla-plus-toolbox
