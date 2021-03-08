@@ -17,3 +17,4 @@ andyyaldoo.vscode-json
 jock.svg
 dotjoshjohnson.xml
 ballerina.ballerina
+alexkrechik.cucumberautocomplete
