@@ -19,6 +19,9 @@ brew install homebrew/cask-versions/firefox-developer-edition
 brew install nvm jenv  
 brew install --cask miniconda  
 conda create -n py3.8 python=3.8  
+conda init zsh
+# Might need a restart of the shell  
+conda activate py3.8
 cat ./conda-packages.txt | xargs -L1 conda install  
 
 brew install git  
