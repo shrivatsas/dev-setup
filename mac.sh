@@ -66,6 +66,7 @@ brew install --cask tla-plus-toolbox
 brew install --cask alloy
 
 #### Languages and Frameworks
+brew install pre-commit
 brew install prest
 brew install maven  
 brew install elixir
