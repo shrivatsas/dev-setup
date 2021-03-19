@@ -66,7 +66,6 @@ brew install --cask tla-plus-toolbox
 brew install --cask alloy
 
 #### Languages and Frameworks
-brew install pre-commit
 brew install prest
 brew install maven  
 brew install elixir
@@ -82,6 +81,10 @@ jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
 brew install --cask graalvm/tap/graalvm-ce-java11
 xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0
 jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Home
+
+#### Utilities
+brew install pre-commit
+brew install cairo pango
 
 #### http://www.mediaatelier.com/CheatSheet/
 brew install --cask cheatsheet 
