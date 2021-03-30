@@ -53,6 +53,7 @@ brew install --cask vagrant-manager
 #### Cloud
 brew install awscli
 brew install azure-cli
+brew install terraform
 
 #### Apps
 brew install dropbox
