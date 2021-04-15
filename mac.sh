@@ -97,6 +97,11 @@ brew install slack
 #### References:
 https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
 
+#### Themes : Solarizer : https://ethanschoonover.com/solarized/
+wget ethanschoonover.com/solarized/files/solarized.zip
+mv solarized.zip -d ~/
+mv ~/solarized ~/.solarized
+
 #### TODO
 #### IntelliJ plugins
 wget -qO-  https://plugins.jetbrains.com/files/$(curl https://plugins.jetbrains.com/api/plugins/4415/updates | jq -r '.[0].file') | bsdtar -xvf- -C ~/.PhpStorm2018.3/config/plugins
