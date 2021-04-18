@@ -19,3 +19,4 @@ dotjoshjohnson.xml
 ballerina.ballerina
 alexkrechik.cucumberautocomplete
 bierner.emojisense
+znck.grammarly
