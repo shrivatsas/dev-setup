@@ -42,6 +42,7 @@ brew install --cask visual-studio
 #### Utilities
 brew install jq tree libevent
 brew install --cask microsoft-excel
+brew install --cask authy
 
 #### Infra
 brew install --cask docker
