@@ -20,3 +20,4 @@ ballerina.ballerina
 alexkrechik.cucumberautocomplete
 bierner.emojisense
 znck.grammarly
+HashiCorp.terraform
