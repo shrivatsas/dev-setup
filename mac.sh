@@ -58,6 +58,11 @@ sudo chmod +x /usr/local/bin/ecs-cli
 brew install azure-cli
 brew install terraform
 
+#### Kubernetes
+brew install minikube
+brew install kubectx
+brew install helm
+
 #### Apps
 brew install dropbox
 brew install --cask postman  
