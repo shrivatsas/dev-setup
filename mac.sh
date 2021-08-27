@@ -11,6 +11,8 @@ brew install --cask iTerm2
 brew install zsh  
 chsh -s /bin/zsh && sudo chsh -s /bin/zsh   
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh  
+brew install zsh-autosuggestions  
+brew install zoxide
 
 #### Firefox  
 brew install homebrew/cask-versions/firefox-developer-edition  
