@@ -13,6 +13,7 @@ chsh -s /bin/zsh && sudo chsh -s /bin/zsh
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh  
 brew install zsh-autosuggestions  
 brew install zoxide
+brew install fzf
 
 #### Firefox  
 brew install homebrew/cask-versions/firefox-developer-edition  
