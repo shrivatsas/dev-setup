@@ -46,7 +46,7 @@ brew install --cask visual-studio
 brew install jq tree libevent
 brew install --cask microsoft-excel
 brew install --cask authy
-brew install wireshark
+brew install --cask wireshark wireshark-chmodbpf
 
 #### Infra
 brew install --cask docker
