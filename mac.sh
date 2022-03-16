@@ -105,6 +105,7 @@ brew install --cask cheatsheet
 #### Communication
 brew install zoom
 brew install slack
+brew install --cask discord
 
 #### References:
 https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
