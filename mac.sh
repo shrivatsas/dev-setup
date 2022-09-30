@@ -98,6 +98,7 @@ jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Hom
 #### Utilities
 brew install pre-commit
 brew install cairo pango
+brew install difftastic
 
 #### http://www.mediaatelier.com/CheatSheet/
 brew install --cask cheatsheet 
