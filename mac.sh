@@ -47,6 +47,7 @@ brew install jq tree libevent
 brew install --cask microsoft-excel
 brew install --cask authy
 brew install --cask wireshark wireshark-chmodbpf
+brew install proxyman
 
 #### Infra
 brew install --cask docker
