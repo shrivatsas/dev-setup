@@ -120,3 +120,7 @@ mv ~/solarized ~/.solarized
 #### TODO
 #### IntelliJ plugins
 wget -qO-  https://plugins.jetbrains.com/files/$(curl https://plugins.jetbrains.com/api/plugins/4415/updates | jq -r '.[0].file') | bsdtar -xvf- -C ~/.PhpStorm2018.3/config/plugins
+
+#### Interesting projects
+##### Glamorous Toolkit
+curl https://dl.feenk.com/scripts/mac.sh | bash
