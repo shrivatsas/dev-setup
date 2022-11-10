@@ -5,7 +5,7 @@ brew update
 xcode-select --install
 
 #### iTerm2  
-brew install --cask iTerm2
+brew install iTerm2
 
 #### ZSH and oh-my-zsh  
 brew install zsh  
@@ -20,41 +20,37 @@ brew install homebrew/cask-versions/firefox-developer-edition
 
 #### Package Managers  
 brew install nvm jenv  
-brew install --cask miniconda  
-conda create -n py3.8 python=3.8  
-conda init zsh
-# Might need a restart of the shell  
-conda activate py3.8
-cat ./conda-packages.txt | xargs -L1 conda install  
+brew install pyenv
+pyenv install 3.8
 
 brew install git  
 echo "alias gs='git status' gc='git checkout' ga='git add' gsl='git stash list' gss='git stash save' gm='git commit -m' gd='git diff'" >> ~/.zshrc
 
 brew install mysql redis  
 brew services start mysql redis  
-brew install --cask dbeaver-community  
+brew install dbeaver-community  
 # Copy .dbeaver directory from old installation if available
-# https://dbeaver.com/docs/wiki/Admin-Manage-Connections/
+# https://dbeaver.com/docs/wiki/Admin-Manage-Connections/ 
 
 #### IDEs and Editors
-brew install --cask visual-studio-code
+brew install visual-studio-code
 cat ./vscode-extensions.txt | xargs -L1 code —-install-extension
-brew install --cask intellij-idea-ce
-brew install --cask visual-studio
+brew install intellij-idea-ce
+brew install visual-studio
 
 #### Utilities
 brew install jq tree libevent
-brew install --cask microsoft-excel
-brew install --cask authy
-brew install --cask wireshark wireshark-chmodbpf
+brew install microsoft-excel
+brew install authy
+brew install wireshark wireshark-chmodbpf
 brew install proxyman
 
 #### Infra
-brew install --cask docker
+brew install docker
 brew install docker-compose
-brew install --cask vagrant
-brew install --cask virtualbox
-brew install --cask vagrant-manager
+brew install vagrant
+brew install virtualbox
+brew install vagrant-manager
 
 #### Cloud
 brew install awscli
@@ -70,20 +66,20 @@ brew install helm
 
 #### Apps
 brew install dropbox
-brew install --cask postman  
-brew install --cask rescuetime  
-brew install --cask drawio  
-brew install --cask notion
+brew install postman  
+brew install rescuetime  
+brew install drawio  
+brew install notion
 
 #### Formal Methods
-brew install --cask tla-plus-toolbox
-brew install --cask alloy
+brew install tla-plus-toolbox
+brew install alloy
 
 #### Languages and Frameworks
 brew install prest
 brew install maven  
 brew install elixir
-brew install --cask dotnet-sdk 
+brew install dotnet-sdk 
 brew install go
 brew install cabal-install
 brew install sbt
@@ -102,12 +98,12 @@ brew install cairo pango
 brew install difftastic
 
 #### http://www.mediaatelier.com/CheatSheet/
-brew install --cask cheatsheet 
+brew install cheatsheet 
 
 #### Communication
 brew install zoom
 brew install slack
-brew install --cask discord
+brew install discord
 
 #### References:
 https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
