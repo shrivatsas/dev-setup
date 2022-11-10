@@ -58,6 +58,8 @@ sudo curl -Lo /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs
 sudo chmod +x /usr/local/bin/ecs-cli
 brew install azure-cli
 brew install terraform
+brew tap common-fate/granted
+brew install granted
 
 #### Kubernetes
 brew install minikube
