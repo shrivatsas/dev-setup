@@ -6,6 +6,7 @@ xcode-select --install
 
 #### iTerm2  
 brew install iTerm2
+brew install --cask warp
 
 #### ZSH and oh-my-zsh  
 brew install zsh  
