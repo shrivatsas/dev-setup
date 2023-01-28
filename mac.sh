@@ -5,7 +5,7 @@ brew update
 xcode-select --install
 
 #### iTerm2  
-brew install iTerm2
+brew install iTerm2 tmux
 brew install --cask warp
 
 #### ZSH and oh-my-zsh  
