@@ -27,6 +27,7 @@ pyenv install 3.8
 brew install git  
 echo "alias gs='git status' gc='git checkout' ga='git add' gsl='git stash list' gss='git stash save' gm='git commit -m' gd='git diff'" >> ~/.zshrc
 
+brew install altinity/clickhouse/clickhouse
 brew install mysql redis  
 brew services start mysql redis  
 brew install dbeaver-community  
