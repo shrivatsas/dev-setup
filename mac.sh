@@ -46,6 +46,7 @@ brew install microsoft-excel
 brew install authy
 brew install wireshark wireshark-chmodbpf
 brew install proxyman
+brew install telnet
 
 #### Infra
 brew install docker
