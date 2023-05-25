@@ -1,3 +1,4 @@
+## intel, amd64 arch
 #### Homebrew  
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"  
 brew update
@@ -20,8 +21,15 @@ brew install fzf
 brew install homebrew/cask-versions/firefox-developer-edition  
 
 #### Package Managers  
-brew install nvm jenv  
+brew install nvm jenv
+echo "eval '$(jenv init -)'" >> ~/.zshrc
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 brew install pyenv
+echo "eval '$(pyenv init -)'" >> ~/.zshrc
+echo "alias pe='source ./venv/bin/activate'" >> ~/.zshrc
 pyenv install 3.8
 
 brew install git  
@@ -44,23 +52,24 @@ brew install visual-studio
 brew install jq tree libevent
 brew install microsoft-excel
 brew install authy
-brew install wireshark wireshark-chmodbpf
+brew install --cask wireshark wireshark-chmodbpf
 brew install proxyman
 brew install telnet
 
 #### Infra
-brew install docker
-brew install docker-compose
+brew install homebrew/cask/docker
 brew install vagrant
 brew install virtualbox
 brew install vagrant-manager
 
 #### Cloud
 brew install awscli
-sudo curl -Lo /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-darwin-amd64-latest
-sudo chmod +x /usr/local/bin/ecs-cli
+curl -Lo /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-darwin-amd64-latest
+chmod +x /usr/local/bin/ecs-cli
 brew install azure-cli
 brew install terraform
+brew install tfenv
+tfenv install 0.14.10
 brew tap common-fate/granted
 brew install granted
 
@@ -70,11 +79,14 @@ brew install kubectx
 brew install helm
 
 #### Apps
+brew install --cask zotero
+brew install --cask spotify
 brew install dropbox
 brew install postman  
 brew install rescuetime  
 brew install drawio  
 brew install notion
+brew install --cask roam-research
 
 #### Formal Methods
 brew install tla-plus-toolbox
@@ -90,7 +102,7 @@ brew install cabal-install
 brew install sbt
 brew install leiningen
 brew install ballerina
-brew install adoptopenjdk8
+brew install adoptopenjdk8 # brew install --cask temurin8
 nvm install --lts
 jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
 brew install --cask graalvm/tap/graalvm-ce-java11
@@ -98,6 +110,9 @@ xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-ja
 jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Home
 
 #### Utilities
+brew install atuin
+echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
+brew install libpq
 brew install pre-commit
 brew install cairo pango
 brew install difftastic
@@ -114,9 +129,8 @@ brew install discord
 https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
 
 #### Themes : Solarizer : https://ethanschoonover.com/solarized/
-wget ethanschoonover.com/solarized/files/solarized.zip
-mv solarized.zip -d ~/
-mv ~/solarized ~/.solarized
+curl https://ethanschoonover.com/solarized/files/solarized.zip -o solarized.zip
+unzip solarized.zip -d ~/.solarized
 
 #### TODO
 #### IntelliJ plugins
