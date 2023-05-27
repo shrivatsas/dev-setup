@@ -1,5 +1,3 @@
-Linux Screen
-
 /bin/bash -c "$(wget -qO- https://raw.githubusercontent.com/rbreaves/kinto/HEAD/install/linux.sh || curl -fsSL https://raw.githubusercontent.com/rbreaves/kinto/HEAD/install/linux.sh)"
 
 ## Terminal Utilities
@@ -54,4 +52,94 @@ snap install authy
 sudo apt install podman podman-docker docker-compose
 systemctl --user start podman.socket
 
+# Cloud Utilities
 
+# Kubernetes
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64  
+sudo install minikube-linux-amd64 /usr/local/bin/minikube  
+
+snap install kubectl --classic
+kubectl version --client
+
+# https://krew.sigs.k8s.io/docs/user-guide/setup/install
+begin
+  set -x; set temp_dir (mktemp -d); cd "$temp_dir" &&
+  set OS (uname | tr '[:upper:]' '[:lower:]') &&
+  set ARCH (uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/') &&
+  set KREW krew-$OS"_"$ARCH &&
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/$KREW.tar.gz" &&
+  tar zxvf $KREW.tar.gz &&
+  ./$KREW install krew &&
+  set -e KREW temp_dir &&
+  cd -
+end
+
+set -gx PATH $PATH $HOME/.krew/bin
+kubectl krew update
+kubectl krew install ctx
+kubectl krew install ns
+
+snap install helm --classic
+
+#### Apps
+# brew install --cask zotero
+snap install spotify
+# Dropbox Manual https://www.dropbox.com/install-linux
+snap install postman  
+brew install rescuetime  
+brew install drawio  
+# Notion official app not available
+curl -fsSLO https://roam-electron-deploy.s3.us-east-2.amazonaws.com/roam-research_0.0.18_amd64.deb
+sudo apt install ./roam-research_0.0.18_amd64.deb
+
+#### Formal Methods
+brew install tla-plus-toolbox
+brew install alloy
+
+#### Languages and Frameworks
+brew install prest
+brew install maven  
+brew install elixir
+brew install dotnet-sdk 
+brew install go
+brew install cabal-install
+brew install sbt
+brew install leiningen
+brew install ballerina
+brew install adoptopenjdk8 # brew install --cask temurin8
+nvm install --lts
+jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
+brew install --cask graalvm/tap/graalvm-ce-java11
+xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0
+jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Home
+
+#### Utilities
+brew install atuin
+echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
+brew install libpq
+brew install pre-commit
+brew install cairo pango
+brew install difftastic
+
+#### http://www.mediaatelier.com/CheatSheet/
+brew install cheatsheet 
+
+#### Communication
+brew install zoom
+brew install slack
+brew install discord
+
+#### References:
+https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
+
+#### Themes : Solarizer : https://ethanschoonover.com/solarized/
+curl https://ethanschoonover.com/solarized/files/solarized.zip -o solarized.zip
+unzip solarized.zip -d ~/.solarized
+
+#### TODO
+#### IntelliJ plugins
+wget -qO-  https://plugins.jetbrains.com/files/$(curl https://plugins.jetbrains.com/api/plugins/4415/updates | jq -r '.[0].file') | bsdtar -xvf- -C ~/.PhpStorm2018.3/config/plugins
+
+#### Interesting projects
+##### Glamorous Toolkit
+curl https://dl.feenk.com/scripts/mac.sh | bash
