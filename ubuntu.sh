@@ -99,11 +99,21 @@ brew install alloy
 #### Languages and Frameworks
 brew install prest
 brew install maven  
-brew install elixir
-brew install dotnet-sdk 
-brew install go
-brew install cabal-install
-brew install sbt
+sudo add-apt-repository ppa:rabbitmq/rabbitmq-erlang
+sudo apt update
+sudo apt install elixir
+
+brew install dotnet-sdk
+
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz
+fish_add_path /usr/local/go/bin
+
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fish_add_path $HOME/.cargo/bin
+
+curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d > cs && chmod +x cs && ./cs setup
+
 brew install leiningen
 brew install ballerina
 brew install adoptopenjdk8 # brew install --cask temurin8
