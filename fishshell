@@ -1,0 +1,8 @@
+sudo apt install fish -y  
+# Fisher
+# curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher  
+chsh -s /usr/bin/fish  
+
+mkdir -p ~/.config/fish  
+
+vim ~/.config/fish/config.fish  
