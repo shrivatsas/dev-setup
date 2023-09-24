@@ -1,3 +1,12 @@
+# Use Mac keyboard keys
+sudo apt-get install keyboard-configuration
+sudo dpkg-reconfigure keyboard-configuration
+    Macbook Pro
+    US
+    US
+    Both Alt keys
+    No compose key
+
 /bin/bash -c "$(wget -qO- https://raw.githubusercontent.com/rbreaves/kinto/HEAD/install/linux.sh || curl -fsSL https://raw.githubusercontent.com/rbreaves/kinto/HEAD/install/linux.sh)"
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -7,14 +16,6 @@ echo 'eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.config/fish/con
 
 ## Terminal Utilities
 sudo apt install tmux -y    
-sudo apt install fish -y  
-# Fisher
-# curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher  
-chsh -s /usr/bin/fish
-
-mkdir -p ~/.config/fish
-
-vim ~/.config/fish/config.fish
 
 ## Developer Utilities
 sudo apt install git -y  
@@ -54,8 +55,6 @@ sudo apt install code
 sudo apt install jq tree
 snap install authy
 
-sudo apt install podman podman-docker docker-compose
-systemctl --user start podman.socket
 
 # Cloud Utilities
 
@@ -91,11 +90,14 @@ snap install helm --classic
 snap install spotify
 # Dropbox Manual https://www.dropbox.com/install-linux
 snap install postman  
-brew install rescuetime  
-brew install drawio  
+curl -fsSLO https://www.rescuetime.com/installers/rescuetime_current_amd64.deb
+sudo apt install ./rescuetime_current_amd64.deb
+snap install drawio  
 # Notion official app not available
 curl -fsSLO https://roam-electron-deploy.s3.us-east-2.amazonaws.com/roam-research_0.0.18_amd64.deb
 sudo apt install ./roam-research_0.0.18_amd64.deb
+
+while read line; do code --install-extension "$line"; done < vscode-extensions.txt
 
 #### Formal Methods
 brew install tla-plus-toolbox
@@ -130,9 +132,9 @@ brew install difftastic
 brew install cheatsheet 
 
 #### Communication
-brew install zoom
-brew install slack
-brew install discord
+https://zoom.us/client/5.14.7.2928/zoom_amd64.deb
+snap install slack
+snap install discord
 
 #### References:
 https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
@@ -148,3 +150,36 @@ wget -qO-  https://plugins.jetbrains.com/files/$(curl https://plugins.jetbrains.
 #### Interesting projects
 ##### Glamorous Toolkit
 curl https://dl.feenk.com/scripts/mac.sh | bash
+
+sudo apt install postgresql-client-common
+sudo apt-get install postgresql-client
+
+https://docs.docker.com/desktop/install/ubuntu/
+
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+wget https://desktop.docker.com/linux/main/amd64/docker-desktop-4.20.0-amd64.deb
+
+cat /etc/containers/registries.conf
+unqualified-search-registries = ["docker.io"]
+
+sudo ln -s /home/shrivatsa/.docker/desktop/docker.sock /var/run/docker.sock
+
+sudo apt install default-jdk
+sudo apt install openjdk-18-jre-headless
+
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+fisher install jorgebucaran/nvm.fish
+fisher install reitzig/sdkman-for-fish@v1.4.0
+
+## Try out https://asdf-vm.com/
