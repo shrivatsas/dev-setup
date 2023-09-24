@@ -52,5 +52,6 @@ redhat.vscode-microprofile
 andyyaldoo.vscode-json
 WolframResearch.wolfram
 dotjoshjohnson.xml
-redhat.vscode-yaml
 yzhang.markdown-all-in-one
+redhat.vscode-yaml
+ziglang.vscode-zig
