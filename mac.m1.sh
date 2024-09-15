@@ -49,6 +49,7 @@ brew install visual-studio-code
 cat ./vscode-extensions.txt | xargs -L1 code —-install-extension
 brew install intellij-idea-ce
 brew install visual-studio
+brew install --cask cursor
 
 #### Utilities
 brew install jq tree libevent
