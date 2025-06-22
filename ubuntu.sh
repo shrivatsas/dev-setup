@@ -193,3 +193,11 @@ fisher install jorgebucaran/nvm.fish
 fisher install reitzig/sdkman-for-fish@v1.4.0
 
 ## Try out https://asdf-vm.com/
+
+sudo wget -q -O - https://screenrec.com/download/pub.asc | sudo apt-key add -
+
+sudo add-apt-repository 'deb https://screenrec.com/download/ubuntu stable main'
+
+sudo apt update
+
+sudo apt install screenrec
