@@ -1,14 +1,4 @@
-# Use Mac keyboard keys
-sudo apt-get install keyboard-configuration
-sudo dpkg-reconfigure keyboard-configuration
-    Macbook Pro
-    US
-    US
-    Both Alt keys
-    No compose key
-
-/bin/bash -c "$(wget -qO- https://raw.githubusercontent.com/rbreaves/kinto/HEAD/install/linux.sh || curl -fsSL https://raw.githubusercontent.com/rbreaves/kinto/HEAD/install/linux.sh)"
-
+#!/bin/bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
