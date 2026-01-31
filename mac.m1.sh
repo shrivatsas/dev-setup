@@ -24,7 +24,7 @@ brew install --cask firefox@developer-edition
 #### Package Managers  
 brew install mise  
 
-brew install git  
+brew install git gh
 echo "alias gs='git status' gc='git checkout' ga='git add' gsl='git stash list' gss='git stash save' gm='git commit -m' gd='git diff'" >> ~/.zshrc
 
 brew install dbeaver-community  
@@ -35,18 +35,19 @@ xargs -n 1 code --install-extension < vscode-extensions.txt
 # brew install cursor windsurf
 
 #### Utilities
-brew install jq tree libevent telnet
+brew install jq tree libevent telnet ripgrep wget glow
 ## brew install authy
 # brew install wireshark wireshark-chmodbpf
 # brew install proxyman
 
 #### Infra
-bre install podman-desktop
-## brew install docker-desktop
+brew install podman-desktop
+brew install docker docker-desktop
 # brew install vagrant vagrant-manager
 # brew install virtualbox
 
 #### Cloud
+brew install gcloud-cli
 # brew install awscli
 # curl -Lo /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-darwin-amd64-latest
 # chmod +x /usr/local/bin/ecs-cli
@@ -58,14 +59,15 @@ bre install podman-desktop
 
 #### Kubernetes
 # brew install minikube
-brew install kubectx helm openlens
+brew install kubernetes-cli kubectx helm openlens kind
 
 #### Apps
 # brew install zotero
 brew install spotify
 brew install dropbox
-# brew install postman  
-# brew install drawio  
+brew install notion
+# brew install postman
+# brew install drawio
 brew install logseq  
 
 #### Formal Methods
@@ -74,8 +76,9 @@ brew install logseq
 
 #### Languages and Frameworks
 # brew install prest
-# brew install maven  
+# brew install maven
 # brew install elixir
+brew install deno
 mise use -g go@latest python@latest uv@latest
 echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
 # brew install leiningen
@@ -96,6 +99,12 @@ curl -fsSL https://ampcode.com/install.sh | zsh
 
 #### Communication
 brew install zoom slack discord
+
+#### Media
+brew install yt-dlp
+
+#### Build Tools
+brew install go-task
 
 #### References:
 # https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
