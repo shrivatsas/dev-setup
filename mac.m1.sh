@@ -6,7 +6,8 @@ xcode-select --install
 brew update
 
 #### iTerm2  
-brew install iTerm2 tmux alfred 
+brew install iTerm2 tmux
+# brew install alfred  # not currently installed
 
 #### ZSH and oh-my-zsh  
 brew install zsh  
@@ -18,8 +19,8 @@ brew install zsh-autosuggestions
 echo "source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc  
 brew install zoxide fzf
 
-#### Firefox  
-brew install --cask firefox@developer-edition  
+#### Firefox
+# brew install --cask firefox@developer-edition  # not currently installed, regular firefox is installed instead
 
 #### Package Managers  
 brew install mise  
@@ -32,7 +33,7 @@ brew install dbeaver-community
 #### IDEs and Editors
 brew install visual-studio-code
 xargs -n 1 code --install-extension < vscode-extensions.txt
-# brew install cursor windsurf
+brew install --cask cursor windsurf
 
 #### Utilities
 brew install jq tree libevent telnet ripgrep wget glow
@@ -59,14 +60,15 @@ brew install gcloud-cli
 
 #### Kubernetes
 # brew install minikube
-brew install kubernetes-cli kubectx helm openlens kind
+brew install kubernetes-cli kubectx helm kind
+# brew install openlens  # not currently installed
 
 #### Apps
 # brew install zotero
-brew install spotify
-brew install dropbox
+# brew install spotify  # not currently installed
+# brew install dropbox  # not currently installed
 brew install notion
-# brew install postman
+brew install postman
 # brew install drawio
 brew install logseq  
 
@@ -78,8 +80,8 @@ brew install logseq
 # brew install prest
 # brew install maven
 # brew install elixir
-brew install deno
-mise use -g go@latest python@latest uv@latest
+brew install deno node
+mise use -g go@latest python@latest uv@latest bun@latest node@20 java@temurin-21
 echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
 # brew install leiningen
 # brew install adoptopenjdk8 # brew install --cask temurin8
@@ -88,8 +90,17 @@ echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
 # xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0
 # jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Home
 brew install --cask claude chatgpt
-brew install --cask claude-code codex gemini-cli
-curl -fsSL https://ampcode.com/install.sh | zsh
+brew install --cask claude-code codex gemini-cli opencode
+# curl -fsSL https://ampcode.com/install.sh | zsh  # not currently installed
+
+#### Databases
+brew install postgresql@14 redis
+
+#### Terminals
+brew install --cask ghostty
+
+#### Browsers
+brew install --cask google-chrome
 
 #### Utilities
 # brew install libpq
