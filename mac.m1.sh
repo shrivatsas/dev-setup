@@ -1,34 +1,34 @@
 ### M1 / arm64 support
-xcode-select --install  
+xcode-select --install
 
-#### Homebrew  
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"  
+#### Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew update
 
-#### iTerm2  
+#### iTerm2
 brew install iTerm2 tmux
 # brew install alfred  # not currently installed
 
-#### ZSH and oh-my-zsh  
-brew install zsh  
-chsh -s /bin/zsh && sudo chsh -s /bin/zsh   
+#### ZSH and oh-my-zsh
+brew install zsh
+chsh -s /bin/zsh && sudo chsh -s /bin/zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 brew install --cask font-powerline-symbols
 echo "ZSH_THEME='agnoster'" >> ~/.zshrc
-brew install zsh-autosuggestions  
-echo "source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc  
+brew install zsh-autosuggestions
+echo "source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
 brew install zoxide fzf
 
 #### Firefox
 # brew install --cask firefox@developer-edition  # not currently installed, regular firefox is installed instead
 
-#### Package Managers  
-brew install mise  
+#### Package Managers
+brew install mise
 
 brew install git gh
 echo "alias gs='git status' gc='git checkout' ga='git add' gsl='git stash list' gss='git stash save' gm='git commit -m' gd='git diff'" >> ~/.zshrc
 
-brew install dbeaver-community  
+brew install dbeaver-community
 
 #### IDEs and Editors
 brew install visual-studio-code
@@ -52,11 +52,12 @@ brew install gcloud-cli
 # brew install awscli
 # curl -Lo /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-darwin-amd64-latest
 # chmod +x /usr/local/bin/ecs-cli
-# brew install azure-cli  
-# brew install terraform  
-# brew install kreuzwerker/taps/m1-terraform-provider-helper  
-# m1-terraform-provider-helper activate  
-# m1-terraform-provider-helper install hashicorp/template -v v2.2.0  
+# brew install azure-cli
+# brew install gcloud-cli
+# brew install terraform
+# brew install kreuzwerker/taps/m1-terraform-provider-helper
+# m1-terraform-provider-helper activate
+# m1-terraform-provider-helper install hashicorp/template -v v2.2.0
 
 #### Kubernetes
 # brew install minikube
@@ -70,7 +71,7 @@ brew install kubernetes-cli kubectx helm kind
 brew install notion
 brew install postman
 # brew install drawio
-brew install logseq  
+brew install logseq
 
 #### Formal Methods
 # brew install tla-plus-toolbox

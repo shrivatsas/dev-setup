@@ -9,3 +9,4 @@ ms-python.python
 WolframResearch.wolfram
 dotjoshjohnson.xml
 yzhang.markdown-all-in-one
+ms-vscode.makefile-tools
