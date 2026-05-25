@@ -1,0 +1,4 @@
+interface:
+  display_name: "PKM Curation"
+  short_description: "Curate links and tags in a personal knowledge base."
+  default_prompt: "Curate links in my PKM: add readable titles, place them semantically, tag them, dedupe, and validate the result."
