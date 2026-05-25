@@ -6,8 +6,9 @@ xcode-select --install
 brew update
 
 #### iTerm2
-brew install iTerm2 tmux
-# brew install alfred  # not currently installed
+brew install --cask iterm2
+brew install tmux
+brew install --cask alfred
 
 #### ZSH and oh-my-zsh
 brew install zsh
@@ -20,7 +21,7 @@ echo "source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >>
 brew install zoxide fzf
 
 #### Firefox
-# brew install --cask firefox@developer-edition  # not currently installed, regular firefox is installed instead
+brew install --cask firefox@developer-edition
 
 #### Package Managers
 brew install mise
@@ -28,12 +29,12 @@ brew install mise
 brew install git gh
 echo "alias gs='git status' gc='git checkout' ga='git add' gsl='git stash list' gss='git stash save' gm='git commit -m' gd='git diff'" >> ~/.zshrc
 
-brew install dbeaver-community
+brew install --cask dbeaver-community
 
 #### IDEs and Editors
-brew install visual-studio-code
+brew install --cask visual-studio-code
 xargs -n 1 code --install-extension < vscode-extensions.txt
-brew install --cask cursor windsurf
+brew install --cask cursor windsurf zed
 
 #### Utilities
 brew install jq tree libevent telnet ripgrep wget glow
@@ -42,8 +43,9 @@ brew install jq tree libevent telnet ripgrep wget glow
 # brew install proxyman
 
 #### Infra
-brew install podman-desktop
-brew install docker docker-desktop
+brew install --cask podman-desktop
+brew install docker
+brew install --cask docker-desktop
 # brew install vagrant vagrant-manager
 # brew install virtualbox
 
@@ -62,16 +64,18 @@ brew install gcloud-cli
 #### Kubernetes
 # brew install minikube
 brew install kubernetes-cli kubectx helm kind
-# brew install openlens  # not currently installed
+brew install --cask openlens
 
 #### Apps
 # brew install zotero
-# brew install spotify  # not currently installed
-# brew install dropbox  # not currently installed
-brew install notion
-brew install postman
+brew install --cask spotify
+brew install --cask dropbox
+brew install --cask notion
+brew install --cask postman
 # brew install drawio
-brew install logseq
+brew install --cask logseq
+# Parallel agents https://emdash.sh/
+brew install --cask emdash
 
 #### Formal Methods
 # brew install tla-plus-toolbox
@@ -81,8 +85,8 @@ brew install logseq
 # brew install prest
 # brew install maven
 # brew install elixir
-brew install deno node
-mise use -g go@latest python@latest uv@latest bun@latest node@20 java@temurin-21
+brew install gh
+mise use -g go@latest python@latest uv@latest bun@latest node@latest java@temurin-21
 echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
 # brew install leiningen
 # brew install adoptopenjdk8 # brew install --cask temurin8
@@ -90,9 +94,11 @@ echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
 # brew install --cask graalvm/tap/graalvm-ce-java11
 # xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0
 # jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Home
-brew install --cask claude chatgpt
-brew install --cask claude-code codex gemini-cli opencode
+brew install --cask claude chatgpt codex-app
+brew install claude-code codex gemini-cli opencode pi-coding-agent
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 # curl -fsSL https://ampcode.com/install.sh | zsh  # not currently installed
+# https://littlebird.ai/how-to-install
 
 #### Databases
 brew install postgresql@14 redis
@@ -108,9 +114,11 @@ brew install --cask google-chrome
 # brew install pre-commit
 # brew install cairo pango
 # brew install difftastic
+# Repo health https://repohealth.tools/
+# go install github.com/spbuilds/repohealth/cmd/repohealth@latest
 
 #### Communication
-brew install zoom slack discord
+brew install --cask zoom slack discord
 
 #### Media
 brew install yt-dlp

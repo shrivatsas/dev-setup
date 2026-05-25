@@ -1,0 +1,4 @@
+interface:
+  display_name: "Logseq Flashcards"
+  short_description: "Create, manage, and daily-generate Logseq flashcards in plain files."
+  default_prompt: "Help me create, normalize, validate, or daily-generate Logseq flashcards in my Markdown files, including #card, cloze cards, and review metadata caveats."
