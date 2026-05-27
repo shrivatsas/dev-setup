@@ -1,0 +1,20 @@
+{
+  "name": "dev-setup",
+  "interface": {
+    "displayName": "Dev Setup"
+  },
+  "plugins": [
+    {
+      "name": "dev-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dev-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

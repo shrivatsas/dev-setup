@@ -68,6 +68,21 @@ Install extensions separately:
 xargs -n 1 code --install-extension < vscode-extensions.txt
 ```
 
+### Dev Setup Skills Plugin
+
+Register the local plugin that lets Codex copy this repo's `skills/` collection into another repository or skills directory:
+
+```bash
+./setup-skills-plugin.sh
+```
+
+Preview or run a copy into the current repository:
+
+```bash
+plugins/dev-skills/scripts/sync-dev-skills.sh --repo . --dry-run
+plugins/dev-skills/scripts/sync-dev-skills.sh --repo .
+```
+
 ## Customization
 
 The scripts contain many commented-out sections for optional tools. Uncomment what you need:
