@@ -1,0 +1,39 @@
+{
+  "name": "dev-skills",
+  "version": "0.1.0",
+  "description": "Copy the dev skills collection into another repository or skills directory.",
+  "author": {
+    "name": "Shrivatsa",
+    "email": "",
+    "url": "https://github.com/shrivatsas"
+  },
+  "homepage": "https://github.com/shrivatsas/dev-setup",
+  "repository": "https://github.com/shrivatsas/dev-setup",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "dev-setup",
+    "sync"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Dev Skills",
+    "shortDescription": "Sync the dev skills collection into the current workspace.",
+    "longDescription": "Provides a skill and script for copying the skills maintained in the dev-setup repository into another repository or explicit skills directory.",
+    "developerName": "Shrivatsa",
+    "category": "Productivity",
+    "capabilities": [
+      "Write",
+      "Automation"
+    ],
+    "websiteURL": "https://github.com/shrivatsas/dev-setup",
+    "privacyPolicyURL": "https://github.com/shrivatsas/dev-setup",
+    "termsOfServiceURL": "https://github.com/shrivatsas/dev-setup",
+    "defaultPrompt": [
+      "Copy my dev skills into this repo.",
+      "Sync dev skills to ~/.codex/skills.",
+      "List which dev skills would be copied."
+    ],
+    "brandColor": "#2563EB"
+  }
+}
