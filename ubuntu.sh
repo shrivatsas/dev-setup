@@ -1,5 +1,5 @@
-#!/bin/bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#!/usr/bin/env fish
+curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
 
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 echo 'eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.config/fish/config.fish
@@ -10,7 +10,7 @@ sudo apt install tmux -y
 ## Developer Utilities
 sudo apt install git -y  
 
-curl https://mise.run | MISE_INSTALL_PATH=/usr/local/bin/mise sh
+curl https://mise.run | env MISE_INSTALL_PATH=/usr/local/bin/mise sh
 
 # jenv doesn't work with fish
 # git clone https://github.com/jenv/jenv.git ~/.jenv
@@ -41,14 +41,15 @@ kubectl version --client
 
 # https://krew.sigs.k8s.io/docs/user-guide/setup/install
 begin
-  set -x; set temp_dir (mktemp -d); cd "$temp_dir" &&
-  set OS (uname | tr '[:upper:]' '[:lower:]') &&
-  set ARCH (uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/') &&
-  set KREW krew-$OS"_"$ARCH &&
-  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/$KREW.tar.gz" &&
-  tar zxvf $KREW.tar.gz &&
-  ./$KREW install krew &&
-  set -e KREW temp_dir &&
+  set -lx temp_dir (mktemp -d)
+  cd "$temp_dir"; or exit 1
+  set -lx OS (uname | tr '[:upper:]' '[:lower:]')
+  set -lx ARCH (uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')
+  set -lx KREW (string join '_' krew $OS $ARCH)
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/$KREW.tar.gz"
+  tar zxvf "$KREW.tar.gz"
+  "./$KREW" install krew
+  set -e KREW temp_dir OS ARCH
   cd -
 end
 
@@ -71,7 +72,9 @@ snap install drawio
 curl -fsSLO https://roam-electron-deploy.s3.us-east-2.amazonaws.com/roam-research_0.0.18_amd64.deb
 sudo apt install ./roam-research_0.0.18_amd64.deb
 
-while read line; do code --install-extension "$line"; done < vscode-extensions.txt
+while read -l line
+    code --install-extension "$line"
+end < vscode-extensions.txt
 
 #### Formal Methods
 brew install tla-plus-toolbox
@@ -93,7 +96,9 @@ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fish_add_path $HOME/.cargo/bin
 
-curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d > cs && chmod +x cs && ./cs setup
+curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d > cs
+chmod +x cs
+./cs setup
 
 brew install leiningen
 brew install ballerina
@@ -106,7 +111,7 @@ jenv add /Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Hom
 
 #### Utilities
 brew install atuin
-echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
+echo 'atuin init fish | source' >> ~/.config/fish/config.fish
 brew install libpq
 brew install pre-commit
 brew install cairo pango
@@ -116,20 +121,20 @@ brew install difftastic
 brew install cheatsheet 
 
 #### Communication
-https://zoom.us/client/5.14.7.2928/zoom_amd64.deb
+# https://zoom.us/client/5.14.7.2928/zoom_amd64.deb
 snap install slack
 snap install discord
 
 #### References:
-https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
+# https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
 
-#### Themes : Solarizer : https://ethanschoonover.com/solarized/
+# #### Themes : Solarizer : https://ethanschoonover.com/solarized/
 curl https://ethanschoonover.com/solarized/files/solarized.zip -o solarized.zip
 unzip solarized.zip -d ~/.solarized
 
 #### TODO
 #### IntelliJ plugins
-wget -qO-  https://plugins.jetbrains.com/files/$(curl https://plugins.jetbrains.com/api/plugins/4415/updates | jq -r '.[0].file') | bsdtar -xvf- -C ~/.PhpStorm2018.3/config/plugins
+wget -qO- "https://plugins.jetbrains.com/files/(curl https://plugins.jetbrains.com/api/plugins/4415/updates | jq -r '.[0].file')" | bsdtar -xvf- -C ~/.PhpStorm2018.3/config/plugins
 
 #### Interesting projects
 ##### Glamorous Toolkit
@@ -138,7 +143,7 @@ curl https://dl.feenk.com/scripts/mac.sh | bash
 sudo apt install postgresql-client-common
 sudo apt-get install postgresql-client
 
-https://docs.docker.com/desktop/install/ubuntu/
+# https://docs.docker.com/desktop/install/ubuntu/
 
 # shell: fish
 sudo apt-get update
@@ -148,10 +153,9 @@ sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-echo \
-  "deb [arch=(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  "(grep '^VERSION_CODENAME=' /etc/os-release | cut -d= -f2)" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+set -l docker_arch (dpkg --print-architecture)
+set -l docker_codename (grep '^VERSION_CODENAME=' /etc/os-release | cut -d= -f2)
+echo "deb [arch=$docker_arch signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $docker_codename stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 curl -fLo docker-desktop-amd64.deb https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
 curl -fLo checksums.txt https://desktop.docker.com/linux/main/amd64/checksums.txt
@@ -161,14 +165,15 @@ sudo apt install ./docker-desktop-amd64.deb
 rm -f docker-desktop-amd64.deb checksums.txt
 
 cat /etc/containers/registries.conf
-unqualified-search-registries = ["docker.io"]
+# unqualified-search-registries = ["docker.io"]
 
 sudo ln -s /home/shrivatsa/.docker/desktop/docker.sock /var/run/docker.sock
 
 sudo apt install default-jdk
 sudo apt install openjdk-18-jre-headless
 
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+fisher install jorgebucaran/fisher
 fisher install jorgebucaran/nvm.fish
 fisher install reitzig/sdkman-for-fish@v1.4.0
 
