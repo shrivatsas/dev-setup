@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Docs"
+  short_description: "Generate C4 and arc42 architecture docs"
+  default_prompt: "Create architecture documentation for this repository. Use C4 diagrams for the visual architecture and arc42 sections for the narrative, decisions, quality requirements, risks, and glossary."
