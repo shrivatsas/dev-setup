@@ -10,6 +10,8 @@ sudo apt install tmux -y
 ## Developer Utilities
 sudo apt install git -y  
 
+curl https://mise.run | MISE_INSTALL_PATH=/usr/local/bin/mise sh
+
 # jenv doesn't work with fish
 # git clone https://github.com/jenv/jenv.git ~/.jenv
 
@@ -138,6 +140,7 @@ sudo apt-get install postgresql-client
 
 https://docs.docker.com/desktop/install/ubuntu/
 
+# shell: fish
 sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg
 
@@ -146,11 +149,16 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
 echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  "deb [arch=(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "(grep '^VERSION_CODENAME=' /etc/os-release | cut -d= -f2)" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-wget https://desktop.docker.com/linux/main/amd64/docker-desktop-4.20.0-amd64.deb
+curl -fLo docker-desktop-amd64.deb https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
+curl -fLo checksums.txt https://desktop.docker.com/linux/main/amd64/checksums.txt
+sha256sum -c --ignore-missing checksums.txt
+sudo apt-get update
+sudo apt install ./docker-desktop-amd64.deb
+rm -f docker-desktop-amd64.deb checksums.txt
 
 cat /etc/containers/registries.conf
 unqualified-search-registries = ["docker.io"]
