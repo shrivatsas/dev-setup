@@ -10,6 +10,11 @@ sudo apt install tmux -y
 ## Developer Utilities
 sudo apt install git -y  
 
+## Terminal
+sudo add-apt-repository ppa:mkasberg/ghostty-ubuntu
+sudo apt update
+sudo apt install ghostty
+
 curl https://mise.run | env MISE_INSTALL_PATH=/usr/local/bin/mise sh
 
 # jenv doesn't work with fish
