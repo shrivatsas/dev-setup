@@ -1,0 +1,8 @@
+interface:
+  display_name: "DDD Grill"
+  short_description: "DDD planning and review, kept sharp"
+  default_prompt: "Use $domain-driven-design to plan a greenfield domain or review a brownfield codebase through a DDD lens."
+  brand_color: "#0F766E"
+
+policy:
+  allow_implicit_invocation: true
