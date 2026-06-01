@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ship It"
+  short_description: "Implement, verify, and ship repo phases"
+  default_prompt: "Use $ship-it to implement the next repo phase, give test instructions, wait for confirmation, then update plan.md and ship the commit."
