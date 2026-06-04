@@ -44,6 +44,11 @@ Statuses:
 | `pulling-updates-from-skills-repository` | populated | https://github.com/obra/superpowers-skills/tree/main/skills/meta/pulling-updates-from-skills-repository |
 | `receiving-code-review` | source + local changes | https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/receiving-code-review |
 | `remembering-conversations` | populated | https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/remembering-conversations |
+| `research` | source + local changes | https://github.com/Weizhena/Deep-Research-skills/tree/master/skills/research-codex-en/research |
+| `research-add-fields` | source + local changes | https://github.com/Weizhena/Deep-Research-skills/tree/master/skills/research-codex-en/research-add-fields |
+| `research-add-items` | source + local changes | https://github.com/Weizhena/Deep-Research-skills/tree/master/skills/research-codex-en/research-add-items |
+| `research-deep` | source + local changes | https://github.com/Weizhena/Deep-Research-skills/tree/master/skills/research-codex-en/research-deep |
+| `research-report` | source + local changes | https://github.com/Weizhena/Deep-Research-skills/tree/master/skills/research-codex-en/research-report |
 | `requesting-code-review` | source + local changes | https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/requesting-code-review |
 | `root-cause-tracing` | populated | https://github.com/obra/superpowers-skills/tree/main/skills/debugging/root-cause-tracing |
 | `scale-game` | populated | https://github.com/obra/superpowers-skills/tree/main/skills/problem-solving/scale-game |
