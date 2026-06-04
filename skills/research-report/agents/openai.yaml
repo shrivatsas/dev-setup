@@ -1,0 +1,5 @@
+interface:
+  display_name: "Research Report"
+  short_description: "Convert research into a crisp final report"
+  default_prompt: "Use $research-report to turn research outputs into a concise final report. Lead with conclusions, keep the structure tight, and write in an evidence-first style."
+

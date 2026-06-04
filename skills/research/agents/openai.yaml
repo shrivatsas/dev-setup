@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research"
+  short_description: "Preliminary research with crisp, evidence-first output"
+  default_prompt: "Use $research to build a research framework, supplement it with web research, and produce concise, evidence-first findings."

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Research Add Fields"
+  short_description: "Refine research field schemas with crisp analysis"
+  default_prompt: "Use $research-add-fields to refine the field framework for an existing research outline. Be concise, evidence-first, and explicit about additions, removals, and the final revised schema."
+

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Research Deep"
+  short_description: "Deep research with crisp synthesis"
+  default_prompt: "Use $research-deep to run the deep research phase from an existing outline. Stay concise, evidence-first, and explicit about confidence and gaps."
+
