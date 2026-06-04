@@ -230,6 +230,9 @@ Skill creation involves these steps:
 4. Edit the skill (implement resources and write SKILL.md)
 5. Validate the skill (run quick_validate.py)
 6. Iterate based on real usage and forward-test complex skills.
+7. If the skill is maintained in `dev-setup`, update the repo copy before you finish and record
+   the remote `git@github.com:shrivatsas/dev-setup.git` in the handoff so the updated skill is easy
+   to push or review later.
 
 Follow these steps in order, skipping only if there is a clear reason why they are not applicable.
 
