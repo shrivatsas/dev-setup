@@ -42,11 +42,19 @@ plugins/dev-skills/scripts/sync-dev-skills.sh --repo .
 find skills -mindepth 2 -maxdepth 2 -name SKILL.md | sort
 ```
 
+5. The sync step also regenerates `SOURCES.yaml` in the destination.
+
+6. Compare two skill trees quickly:
+
+```bash
+plugins/dev-skills/scripts/generate-sources-manifest.py --root /Users/shrivatsa/Documents/dev-setup/skills --compare ~/.codex/skills
+```
+
 ## Notes
 
-- The script copies complete skill directories, including linked files, scripts, assets, references, and `SOURCES.md`.
+- The script copies complete skill directories, including linked files, scripts, assets, references, and `SOURCES.yaml`.
 - Existing destination files with the same path are overwritten.
 - Use `--delete` only when the user explicitly wants destination files removed if they are absent from the source.
 - The script excludes `.git/` and `__pycache__/` by default.
-- Use `--exclude SOURCES.md` if the destination should receive only skill directories.
+- Use `--exclude SOURCES.yaml` if the destination should receive only skill directories.
 - The script refuses to run if the source directory does not exist.

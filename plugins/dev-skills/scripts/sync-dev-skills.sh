@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+GENERATE_MANIFEST="$SCRIPT_DIR/generate-sources-manifest.py"
 SOURCE="${DEV_SETUP_SKILLS_SOURCE:-/Users/shrivatsa/Documents/dev-setup/skills}"
 TARGET=""
 DRY_RUN=0
@@ -112,6 +114,10 @@ else
     fi
     cp -a "$path" "$TARGET/"
   done
+fi
+
+if [[ "$DRY_RUN" -eq 0 ]]; then
+  "$GENERATE_MANIFEST" --root "$TARGET" --write
 fi
 
 echo "Synced dev-setup skills"
