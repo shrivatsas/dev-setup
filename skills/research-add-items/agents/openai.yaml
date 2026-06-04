@@ -1,0 +1,5 @@
+interface:
+  display_name: "Research Add Items"
+  short_description: "Refine research item lists with crisp analysis"
+  default_prompt: "Use $research-add-items to refine the item list for an existing research outline. Be concise, evidence-first, and explicit about additions, removals, and the final revised list."
+
