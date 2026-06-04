@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software Architect"
+  short_description: "Drill into requirements and recommend architecture"
+  default_prompt: "Use $software-architect to run an outcome-first architecture conversation, keep a running intake file, and recommend an architecture."
