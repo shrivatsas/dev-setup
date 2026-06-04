@@ -1,0 +1,4 @@
+interface:
+  display_name: "HIPAA Compliance"
+  short_description: "HIPAA reviews, drafting, and technical guidance"
+  default_prompt: "Use $hipaa-compliance to review HIPAA materials, draft HIPAA documents, and explain HIPAA technical safeguards."

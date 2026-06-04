@@ -1,0 +1,349 @@
+schema_version: 1
+source_root: "/Users/shrivatsa/Documents/dev-setup/skills"
+generator: "generate-sources-manifest.py"
+skills:
+  - name: architecture-docs
+    path: "architecture-docs"
+    version: 1
+    sha256: "58f928777677eb408f8215a4c1cbd214844ec1a78013db748f2cbf53680880cf"
+    file_count: 5
+  - name: article-extractor
+    path: "article-extractor"
+    version: 1
+    sha256: "2a940bc89d2f21179fb2e446940b3fef80910aae433d6d98815a4da26c3117f1"
+    file_count: 1
+  - name: brainstorming
+    path: "brainstorming"
+    version: 1
+    sha256: "31aab7fd68f917c6ab5475377e14001dd6f4f72a88679bc9faef9ac2c6cc17ca"
+    file_count: 8
+  - name: caveman
+    path: "caveman"
+    version: 1
+    sha256: "7e2fa5f052ed8572bbe892d4c1baeea80ba8659d0b72e6432bfd7e8fb98abc0c"
+    file_count: 1
+  - name: codex
+    path: "codex"
+    version: 1
+    sha256: "26e7dfc244748ee2e39d01adf5693e1db75a79baeb22379a4008f1954150acd1"
+    file_count: 1
+  - name: collision-zone-thinking
+    path: "collision-zone-thinking"
+    version: 1
+    sha256: "b3c0cb9e9b1754a03456e0da13f9900732da71827c69fd9dff9cab70db64eedd"
+    file_count: 1
+  - name: condition-based-waiting
+    path: "condition-based-waiting"
+    version: 1
+    sha256: "584f2d05146fe17e4bcd6405dec6c288d5e5fe9e179b9378b00bb694cc4e4405"
+    file_count: 2
+  - name: defense-in-depth
+    path: "defense-in-depth"
+    version: 1
+    sha256: "e63804c52d18821bf7278369740b2c3739c71efc4635ba7a130cd43ef87eb24a"
+    file_count: 1
+  - name: diagnose
+    path: "diagnose"
+    version: 1
+    sha256: "6b0d86fe514a8e13f67c846a8848b2f04a9d49b3ba53ef7cf745780480a98f1b"
+    file_count: 2
+  - name: dispatching-parallel-agents
+    path: "dispatching-parallel-agents"
+    version: 1
+    sha256: "6f85a00af7ae36fae408382d663cbcb440964a8a53ee4ee12ae32fccb9b3a841"
+    file_count: 1
+  - name: domain-driven-design
+    path: "domain-driven-design"
+    version: 1
+    sha256: "031c9c59faf1dda3ea013155ebe94369572cb4534e73e986b94127a874497fd8"
+    file_count: 4
+  - name: executing-plans
+    path: "executing-plans"
+    version: 1
+    sha256: "547f982d4ce5769963206a14fa3ba9dd1584173a06e18c04400dc55a5b83bfe7"
+    file_count: 1
+  - name: explain
+    path: "explain"
+    version: 1
+    sha256: "d3b8123c66f1af255efe843709f13b057c07c19457f8e19fa11930478e003df7"
+    file_count: 1
+  - name: finishing-a-development-branch
+    path: "finishing-a-development-branch"
+    version: 1
+    sha256: "a29b2da762c9d8705f422ad91b8057d2d5147cd069aa09a69bb809726619cdbe"
+    file_count: 1
+  - name: gardening-skills-wiki
+    path: "gardening-skills-wiki"
+    version: 1
+    sha256: "0d51f1f23a07a928c1f0965b674382aac9cf58be460f8d7efbb428d549378aff"
+    file_count: 6
+  - name: grill-me
+    path: "grill-me"
+    version: 1
+    sha256: "0fe30e2291a6f990a5414f85205535bc06519622bf604980511d7c11dad327e0"
+    file_count: 1
+  - name: grill-with-docs
+    path: "grill-with-docs"
+    version: 1
+    sha256: "239939bf31313e6de6ca84e78cb77e1dc0011157a1dcf62594e495b0ada34b12"
+    file_count: 3
+  - name: handoff
+    path: "handoff"
+    version: 1
+    sha256: "478ba7f43732eb37517839d1360c630bc645a1eac6f39737cb3fb38d22a1194b"
+    file_count: 1
+  - name: hipaa-compliance
+    path: "hipaa-compliance"
+    version: 1
+    sha256: "eb99ed2ed9f45efdc79a74ede25335858ed3eceea624012b37c58c40f039a160"
+    file_count: 6
+  - name: hypothesis-tests
+    path: "hypothesis-tests"
+    version: 1
+    sha256: "b33a73cacb85f717c836a0eb12abaf612d71644c05c6306fbd276d7af18ba1ef"
+    file_count: 1
+  - name: improve-codebase-architecture
+    path: "improve-codebase-architecture"
+    version: 1
+    sha256: "326e2a53c622d19509f2b0c32111b4d8cb208eb3df1bd1dd8671308708bc245b"
+    file_count: 5
+  - name: inversion-exercise
+    path: "inversion-exercise"
+    version: 1
+    sha256: "2562c31a7de33250d120740559a04edebcce5f3f0cd0d9173af8648d1a03b2bd"
+    file_count: 1
+  - name: karpathy-guidelines
+    path: "karpathy-guidelines"
+    version: 1
+    sha256: "5e8a1677df986d47abaf3d42f1ce0c7427ea030f50370c52baf9ba1e2c7c3db9"
+    file_count: 1
+  - name: logseq-flashcards
+    path: "logseq-flashcards"
+    version: 1
+    sha256: "b4ed66a8d3b82cf2fbe8ea06c7bb017a5ba6cb1a167e93028c3d602e10409e93"
+    file_count: 3
+  - name: meta-pattern-recognition
+    path: "meta-pattern-recognition"
+    version: 1
+    sha256: "a3eb5abd6c8a66ae45724243ac4fc54e0a6190b62c5f03f47ba4945db227056b"
+    file_count: 1
+  - name: mutation-testing
+    path: "mutation-testing"
+    version: 1
+    sha256: "833e54ac2b471107c999d8feaa8b3b48a98c6d5dc65bf1e808a075381b3eccf2"
+    file_count: 1
+  - name: pict-test-designer
+    path: "pict-test-designer"
+    version: 1
+    sha256: "9dcda2f70058b7eeedfb52b67ca7757d92832423b92c853ca814c3e8cff53dbe"
+    file_count: 10
+  - name: pkm-curation
+    path: "pkm-curation"
+    version: 1
+    sha256: "485a198467a90b476e30e67ee0b9fb7ece1e895a8303f3e629ad24da4b752806"
+    file_count: 2
+  - name: pre-mortem
+    path: "pre-mortem"
+    version: 1
+    sha256: "2ea11e46ec738fb685208138f0f79b070ead70d6e1b57bbfcee83805e85794d3"
+    file_count: 1
+  - name: preserving-productive-tensions
+    path: "preserving-productive-tensions"
+    version: 1
+    sha256: "cb018454099717dfd6313969be7c8e175c589ed8cfdedc865e94d8025c5c5fb1"
+    file_count: 1
+  - name: prototype
+    path: "prototype"
+    version: 1
+    sha256: "76829cdb04f2cf3924e58f90d298a2e39029a3031f76f68131dbe5ae9a9a3f83"
+    file_count: 3
+  - name: pulling-updates-from-skills-repository
+    path: "pulling-updates-from-skills-repository"
+    version: 1
+    sha256: "411789c81f3465c186cb146467ce36111562a01bb09beb436fc4f15b1075d373"
+    file_count: 1
+  - name: receiving-code-review
+    path: "receiving-code-review"
+    version: 1
+    sha256: "b90b1e180f11fa06053fc0f9fb0a957935dce35168897d1aff6be33e14545b3e"
+    file_count: 1
+  - name: remembering-conversations
+    path: "remembering-conversations"
+    version: 1
+    sha256: "c00d186390cfb7950b936ee28423891f2d0cd42328abe463d33d6f73c11a4849"
+    file_count: 29
+  - name: requesting-code-review
+    path: "requesting-code-review"
+    version: 1
+    sha256: "4ac36baa8e00f0460ea480baf965e83b837a65e66a784055c46ee24f5f94a7c1"
+    file_count: 2
+  - name: research
+    path: "research"
+    version: 1
+    sha256: "07724821c56c4570f40915a558d4684e208a679bcde08d77aae963cf029ed312"
+    file_count: 2
+  - name: research-add-fields
+    path: "research-add-fields"
+    version: 1
+    sha256: "810571e74f19a50b1c9eb2e79cb757616ca7a2df2b11cdcbb126c5596750ed31"
+    file_count: 2
+  - name: research-add-items
+    path: "research-add-items"
+    version: 1
+    sha256: "ac2406168ad3e7eb297176a0eff2e09b7a68b63306359d960583e18c53c8c190"
+    file_count: 2
+  - name: research-deep
+    path: "research-deep"
+    version: 1
+    sha256: "afe0658093d966752d4943b4a9b9ef2fededb840cc5e6bd9d50734352f3ce012"
+    file_count: 2
+  - name: research-report
+    path: "research-report"
+    version: 1
+    sha256: "455038afa644af0d2c87195005acaa1c2aceddd7a1086a883a775101f1efab74"
+    file_count: 2
+  - name: root-cause-tracing
+    path: "root-cause-tracing"
+    version: 1
+    sha256: "4abd67851dade8e995d7020593d67191420d72129f163b75262bb846b57e0652"
+    file_count: 2
+  - name: scale-game
+    path: "scale-game"
+    version: 1
+    sha256: "5542c0ae14d2c32beb33605c0d3a51487c921b2acb28def2f773899bafe22ae3"
+    file_count: 1
+  - name: setup-matt-pocock-skills
+    path: "setup-matt-pocock-skills"
+    version: 1
+    sha256: "29befdc65614366b29a89284af9235e581ddf5b0f7ab3e6fb826dddf7b7e3548"
+    file_count: 6
+  - name: sharing-skills
+    path: "sharing-skills"
+    version: 1
+    sha256: "0b712f36c96b1c6040c78ce5acba2de275fdb5b8e0d6192089020497cc37fcf5"
+    file_count: 1
+  - name: ship-it
+    path: "ship-it"
+    version: 1
+    sha256: "4777c4675f67b1941d098160423d3c0f331aa2b0f84f4957473acc30d56aaa48"
+    file_count: 2
+  - name: ship-learn-next
+    path: "ship-learn-next"
+    version: 1
+    sha256: "f780832426ea584139e9e239089655b2e4057b48f947659d09c5bd8416483ff8"
+    file_count: 1
+  - name: simplification-cascades
+    path: "simplification-cascades"
+    version: 1
+    sha256: "56ccca0f89f2bef33e6061a60458279659a53a9171ac3af8838570b066642697"
+    file_count: 1
+  - name: skill-creator
+    path: "skill-creator"
+    version: 2
+    sha256: "f3fdc1fc5b2f5e9acacc3f67e9177a6dc37df3a8e7da3941ae44b14dbba8d763"
+    file_count: 9
+  - name: slack-search
+    path: "slack-search"
+    version: 1
+    sha256: "b2417ebda4ac6d843e0aed6dd6af19fd5ea4fd44e8d16265d94473632d71f476"
+    file_count: 1
+  - name: software-architect
+    path: "software-architect"
+    version: 1
+    sha256: "664ff6a2d9d7c887ca215773c5d8c772625e53b2e291afe2cfa2db32f1f97531"
+    file_count: 6
+  - name: subagent-driven-development
+    path: "subagent-driven-development"
+    version: 1
+    sha256: "1a5b2633feb47c7317f46b748747806209b2a393c22dc3fa96a923f0f283ef77"
+    file_count: 4
+  - name: systematic-debugging
+    path: "systematic-debugging"
+    version: 1
+    sha256: "81f5e240ad23978fa09d6701bb75190f0ff03c08addbba2bc07f23be7707b349"
+    file_count: 11
+  - name: tdd
+    path: "tdd"
+    version: 1
+    sha256: "d5826cecfb40ba4616d23eceb721b5c97a55ab36777c5cc5288094488f3bbbc6"
+    file_count: 6
+  - name: test-driven-development
+    path: "test-driven-development"
+    version: 1
+    sha256: "b078532e190983b849818c11a7d4797dcbae9dfe04fadabf9b90ca5ee63650c8"
+    file_count: 2
+  - name: testing-anti-patterns
+    path: "testing-anti-patterns"
+    version: 1
+    sha256: "08c404aac6da594293cbaed1c17bf5ef2f641e08daae63b1f4e9a11c3f96aac1"
+    file_count: 1
+  - name: testing-skills-with-subagents
+    path: "testing-skills-with-subagents"
+    version: 1
+    sha256: "d762daaa4136df6ea5e45a4c5a9977afe3444e1c5a23eb39fb994af037f9dd4a"
+    file_count: 2
+  - name: to-issues
+    path: "to-issues"
+    version: 1
+    sha256: "3fc7c307251c4f08a50326236e7e70faffe1dadb99ee35a3d854b1b7a0b79418"
+    file_count: 1
+  - name: to-prd
+    path: "to-prd"
+    version: 1
+    sha256: "a9a42e82d98fc26a289ee525b29af933b81a5b937f58284bda69128c88e49b3d"
+    file_count: 1
+  - name: tracing-knowledge-lineages
+    path: "tracing-knowledge-lineages"
+    version: 1
+    sha256: "8c3c0a0f71520a53c1081d372a97b4f8a9683e8ebfb5dd9418a6b9d57efaa8b2"
+    file_count: 1
+  - name: triage
+    path: "triage"
+    version: 1
+    sha256: "4e735cfcce7f614cef6849ba5cec4355cb6d42e507601e63cfbd707dd0be9c1c"
+    file_count: 3
+  - name: using-git-worktrees
+    path: "using-git-worktrees"
+    version: 1
+    sha256: "20806a49e07faff9d830c15d882fbad4f9e40a6762c34c64f42f07a02c28d3bd"
+    file_count: 1
+  - name: using-skills
+    path: "using-skills"
+    version: 1
+    sha256: "8a4602823f29dc46c6b33766732a5f12dd8425b3524cd625c53f1b5cb136b098"
+    file_count: 3
+  - name: using-superpowers
+    path: "using-superpowers"
+    version: 1
+    sha256: "b3ead3c48558d7cec17c078a2ecba24404e6e8b2df6246d352cc14823741d170"
+    file_count: 4
+  - name: verification-before-completion
+    path: "verification-before-completion"
+    version: 1
+    sha256: "9f704f1335e61a3ce258270d9f492cf487af55f1db0b9fc1bc5fa2173ebd38fa"
+    file_count: 1
+  - name: write-a-skill
+    path: "write-a-skill"
+    version: 1
+    sha256: "03840258378476cbefa13fd3f7bf70db93ec1c3cdd7d0dc4edb9431e71a2a24d"
+    file_count: 1
+  - name: writing-plans
+    path: "writing-plans"
+    version: 1
+    sha256: "6d34ebebd29f4131bf098bbd85dc0ed59b12c84beff1c911770896f6a7183c73"
+    file_count: 2
+  - name: writing-skills
+    path: "writing-skills"
+    version: 1
+    sha256: "125cf2c0e5424a646210ce0a8f8b1903b4c6603a66c38147915a23e43762d674"
+    file_count: 7
+  - name: youtube-transcript
+    path: "youtube-transcript"
+    version: 1
+    sha256: "775dd751c772d84628d8d3a16580beae43b64a34b3a8a6c0665b382b011dae8d"
+    file_count: 1
+  - name: zoom-out
+    path: "zoom-out"
+    version: 1
+    sha256: "34f4bab271b9b9bbad01e08413d5a096ec84d1ee983d747de9219f77afc5e897"
+    file_count: 1
