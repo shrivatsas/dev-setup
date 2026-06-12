@@ -12,7 +12,7 @@ Use this when the domain is still being shaped.
 6. Sketch aggregates around invariants and transaction boundaries.
 7. Decide which interactions are sync, async, or internal.
 8. Record any hard trade-off in an ADR.
-9. Do not move forward until the current branch is resolved.
+9. Do not move forward until the current branch is resolved. In report mode, resolve a branch by stating a recommended decision and the assumption it rests on, instead of waiting for an answer.
 
 ## Questions To Ask
 
