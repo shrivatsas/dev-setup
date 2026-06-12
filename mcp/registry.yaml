@@ -1,0 +1,41 @@
+# Canonical list of MCP servers for this dev setup.
+#
+# Keep this file as the source of truth. `./setup-mcps.sh` renders the enabled
+# entries into Codex's `~/.codex/config.toml` under a managed block.
+#
+# Fields:
+# - `name`: MCP server name in Codex config
+# - `enabled`: whether bootstrap should include it
+# - `command` + `args`: stdio launcher
+# - `url`: remote MCP endpoint
+# - `env`: environment variables for the launcher
+# - `http_headers`: headers for remote MCP endpoints
+
+mcp_servers:
+  - name: sentry
+    enabled: true
+    description: Error and observability workflows.
+    command: npx
+    args:
+      - -y
+      - mcp-remote@latest
+      - https://mcp.sentry.dev/mcp
+
+  - name: applyto_realfast
+    enabled: false
+    description: Personal remote MCP for ApplyTo RealFast.
+    url: https://join.realfast.ai/mcp/core
+    http_headers:
+      Authorization: ${APPLYTO_REALFAST_TOKEN}
+
+  - name: node_repl
+    enabled: false
+    description: Local Node REPL bridge used by Codex internals.
+    command: /Applications/Codex.app/Contents/Resources/cua_node/bin/node_repl
+    args: []
+    env:
+      NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS: "1000"
+      NODE_REPL_NODE_MODULE_DIRS: /Applications/Codex.app/Contents/Resources/cua_node/lib/node_modules
+      NODE_REPL_NODE_PATH: /Applications/Codex.app/Contents/Resources/cua_node/bin/node
+      NODE_REPL_TRUSTED_CODE_PATHS: /Users/shrivatsa/.codex
+      CODEX_HOME: /Users/shrivatsa/.codex

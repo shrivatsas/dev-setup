@@ -126,6 +126,9 @@ brew install yt-dlp
 #### Build Tools
 brew install go-task
 
+#### MCPs
+# ./setup-mcps.sh
+
 #### References:
 # https://medium.com/@maxy_ermayank/developer-environment-setup-script-5fcb7b854acc
 

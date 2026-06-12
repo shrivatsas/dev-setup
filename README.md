@@ -12,8 +12,10 @@ This repository contains automated setup scripts and configuration files to quic
 |------|-------------|
 | `mac.m1.sh` | Setup script for macOS on Apple Silicon (M1/M2/M3) |
 | `ubuntu.sh` | Setup script for Ubuntu/Linux |
+| `setup-mcps.sh` | Bootstrap script that renders `mcp/registry.yaml` into Codex config |
 | `vscode-extensions.txt` | VS Code extensions to install |
 | `conda-packages.txt` | Python packages for data science workflows |
+| `mcp/registry.yaml` | Canonical MCP server list rendered into Codex config |
 | `fishshell` | Fish shell installation notes |
 
 ## What Gets Installed
@@ -81,6 +83,17 @@ Preview or run a copy into the current repository:
 ```bash
 plugins/dev-skills/scripts/sync-dev-skills.sh --repo . --dry-run
 plugins/dev-skills/scripts/sync-dev-skills.sh --repo .
+```
+
+### MCP Setup
+
+MCP stands for Model Context Protocol. It is a standard way for an assistant to connect to external tools and data sources through a structured server interface.
+
+Render the enabled MCP list from this repo into Codex's local config:
+
+```bash
+./setup-mcps.sh --dry-run
+./setup-mcps.sh
 ```
 
 ## Customization
