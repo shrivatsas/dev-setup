@@ -29,7 +29,7 @@ This repository contains automated setup scripts and configuration files to quic
 - Git with common aliases
 - VS Code with extensions
 - DBeaver (database client)
-- Podman Desktop
+- Docker CLI and Docker Compose plugin, powered by Colima (no Docker Desktop)
 
 ### Languages & Runtimes
 - mise (runtime version manager)
@@ -61,6 +61,22 @@ chmod +x mac.m1.sh
 ```bash
 chmod +x ubuntu.sh
 ./ubuntu.sh
+```
+
+### Containers
+
+Both setup scripts install Docker CLI, Docker Compose, and Colima instead of
+Docker Desktop. On macOS, Colima is configured with a VZ VM, virtiofs mounts,
+2 CPUs, and 4 GiB memory. On Linux, Colima uses its QEMU-based defaults with
+2 CPUs and 4 GiB memory. The scripts also configure Docker to discover the
+Homebrew-installed Compose plugin.
+
+After setup, verify the runtime with:
+
+```bash
+colima status
+docker compose version
+docker run --rm hello-world
 ```
 
 ### VS Code Extensions

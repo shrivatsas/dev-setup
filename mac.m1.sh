@@ -44,8 +44,14 @@ brew install jq tree libevent telnet ripgrep wget glow
 
 #### Infra
 brew install --cask podman-desktop
-brew install docker
-brew install --cask docker-desktop
+brew install docker docker-compose colima
+mkdir -p ~/.docker
+if [ ! -f ~/.docker/config.json ]; then
+  echo '{}' > ~/.docker/config.json
+fi
+jq '. + {cliPluginsExtraDirs: ["/opt/homebrew/lib/docker/cli-plugins"]} | del(.credsStore)' ~/.docker/config.json > ~/.docker/config.json.tmp && mv ~/.docker/config.json.tmp ~/.docker/config.json
+colima start --vm-type=vz --mount-type=virtiofs --cpu 2 --memory 4
+brew services start colima
 # brew install vagrant vagrant-manager
 # brew install virtualbox
 

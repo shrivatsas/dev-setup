@@ -148,31 +148,18 @@ curl https://dl.feenk.com/scripts/mac.sh | bash
 sudo apt install postgresql-client-common
 sudo apt-get install postgresql-client
 
-# https://docs.docker.com/desktop/install/ubuntu/
-
-# shell: fish
-sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg
-
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
-set -l docker_arch (dpkg --print-architecture)
-set -l docker_codename (grep '^VERSION_CODENAME=' /etc/os-release | cut -d= -f2)
-echo "deb [arch=$docker_arch signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $docker_codename stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-curl -fLo docker-desktop-amd64.deb https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
-curl -fLo checksums.txt https://desktop.docker.com/linux/main/amd64/checksums.txt
-sha256sum -c --ignore-missing checksums.txt
-sudo apt-get update
-sudo apt install ./docker-desktop-amd64.deb
-rm -f docker-desktop-amd64.deb checksums.txt
-
-cat /etc/containers/registries.conf
-# unqualified-search-registries = ["docker.io"]
-
-sudo ln -s /home/user/.docker/desktop/docker.sock /var/run/docker.sock
+#### Containers
+# Colima runs the Docker daemon without Docker Desktop. Linux uses Colima's
+# QEMU-based defaults; the VZ/virtiofs configuration is macOS-only.
+brew install docker docker-compose colima
+mkdir -p ~/.docker
+if not test -f ~/.docker/config.json
+    echo '{}' > ~/.docker/config.json
+end
+set -l docker_cli_plugins_dir (brew --prefix)/lib/docker/cli-plugins
+jq --arg plugin_dir "$docker_cli_plugins_dir" '. + {cliPluginsExtraDirs: [$plugin_dir]} | del(.credsStore)' ~/.docker/config.json > ~/.docker/config.json.tmp; and mv ~/.docker/config.json.tmp ~/.docker/config.json
+colima start --cpu 2 --memory 4
+brew services start colima
 
 sudo apt install default-jdk
 sudo apt install openjdk-18-jre-headless
