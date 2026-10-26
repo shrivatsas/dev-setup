@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+# Send a review command from prompts/ to another agent pane through herdr.
+#
+# Why this exists: pi and claude read prompts/ as slash commands, so typing /review works
+# there. Codex has no prompt directory, and no slash command can refuse to review its own
+# author's work. This script covers both: it reads the same prompt files, never sends to
+# the calling pane, and inlines the skill body for agents that cannot load skills.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PROMPTS="$ROOT/prompts"
+SKILL="$ROOT/skills/reviewing-changes/SKILL.md"
+
+# Agents that load the linked skills themselves; everything else gets the skill inlined.
+SKILL_AWARE="${REVIEW_SKILL_AWARE:- pi claude }"
+
+usage() {
+  cat <<'USAGE'
+Usage:
+  review <review|fixes|rereview> <target> [options]
+
+Arguments:
+  mode             review | fixes | rereview  (prompts/<mode>.md)
+  target           PR number
+
+Options:
+  --list           Show live agent panes and exit.
+  --agent NAME     Send to every pane running NAME (pi, claude, codex).
+  --pane PANE      Send to one pane id, e.g. wS:p1.
+  --all-others     Send to every other agent pane.
+  --dry-run        Print the resolved text and targets; send nothing.
+  --timeout MS     Give up waiting after this long (default 900000).
+  -h, --help       Show this help.
+
+Never sends to this pane: a pane cannot review work it is authoring.
+USAGE
+}
+
+mode=""; target="?"; agent=""; pane=""; all_others=0; dry=0; timeout=900000; list=0
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    review|fixes|rereview) mode="$1"; shift ;;
+    --list)                list=1; shift ;;
+    --agent)               agent="${2:-}"; shift 2 ;;
+    --pane)                pane="${2:-}"; shift 2 ;;
+    --all-others)          all_others=1; shift ;;
+    --dry-run)             dry=1; shift ;;
+    --timeout)             timeout="${2:-}"; shift 2 ;;
+    -h|--help)             usage; exit 0 ;;
+    -*)                    echo "Unknown option: $1" >&2; exit 2 ;;
+    *)                     target="$1"; shift ;;
+  esac
+done
+
+panes_json="$(herdr agent list)"
+
+list_panes() {
+  printf '%s' "$panes_json" | python3 -c '
+import json, os, sys
+for a in json.load(sys.stdin)["result"]["agents"]:
+    pid = a.get("pane_id") or ""
+    mark = " (this pane)" if pid == os.environ.get("HERDR_PANE_ID", "") else ""
+    title = (a.get("terminal_title_stripped") or "")[:44]
+    print("%-8s %-7s %-8s %-44s %s%s" % (
+        pid, a.get("agent") or "?", a.get("agent_status") or "?", title,
+        a.get("cwd") or "", mark))
+'
+}
+
+[[ "$list" -eq 1 ]] && { list_panes; exit 0; }
+
+if [[ -z "$mode" ]]; then
+  echo "Choose a mode: review, fixes, or rereview." >&2
+  usage >&2
+  exit 2
+fi
+
+prompt_file="$PROMPTS/$mode.md"
+[[ -f "$prompt_file" ]] || { echo "No prompt for mode: $mode" >&2; exit 1; }
+
+# Frontmatter is for the agent command loader, not for the agent's input.
+strip_frontmatter() { awk 'BEGIN{n=0} /^---$/{n++; next} n>=2'; }
+
+body="$(strip_frontmatter < "$prompt_file")"
+[[ -n "$body" ]] || body="$(cat "$prompt_file")"
+
+resolve_panes() {
+  printf '%s' "$panes_json" | python3 -c '
+import json, os, sys
+want_agent, want_pane, all_others = sys.argv[1], sys.argv[2], sys.argv[3] == "1"
+me = os.environ.get("HERDR_PANE_ID", "")
+rows = []
+for a in json.load(sys.stdin)["result"]["agents"]:
+    pid = a.get("pane_id") or ""
+    if pid == me:
+        continue
+    if want_pane and pid != want_pane:
+        continue
+    if want_agent and (a.get("agent") or "") != want_agent:
+        continue
+    if not (want_pane or want_agent or all_others):
+        continue
+    rows.append(pid + "\t" + (a.get("agent") or "") + "\t" + (a.get("cwd") or ""))
+print("\n".join(rows))
+' "$agent" "$pane" "$all_others"
+}
+
+mapfile -t targets < <(resolve_panes | sed '/^$/d')
+
+if [[ "${#targets[@]}" -eq 0 ]]; then
+  echo "No target pane selected. Live panes:" >&2
+  list_panes >&2
+  exit 1
+fi
+
+for row in "${targets[@]}"; do
+  IFS=$'\t' read -r tpane tagent tcwd <<<"$row"
+  text="PRs: $target
+
+$body"
+
+  case "$SKILL_AWARE" in
+    *" $tagent "*)
+      ;;
+    *)
+      if [[ -f "$SKILL" ]]; then
+        skill_body="$(strip_frontmatter < "$SKILL")"
+        text="$text
+
+$skill_body"
+      fi
+      ;;
+  esac
+
+  if [[ "$dry" -eq 1 ]]; then
+    echo "== would send to $tpane ($tagent, $tcwd)"
+    printf '%s\n' "$text" | head -3
+    echo "   [... $(printf '%s' "$text" | wc -l) lines, $(printf '%s' "$text" | wc -c) bytes]"
+    continue
+  fi
+
+  echo "== sending to $tpane ($tagent)"
+  herdr agent prompt "$tpane" "$text" --wait --until idle --timeout "$timeout" >/dev/null
+  echo "-- $tpane response:"
+  herdr agent read "$tpane"
+done
