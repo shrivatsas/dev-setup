@@ -1,7 +1,12 @@
 schema_version: 1
-source_root: "/Users/user/Documents/dev-setup/skills"
+source_root: "."
 generator: "generate-sources-manifest.py"
 skills:
+  - name: amazon-bedrock
+    path: "amazon-bedrock"
+    version: 1
+    sha256: "230207197c618fdf0e8d83def7c282a6d8cafae7861c12f06913fb6305750097"
+    file_count: 38
   - name: architecture-docs
     path: "architecture-docs"
     version: 1
@@ -12,6 +17,111 @@ skills:
     version: 1
     sha256: "2a940bc89d2f21179fb2e446940b3fef80910aae433d6d98815a4da26c3117f1"
     file_count: 1
+  - name: aws-ai-ml
+    path: "aws-ai-ml"
+    version: 1
+    sha256: "a3a2c3d92da083065643311c9316aa395dfc74ec0b7eb7dea1abe0792274a288"
+    file_count: 119
+  - name: aws-auth
+    path: "aws-auth"
+    version: 1
+    sha256: "6caa55226f8be999a8cd5f4d509d0e289881135086a405df477363737512adeb"
+    file_count: 11
+  - name: aws-billing-and-cost-management
+    path: "aws-billing-and-cost-management"
+    version: 1
+    sha256: "8a23f26e778c439e84114123d327be17bbbb4c28dae3d17b706ab39068001914"
+    file_count: 17
+  - name: aws-blocks
+    path: "aws-blocks"
+    version: 1
+    sha256: "d8643901faa1741659f0389581be6689e6dfd32c04b7c4b6061f63e71d175913"
+    file_count: 2
+  - name: aws-cdk
+    path: "aws-cdk"
+    version: 1
+    sha256: "0b374fc7feb6a454678755f22e37d210c39705c721204e2dafba5ed08c77defe"
+    file_count: 12
+  - name: aws-cloudformation
+    path: "aws-cloudformation"
+    version: 1
+    sha256: "8dd9090fabcee0d3dadde419be4dd60c2940ebbdea90a8fe48579f329f5917c6"
+    file_count: 17
+  - name: aws-compute
+    path: "aws-compute"
+    version: 1
+    sha256: "01df48f4e7cac79ffdbc19c3bb8bbde2d30010a12092bd8ed5b758fed93056f7"
+    file_count: 8
+  - name: aws-containers
+    path: "aws-containers"
+    version: 1
+    sha256: "1ae3d8851b0304d81f992bd52f222a82a0ab7d8b8c62e678959406749560f67b"
+    file_count: 18
+  - name: aws-database
+    path: "aws-database"
+    version: 1
+    sha256: "92440de375184c4d77aca7382c028492d57ddfb9409c99d85891cef7021ffbe4"
+    file_count: 22
+  - name: aws-deployment
+    path: "aws-deployment"
+    version: 1
+    sha256: "29540fc8d5c9a44d13764031a9af684c30d7f8577805df8b3551a6db2a251f90"
+    file_count: 8
+  - name: aws-iam
+    path: "aws-iam"
+    version: 1
+    sha256: "1bc3b0bde904986f394fd9091c1b78b6ccd81704db492cfaf9b6df5c0e4043ea"
+    file_count: 6
+  - name: aws-messaging-and-streaming
+    path: "aws-messaging-and-streaming"
+    version: 1
+    sha256: "7b701bd32d61ba718482d10773dd23734d66d2593a9514f3a2a4288ff7688463"
+    file_count: 2
+  - name: aws-networking
+    path: "aws-networking"
+    version: 1
+    sha256: "601211a1b3dc9610b9a1c741a0df095c165446fdafd7ca4170659df04b61d15e"
+    file_count: 2
+  - name: aws-observability
+    path: "aws-observability"
+    version: 1
+    sha256: "94feb7b129ccd12f81df8d4c4a150525fe4f3803880a8885c13834e5ac603fe7"
+    file_count: 51
+  - name: aws-sdk-js-v3-usage
+    path: "aws-sdk-js-v3-usage"
+    version: 1
+    sha256: "a1733667b23169fc3d054c92f12476cbd67df6463032d120ce647feccafa4b7f"
+    file_count: 13
+  - name: aws-sdk-python-usage
+    path: "aws-sdk-python-usage"
+    version: 1
+    sha256: "608b25c818017e7fd897d80f1dd25716d97ba3f02a7b868d3c863c76d848b510"
+    file_count: 9
+  - name: aws-sdk-swift-usage
+    path: "aws-sdk-swift-usage"
+    version: 1
+    sha256: "f3ae57779a383d91f3132a84ca2bafc95d0814025edf84f89169f415555f0f0e"
+    file_count: 2
+  - name: aws-security
+    path: "aws-security"
+    version: 1
+    sha256: "fe8e490709a0549e3e732ffdb1753f88ade7a5776fa3b1ca78a8b788fb749e70"
+    file_count: 25
+  - name: aws-serverless
+    path: "aws-serverless"
+    version: 1
+    sha256: "32f7f120524be7e4c826c974c0f0d66d4e8a0ad952846c2a2805ee92cc2298bd"
+    file_count: 13
+  - name: aws-storage
+    path: "aws-storage"
+    version: 1
+    sha256: "b03a9ee18e73d9ab2750bdc41ade14a92afd190d4183b3208bf093f0c85bf8a7"
+    file_count: 14
+  - name: aws-well-architected-review
+    path: "aws-well-architected-review"
+    version: 1
+    sha256: "92af0ca8fd02a1f4d83d58b3ec76c8ff15eb871de9b298c2927189f6e027760e"
+    file_count: 10
   - name: brainstorming
     path: "brainstorming"
     version: 1
@@ -29,18 +139,18 @@ skills:
     file_count: 1
   - name: collision-zone-thinking
     path: "collision-zone-thinking"
-    version: 1
-    sha256: "b3c0cb9e9b1754a03456e0da13f9900732da71827c69fd9dff9cab70db64eedd"
+    version: 2
+    sha256: "5c9244bac51d94b0714d93cb6cce51bf7c0a23ecea69fc10c07b4f0a8511c0e3"
     file_count: 1
   - name: condition-based-waiting
     path: "condition-based-waiting"
-    version: 1
-    sha256: "584f2d05146fe17e4bcd6405dec6c288d5e5fe9e179b9378b00bb694cc4e4405"
+    version: 2
+    sha256: "b3a56a4dcd9d12ce6cec087ca9be3a73371353759cb11d5c6184a9e5e8ceea7b"
     file_count: 2
   - name: defense-in-depth
     path: "defense-in-depth"
-    version: 1
-    sha256: "e63804c52d18821bf7278369740b2c3739c71efc4635ba7a130cd43ef87eb24a"
+    version: 2
+    sha256: "dac5eaff0d7e52ca8f918e63c8c84f108e4657ddbea6c11bca5e7bb08a4492eb"
     file_count: 1
   - name: diagnose
     path: "diagnose"
@@ -54,9 +164,9 @@ skills:
     file_count: 1
   - name: domain-driven-design
     path: "domain-driven-design"
-    version: 1
-    sha256: "031c9c59faf1dda3ea013155ebe94369572cb4534e73e986b94127a874497fd8"
-    file_count: 4
+    version: 2
+    sha256: "3b11fbd6d7c6897fd086e87b4f2bfcaed41ee2a96974a71db02646539b8ea0dd"
+    file_count: 5
   - name: executing-plans
     path: "executing-plans"
     version: 1
@@ -74,8 +184,8 @@ skills:
     file_count: 1
   - name: gardening-skills-wiki
     path: "gardening-skills-wiki"
-    version: 1
-    sha256: "0d51f1f23a07a928c1f0965b674382aac9cf58be460f8d7efbb428d549378aff"
+    version: 2
+    sha256: "5e444a052a4683f3e5a3d2c7f26e24dba5c5b222c4d49714bb1d2a1e59d12729"
     file_count: 6
   - name: grill-me
     path: "grill-me"
@@ -109,14 +219,19 @@ skills:
     file_count: 5
   - name: inversion-exercise
     path: "inversion-exercise"
-    version: 1
-    sha256: "2562c31a7de33250d120740559a04edebcce5f3f0cd0d9173af8648d1a03b2bd"
+    version: 2
+    sha256: "29d88892805ef180bcf32cb2757aa41cdd7c0db908a4144eda36d77cc5802ebf"
     file_count: 1
   - name: karpathy-guidelines
     path: "karpathy-guidelines"
     version: 1
     sha256: "5e8a1677df986d47abaf3d42f1ce0c7427ea030f50370c52baf9ba1e2c7c3db9"
     file_count: 1
+  - name: launch-with-aws
+    path: "launch-with-aws"
+    version: 1
+    sha256: "a51ed9d09be5cd8b12063be6619b8fa758aacb95011df8d64ecc153953164668"
+    file_count: 9
   - name: logseq-flashcards
     path: "logseq-flashcards"
     version: 1
@@ -124,8 +239,8 @@ skills:
     file_count: 3
   - name: meta-pattern-recognition
     path: "meta-pattern-recognition"
-    version: 1
-    sha256: "a3eb5abd6c8a66ae45724243ac4fc54e0a6190b62c5f03f47ba4945db227056b"
+    version: 2
+    sha256: "dd67c6d9c0cfc5cfdbfd6c76f57ecd5e9fe8ade48131c44bd926569c709a3ffd"
     file_count: 1
   - name: mutation-testing
     path: "mutation-testing"
@@ -149,8 +264,8 @@ skills:
     file_count: 1
   - name: preserving-productive-tensions
     path: "preserving-productive-tensions"
-    version: 1
-    sha256: "cb018454099717dfd6313969be7c8e175c589ed8cfdedc865e94d8025c5c5fb1"
+    version: 2
+    sha256: "8523daf1b7b697185ccb3e03b70d187f004a186d0e3dc416d16b5e67c4826ae7"
     file_count: 1
   - name: prototype
     path: "prototype"
@@ -159,8 +274,8 @@ skills:
     file_count: 3
   - name: pulling-updates-from-skills-repository
     path: "pulling-updates-from-skills-repository"
-    version: 1
-    sha256: "411789c81f3465c186cb146467ce36111562a01bb09beb436fc4f15b1075d373"
+    version: 2
+    sha256: "65969ca44480a5f7f577e5331f783e63555f82d74cd31109086b13c77fea9320"
     file_count: 1
   - name: receiving-code-review
     path: "receiving-code-review"
@@ -169,8 +284,8 @@ skills:
     file_count: 1
   - name: remembering-conversations
     path: "remembering-conversations"
-    version: 1
-    sha256: "c00d186390cfb7950b936ee28423891f2d0cd42328abe463d33d6f73c11a4849"
+    version: 2
+    sha256: "4331a1cc6091ab415c973a39cef8a9cb127dd59c9af8ed17a62769b34cc47048"
     file_count: 29
   - name: requesting-code-review
     path: "requesting-code-review"
@@ -202,15 +317,20 @@ skills:
     version: 1
     sha256: "455038afa644af0d2c87195005acaa1c2aceddd7a1086a883a775101f1efab74"
     file_count: 2
+  - name: reviewing-changes
+    path: "reviewing-changes"
+    version: 1
+    sha256: "f8192652da9bc4a23c75d8de007625c995e6862d24d22ed72732b8b734bdb07c"
+    file_count: 1
   - name: root-cause-tracing
     path: "root-cause-tracing"
-    version: 1
-    sha256: "4abd67851dade8e995d7020593d67191420d72129f163b75262bb846b57e0652"
+    version: 2
+    sha256: "fe369821d24c38b8afb86082f9b40f3e847a2a883c2550e8086c206a48ad3d4e"
     file_count: 2
   - name: scale-game
     path: "scale-game"
-    version: 1
-    sha256: "5542c0ae14d2c32beb33605c0d3a51487c921b2acb28def2f773899bafe22ae3"
+    version: 2
+    sha256: "a0ff75cebf0351afec6656431b3b620af54d5c8170d81856f477ac554b43b816"
     file_count: 1
   - name: setup-matt-pocock-skills
     path: "setup-matt-pocock-skills"
@@ -219,8 +339,8 @@ skills:
     file_count: 6
   - name: sharing-skills
     path: "sharing-skills"
-    version: 1
-    sha256: "0b712f36c96b1c6040c78ce5acba2de275fdb5b8e0d6192089020497cc37fcf5"
+    version: 2
+    sha256: "302dd8988893f0a03db870d3de46a130865f0c595ab5d343c95aba43f6bc3c77"
     file_count: 1
   - name: ship-it
     path: "ship-it"
@@ -232,10 +352,15 @@ skills:
     version: 1
     sha256: "f780832426ea584139e9e239089655b2e4057b48f947659d09c5bd8416483ff8"
     file_count: 1
+  - name: signing-in-to-aws
+    path: "signing-in-to-aws"
+    version: 1
+    sha256: "afa7c89ac20f8eff5618d9eff1e19ee46e7c3f649afe4e72315dc0c9d540a6b2"
+    file_count: 2
   - name: simplification-cascades
     path: "simplification-cascades"
-    version: 1
-    sha256: "56ccca0f89f2bef33e6061a60458279659a53a9171ac3af8838570b066642697"
+    version: 2
+    sha256: "5b0cf8ea5804eab8aa95ea20d21639fcf6698e60960072001272fe7d40f38eaf"
     file_count: 1
   - name: skill-creator
     path: "skill-creator"
@@ -274,13 +399,13 @@ skills:
     file_count: 2
   - name: testing-anti-patterns
     path: "testing-anti-patterns"
-    version: 1
-    sha256: "08c404aac6da594293cbaed1c17bf5ef2f641e08daae63b1f4e9a11c3f96aac1"
+    version: 2
+    sha256: "343e31e5e4c936dc50d309b5dadd9061f22361b9f7dbf0b1ea5656736fa1c494"
     file_count: 1
   - name: testing-skills-with-subagents
     path: "testing-skills-with-subagents"
-    version: 1
-    sha256: "d762daaa4136df6ea5e45a4c5a9977afe3444e1c5a23eb39fb994af037f9dd4a"
+    version: 2
+    sha256: "622a115ae9f943b346d7e1fd277ac378c92f6a11d72384d42cf948d36f0c8834"
     file_count: 2
   - name: to-issues
     path: "to-issues"
@@ -294,8 +419,8 @@ skills:
     file_count: 1
   - name: tracing-knowledge-lineages
     path: "tracing-knowledge-lineages"
-    version: 1
-    sha256: "8c3c0a0f71520a53c1081d372a97b4f8a9683e8ebfb5dd9418a6b9d57efaa8b2"
+    version: 2
+    sha256: "9144bb21bb7c9f59c03fa6cb0d41ec2deb5c237204c563084de1db5a8e0667a8"
     file_count: 1
   - name: triage
     path: "triage"
@@ -309,8 +434,8 @@ skills:
     file_count: 1
   - name: using-skills
     path: "using-skills"
-    version: 1
-    sha256: "8a4602823f29dc46c6b33766732a5f12dd8425b3524cd625c53f1b5cb136b098"
+    version: 2
+    sha256: "4525351789f943583510ff28d8773666582204b97565f37bc4fed88331a17998"
     file_count: 3
   - name: using-superpowers
     path: "using-superpowers"

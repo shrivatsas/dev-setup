@@ -1,5 +1,5 @@
 ---
-name: Condition-Based Waiting
+name: condition-based-waiting
 description: Replace arbitrary timeouts with condition polling for reliable async tests
 when_to_use: when tests have race conditions, timing dependencies, or inconsistent pass/fail behavior
 version: 1.1.0

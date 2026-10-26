@@ -1,5 +1,5 @@
 ---
-name: Pulling Updates from Skills Repository
+name: pulling-updates-from-skills-repository
 description: Sync local skills repository with upstream changes from obra/superpowers-skills
 when_to_use: when session start indicates new upstream skills available, or when manually updating to latest versions
 version: 1.2.0

@@ -1,5 +1,5 @@
 ---
-name: Sharing Skills
+name: sharing-skills
 description: Contribute skills back to upstream via branch and PR
 when_to_use: when you've developed a broadly useful skill and want to contribute it upstream via pull request
 version: 2.1.0

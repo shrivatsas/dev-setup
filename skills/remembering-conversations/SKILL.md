@@ -1,5 +1,5 @@
 ---
-name: Remembering Conversations
+name: remembering-conversations
 description: Search previous Claude Code conversations for facts, patterns, decisions, and context using semantic or text search
 when_to_use: when partner mentions past discussions, debugging familiar issues, or seeking historical context about decisions and patterns
 version: 1.1.0

@@ -134,7 +134,9 @@ def records_by_name(records: List[Dict[str, object]]) -> Dict[str, Dict[str, obj
 def render_manifest(root: Path, records: List[Dict[str, object]]) -> str:
     lines: List[str] = [
         "schema_version: 1",
-        f'source_root: "{root}"',
+        # Relative on purpose: this file is committed and regenerated on every machine,
+        # so an absolute path would conflict between checkouts on each run.
+        'source_root: "."',
         f'generator: "generate-sources-manifest.py"',
         "skills:",
     ]
