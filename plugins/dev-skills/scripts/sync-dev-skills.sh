@@ -111,8 +111,14 @@ if [[ "$PRUNE" -eq 1 ]]; then
   done
 fi
 
+# macOS without Command Line Tools has no python3; the links above still stand without a
+# manifest, so this is a note rather than a failure.
 if [[ "$DRY_RUN" -eq 0 ]] && [[ -f "$GENERATE_MANIFEST" ]]; then
-  python3 "$GENERATE_MANIFEST" --root "$SOURCE" --write
+  if command -v python3 >/dev/null 2>&1; then
+    python3 "$GENERATE_MANIFEST" --root "$SOURCE" --write
+  else
+    echo "note: python3 not found; SOURCES.yaml not regenerated" >&2
+  fi
 fi
 
 echo

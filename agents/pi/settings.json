@@ -1,0 +1,10 @@
+{
+  "lastChangelogVersion": "1.4.0",
+  "theme": "dark",
+  "hideThinkingBlock": false,
+  "defaultProvider": "commandcode",
+  "defaultModel": "deepseek/deepseek-v4.1-flash",
+  "packages": [
+    "npm:pi-commandcode-provider"
+  ]
+}

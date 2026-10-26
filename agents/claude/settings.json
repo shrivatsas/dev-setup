@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/user/.claude/hooks/flood-guard.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/home/user/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "theme": "auto"
+}

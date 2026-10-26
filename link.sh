@@ -116,6 +116,71 @@ link_prompts() {
   done
 }
 
+# Agent configuration adopted from this checkout: one source, same as skills and prompts.
+agent_pairs() {
+  printf '%s\t%s\n' \
+    "agents/codex/config.toml"  "$HOME/.codex/config.toml" \
+    "agents/pi/settings.json"   "$HOME/.pi/agent/settings.json" \
+    "agents/pi/AGENTS.md"       "$HOME/.pi/agent/AGENTS.md" \
+    "agents/herdr/config.toml"  "$HOME/.config/herdr/config.toml" \
+    "agents/claude/settings.json" "$HOME/.claude/settings.json"
+  local f acct
+  for f in "$ROOT"/agents/pi/extensions/*; do
+    [[ -e "$f" ]] || continue
+    printf '%s\t%s\n' "agents/pi/extensions/$(basename "$f")" "$HOME/.pi/agent/extensions/$(basename "$f")"
+  done
+  for f in "$ROOT"/agents/claude/hooks/*; do
+    [[ -e "$f" ]] || continue
+    printf '%s\t%s\n' "agents/claude/hooks/$(basename "$f")" "$HOME/.claude/hooks/$(basename "$f")"
+  done
+  # claude reads its configuration from the active config dir, so each account needs the
+  # same settings and hooks as ~/.claude.
+  for acct in "$HOME"/.claude-accounts/*/; do
+    [[ -d "$acct" ]] || continue
+    printf '%s\t%s\n' "agents/claude/settings.json" "${acct}settings.json"
+    for f in "$ROOT"/agents/claude/hooks/*; do
+      [[ -e "$f" ]] || continue
+      printf '%s\t%s\n' "agents/claude/hooks/$(basename "$f")" "${acct}hooks/$(basename "$f")"
+    done
+  done
+}
+
+link_agents() {
+  local rel dst src
+  while IFS=$'\t' read -r rel dst; do
+    src="$ROOT/$rel"
+    [[ -f "$src" ]] || continue
+
+    if [[ "$CHECK" -eq 1 ]]; then
+      if [[ ! -e "$dst" ]]; then
+        echo "missing  ${dst/#$HOME/\~} (from $rel)"
+        fail=1
+      elif [[ ! -L "$dst" ]] || [[ "$(readlink "$dst")" != "$src" ]]; then
+        echo "drift    ${dst/#$HOME/\~} (not a link to $rel)"
+        fail=1
+      fi
+      continue
+    fi
+
+    mkdir -p "$(dirname "$dst")"
+    if [[ -L "$dst" ]]; then
+      [[ "$(readlink "$dst")" == "$src" ]] || { ln -sfn "$src" "$dst"; echo "relink   ${dst/#$HOME/\~}"; }
+    elif [[ -e "$dst" ]]; then
+      if cmp -s "$dst" "$src"; then
+        rm -f "$dst"; ln -s "$src" "$dst"
+        echo "link     ${dst/#$HOME/\~}"
+      else
+        cp -p "$dst" "$dst.bak-$(date +%Y%m%d-%H%M%S)"
+        ln -sfn "$src" "$dst"
+        echo "adopt    ${dst/#$HOME/\~} (kept a .bak copy)"
+      fi
+    else
+      ln -s "$src" "$dst"
+      echo "link     ${dst/#$HOME/\~}"
+    fi
+  done < <(agent_pairs)
+}
+
 markdown_commands_note() {  cat <<'NOTE'
 
 Prompt templates are argument-free by design: pi substitutes $1/$@ and claude uses
@@ -126,6 +191,7 @@ NOTE
 
 link_skills
 link_prompts
+link_agents
 
 if [[ "$CHECK" -eq 1 ]]; then
   if [[ "$fail" -eq 0 ]]; then

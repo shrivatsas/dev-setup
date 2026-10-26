@@ -135,6 +135,30 @@ prompt text to a codex pane instead: `herdr agent prompt <pane> "$(cat prompts/r
 
 Which model to use, and the commands to launch it, are in [models.md](models.md).
 
+## A new machine
+
+```bash
+git clone git@github.com:shrivatsas/dev-setup.git && cd dev-setup
+./install.sh              # check tools, wire this checkout, list what a human must do
+./install.sh --install    # additionally install codex and the herdr plugin
+```
+
+`install.sh` links and adopts; it never invents an install command or a login. Credentials are
+not in this repository: claude and codex accounts, `gh auth login`, and the AWS profiles are
+per machine and per account.
+
+Agent configuration is adopted the same way as skills, so one file serves every machine:
+
+| source | linked to |
+| --- | --- |
+| `agents/codex/config.toml` | `~/.codex/config.toml` |
+| `agents/claude/settings.json`, `agents/claude/hooks/*` | `~/.claude/` and every `~/.claude-accounts/*/` |
+| `agents/pi/settings.json`, `agents/pi/AGENTS.md`, `agents/pi/extensions/*` | `~/.pi/agent/` |
+| `agents/herdr/config.toml` | `~/.config/herdr/config.toml` (then `herdr server reload-config`) |
+
+When a real file is in the way and differs, `link.sh` saves a `.bak-` copy before linking, so
+the first run on an existing machine is reversible.
+
 ## Customization
 
 The scripts contain many commented-out sections for optional tools. Uncomment what you need:
