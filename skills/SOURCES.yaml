@@ -322,6 +322,11 @@ skills:
     version: 1
     sha256: "f8192652da9bc4a23c75d8de007625c995e6862d24d22ed72732b8b734bdb07c"
     file_count: 1
+  - name: reviewing-pr-fixes
+    path: "reviewing-pr-fixes"
+    version: 1
+    sha256: "76c78ce8997673527814bf5aa07bb502494eee7fb8ad78549b30f3a84f80b517"
+    file_count: 1
   - name: root-cause-tracing
     path: "root-cause-tracing"
     version: 2
