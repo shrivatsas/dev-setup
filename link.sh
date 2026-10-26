@@ -107,31 +107,6 @@ link_prompts() {
   done
 }
 
-link_bin() {
-  local dir="$HOME/.local/bin"
-  if [[ "$CHECK" -eq 1 ]]; then
-    for src in "$ROOT"/bin/*; do
-      [[ -e "$src" ]] || continue
-      name="$(basename "$src")"
-      dst="$dir/$name"
-      if [[ ! -e "$dst" ]]; then
-        echo "missing  ${dst/#$HOME/\~}"
-        fail=1
-      elif [[ ! -L "$dst" ]] || [[ "$(readlink "$dst")" != "$src" ]]; then
-        echo "drift    ${dst/#$HOME/\~} (not a link to dev-setup)"
-        fail=1
-      fi
-    done
-  else
-    mkdir -p "$dir"
-    echo "== ${dir/#$HOME/\~}"
-    for src in "$ROOT"/bin/*; do
-      [[ -e "$src" ]] || continue
-      ln -sfn "$src" "$dir/$(basename "$src")"
-    done
-  fi
-}
-
 markdown_commands_note() {  cat <<'NOTE'
 
 Prompt templates are argument-free by design: pi substitutes $1/$@ and claude uses
@@ -142,7 +117,6 @@ NOTE
 
 link_skills
 link_prompts
-link_bin
 
 if [[ "$CHECK" -eq 1 ]]; then
   if [[ "$fail" -eq 0 ]]; then

@@ -121,7 +121,6 @@ needs them, so an edit here is live everywhere and nothing can drift:
 | --- | --- |
 | `~/.agents/skills`, `~/.claude/skills`, `~/.codex/skills` | one link per skill |
 | `~/.pi/agent/prompts`, `~/.claude/commands` | one link per prompt, as a slash command |
-| `~/.local/bin` | `bin/*`, including `review` |
 
 `./link.sh --check` reports anything unwired, copied, or pointing elsewhere.
 
@@ -130,18 +129,10 @@ destination that must be self-contained, such as a repository someone else check
 `SOURCES.yaml` manifest records a monotonic version and checksum per skill and is regenerated
 on every run.
 
-Prompts are slash commands in pi and claude. Codex has no prompt directory, so `bin/review`
-sends the same prompt text to a herdr pane instead:
+Prompts are slash commands in pi and claude. Codex has no prompt directory, so send the
+prompt text to a codex pane instead: `herdr agent prompt <pane> "$(cat prompts/review.md)"`.
 
-```bash
-bin/review --list                          # live agent panes
-bin/review review 274 --pane wS:p1         # one pane
-bin/review fixes 274 --agent claude        # every claude pane
-bin/review review 274 --all-others --dry-run
-```
-
-It never sends to the calling pane, so a pane cannot review work it is authoring, and it
-inlines `skills/reviewing-changes` for agents that cannot load skills themselves.
+Which model to use, and the commands to launch it, are in [models.md](models.md).
 
 ## Customization
 
