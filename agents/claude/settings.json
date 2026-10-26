@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/home/user/.claude/hooks/flood-guard.sh"
+            "command": "$HOME/.claude/hooks/flood-guard.sh"
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash '/home/user/.claude/hooks/herdr-agent-state.sh' session",
+            "command": "bash '$HOME/.claude/hooks/herdr-agent-state.sh' session",
             "timeout": 10
           }
         ]

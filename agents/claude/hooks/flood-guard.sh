@@ -7,7 +7,7 @@
 # Installed in ~/.claude/settings.json:
 #   "hooks": { "PreToolUse": [ { "matcher": "Bash",
 #     "hooks": [ { "type": "command",
-#       "command": "/home/user/.claude/hooks/flood-guard.sh" } ] } ] }
+#       "command": "$HOME/.claude/hooks/flood-guard.sh" } ] } ] }
 # Also symlinked into the Codex account (~/.codex-accounts/*/hooks/).
 
 allow() { exit 0; }

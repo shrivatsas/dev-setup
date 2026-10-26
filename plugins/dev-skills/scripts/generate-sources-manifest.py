@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Tuple
 
 
-DEFAULT_ROOT = Path("/Users/user/Documents/dev-setup/skills")
+DEFAULT_ROOT = Path(__file__).resolve().parents[3] / "skills"
 MANIFEST_NAME = "SOURCES.yaml"
 TRACKED_EXCLUSIONS = {MANIFEST_NAME, "SOURCES.md"}
 

@@ -119,8 +119,6 @@ link_prompts() {
 # Agent configuration adopted from this checkout: one source, same as skills and prompts.
 agent_pairs() {
   printf '%s\t%s\n' \
-    "agents/codex/config.toml"  "$HOME/.codex/config.toml" \
-    "agents/pi/settings.json"   "$HOME/.pi/agent/settings.json" \
     "agents/pi/AGENTS.md"       "$HOME/.pi/agent/AGENTS.md" \
     "agents/herdr/config.toml"  "$HOME/.config/herdr/config.toml" \
     "agents/claude/settings.json" "$HOME/.claude/settings.json"

@@ -1,60 +1,52 @@
 ---
 name: sync-dev-skills
-description: Copy the skills collection from /Users/user/Documents/dev-setup/skills into the current repository, another repository, or an explicit skills directory. Use when the user asks to copy, sync, install, update, or bring over their dev-setup skills.
+description: Link the skills collection from a dev-setup checkout into the current repository, another repository, or an agent skills directory. Use when the user asks to install, wire, sync, or bring over their dev-setup skills.
 ---
 
-# Sync Dev Setup Skills
+# Link Dev Setup Skills
 
-Use this skill when the user wants the skills from the `dev-setup` repository copied into another workspace.
+Use this skill when the user wants the skills from their `dev-setup` checkout available in
+another workspace. The script links; it never copies, because a copy is what drifts.
 
 ## Source
 
-Default source:
-
-```text
-/Users/user/Documents/dev-setup/skills
-```
-
-Override with `DEV_SETUP_SKILLS_SOURCE` or `--source` when needed.
+The source defaults to `skills/` in the repository that contains the script, so no absolute
+path is needed. Override with `DEV_SETUP_SKILLS_SOURCE` or `--source`.
 
 ## Workflow
 
 1. Decide the destination.
-   - Current repository: use `--repo .`, which writes to `./skills`.
-   - Another repository: use `--repo /path/to/repo`, which writes to `/path/to/repo/skills`.
-   - Explicit skills directory: use `--target /path/to/skills`.
-   - Codex home skills: use `--target ~/.codex/skills`.
-2. Preview first unless the user explicitly asked to copy immediately:
+   - Current repository: `--repo .` links into `./skills`.
+   - Another repository: `--repo /path/to/repo` links into `/path/to/repo/skills`.
+   - Explicit directory: `--target /path/to/skills`.
+2. Preview first unless the user asked to wire it immediately:
 
 ```bash
 plugins/dev-skills/scripts/sync-dev-skills.sh --repo . --dry-run
 ```
 
-3. Run the copy:
+3. Link:
 
 ```bash
 plugins/dev-skills/scripts/sync-dev-skills.sh --repo .
 ```
 
-4. Verify:
+4. Verify every skill resolves:
 
 ```bash
 find skills -mindepth 2 -maxdepth 2 -name SKILL.md | sort
 ```
 
-5. The sync step also regenerates `SOURCES.yaml` in the destination.
-
-6. Compare two skill trees quickly:
-
-```bash
-plugins/dev-skills/scripts/generate-sources-manifest.py --root /Users/user/Documents/dev-setup/skills --compare ~/.codex/skills
-```
+5. `SOURCES.yaml` is regenerated at the source after each run, recording a version and
+   checksum per skill.
 
 ## Notes
 
-- The script copies complete skill directories, including linked files, scripts, assets, references, and `SOURCES.yaml`.
-- Existing destination files with the same path are overwritten.
-- Use `--delete` only when the user explicitly wants destination files removed if they are absent from the source.
-- The script excludes `.git/` and `__pycache__/` by default.
-- Use `--exclude SOURCES.yaml` if the destination should receive only skill directories.
-- The script refuses to run if the source directory does not exist.
+- Each skill becomes a symlink to the source directory; an edit in the source is live in every
+  destination immediately.
+- A real directory in the way is reported as a conflict and left untouched. Move its content
+  into the source instead of maintaining a second copy.
+- `--prune` removes links whose source skill no longer exists. `--force` replaces a link that
+  points somewhere else.
+- Codex, Claude and Pi all read more than one skills location; `link.sh` in the same repository
+  is the command that wires a whole machine.

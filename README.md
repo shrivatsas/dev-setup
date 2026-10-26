@@ -151,10 +151,14 @@ Agent configuration is adopted the same way as skills, so one file serves every 
 
 | source | linked to |
 | --- | --- |
-| `agents/codex/config.toml` | `~/.codex/config.toml` |
 | `agents/claude/settings.json`, `agents/claude/hooks/*` | `~/.claude/` and every `~/.claude-accounts/*/` |
-| `agents/pi/settings.json`, `agents/pi/AGENTS.md`, `agents/pi/extensions/*` | `~/.pi/agent/` |
+| `agents/pi/AGENTS.md`, `agents/pi/extensions/*` | `~/.pi/agent/` |
 | `agents/herdr/config.toml` | `~/.config/herdr/config.toml` (then `herdr server reload-config`) |
+
+Two files are **seeded, never linked**: `agents/codex/config.toml` and `agents/pi/settings.json`.
+Pi and Codex rewrite those themselves — device ids, changelog markers, plugin and marketplace
+state — so a link would push the agent's own state into this repository. `install.sh` copies
+them only when the destination is missing, and leaves an existing file alone.
 
 When a real file is in the way and differs, `link.sh` saves a `.bak-` copy before linking, so
 the first run on an existing machine is reversible.

@@ -53,6 +53,24 @@ if [[ "$DO_INSTALL" -eq 1 ]]; then
 fi
 
 echo
+echo "== seeding agent-written config (copied, never linked)"
+# pi and codex rewrite these files themselves, so a link would push the agent's own state
+# into this repository.
+seed() {
+  local src="$ROOT/$1" dst="$2"
+  [[ -f "$src" ]] || return 0
+  mkdir -p "$(dirname "$dst")"
+  if [[ -e "$dst" ]]; then
+    printf '  %-34s %s\n' "${dst/#$HOME/~}" "exists, left alone"
+  else
+    cp "$src" "$dst"
+    printf '  %-34s %s\n' "${dst/#$HOME/~}" "seeded"
+  fi
+}
+seed agents/codex/config.toml "$HOME/.codex/config.toml"
+seed agents/pi/settings.json  "$HOME/.pi/agent/settings.json"
+
+echo
 echo "== wiring this checkout into the machine"
 "$ROOT/link.sh"
 
@@ -60,11 +78,11 @@ echo
 echo "== still yours to do"
 cat <<'STEPS'
   Logins, per account. None of this is in the repository, on purpose:
-    claude   CLAUDE_CONFIG_DIR=~/.claude-accounts/<account>/ claude   # and -upw
+    claude   CLAUDE_CONFIG_DIR=~/.claude-accounts/<account>/ claude 
     codex    codex login                                                # per codex account
     github   gh auth login
     aws      aws login --profile default
-             aws sts get-caller-identity --profile bedrock-guidelines
+             aws sts get-caller-identity --profile bedrock-<profile>
 
   Machines and plugins for herdr:
     herdr machine add <ssh-target>          # the other box, e.g. macbook
