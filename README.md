@@ -124,10 +124,10 @@ needs them, so an edit here is live everywhere and nothing can drift:
 
 `./link.sh --check` reports anything unwired, copied, or pointing elsewhere.
 
-`plugins/dev-skills/scripts/sync-dev-skills.sh` links by default. `--copy` exists only for a
-destination that must be self-contained, such as a repository someone else checks out. The
+`plugins/dev-skills/scripts/sync-dev-skills.sh` links only — a copy is what drifts. The
 `SOURCES.yaml` manifest records a monotonic version and checksum per skill and is regenerated
-on every run.
+on every run. It refuses to replace a real directory: move that content into `skills/` instead
+of maintaining a second copy.
 
 Prompts are slash commands in pi and claude. Codex has no prompt directory, so send the
 prompt text to a codex pane instead: `herdr agent prompt <pane> "$(cat prompts/review.md)"`.
