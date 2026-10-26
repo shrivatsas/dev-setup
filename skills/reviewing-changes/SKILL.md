@@ -1,6 +1,6 @@
 ---
 name: reviewing-changes
-description: Reviews a change or a review round in three modes — review, fix, re-review. Order matters: intent before approach before details. Use when reviewing pull requests, addressing review comments, or re-reviewing after new commits.
+description: "Reviews a change or a review round in three modes — review, fix, re-review. Order matters: intent before approach before details. Use when reviewing pull requests, addressing review comments, or re-reviewing after new commits."
 ---
 
 # Reviewing Changes
