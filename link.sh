@@ -16,13 +16,19 @@ SYNC="$ROOT/plugins/dev-skills/scripts/sync-dev-skills.sh"
 CHECK=0
 [[ "${1:-}" == "--check" ]] && CHECK=1
 
-# Agent skill directories. Codex keeps .system/ alongside user skills, so links are
-# created per skill rather than replacing the directory.
+# Skill directories per agent:
+#   ~/.agents/skills, ~/.claude/skills, ~/.codex/skills — pi, claude and codex all read more
+#     than one of these, so keeping all three populated means no agent goes without skills
+#   ~/.claude-accounts/*/skills — claude's skill root lives inside its config dir, so each
+#     account needs its own links
 SKILL_TARGETS=(
   "$HOME/.agents/skills"
   "$HOME/.claude/skills"
   "$HOME/.codex/skills"
 )
+for acct in "$HOME"/.claude-accounts/*/; do
+  [[ -d "$acct" ]] && SKILL_TARGETS+=("${acct}skills")
+done
 
 # Agent prompt/command directories: agent|dir. Codex is unlisted until its custom prompt
 # format is verified on this machine.
@@ -53,11 +59,14 @@ link_skills() {
         fi
       done
       if [[ -d "$dir" ]]; then
-        for shadow in "$dir"/*/; do
-          name="$(basename "$shadow")"
-          [[ "$name" == ".system" ]] && continue
-          [[ -e "$SKILLS/$name" ]] && continue
-          echo "orphan   ${dir/#$HOME/\~}/$name (no source skill)"
+        # Only a link into dev-setup whose source vanished is an orphan; the agent's own
+        # entries in its skills directory are not ours to judge.
+        for entry in "$dir"/*; do
+          [[ -L "$entry" ]] || continue
+          target="$(readlink "$entry")"
+          case "$target" in "$SKILLS"/*) ;; *) continue ;; esac
+          [[ -e "$target" ]] && continue
+          echo "orphan   ${entry/#$HOME/\~} (link to a removed skill)"
           fail=1
         done
       fi

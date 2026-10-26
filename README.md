@@ -120,6 +120,7 @@ needs them, so an edit here is live everywhere and nothing can drift:
 | Linked into | What |
 | --- | --- |
 | `~/.agents/skills`, `~/.claude/skills`, `~/.codex/skills` | one link per skill |
+| `~/.claude-accounts/*/skills` | claude's skill root lives inside its config dir |
 | `~/.pi/agent/prompts`, `~/.claude/commands` | one link per prompt, as a slash command |
 
 `./link.sh --check` reports anything unwired, copied, or pointing elsewhere.

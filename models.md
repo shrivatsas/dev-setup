@@ -35,6 +35,10 @@ The pane must be at a shell prompt. Accounts are environment variables, not flag
 CLAUDE_CONFIG_DIR=~/.claude-accounts/<account-scoped> herdr
 ```
 
+claude reads its skills from inside that config dir, so `link.sh` links each account's
+`skills/` too. The default `~/.claude` profile has an expired OAuth session — run claude with
+an account config dir or it fails before loading anything.
+
 ## Running a review
 
 Review text lives in `prompts/`. Reviews run on pi, never in the pane that wrote the change.
