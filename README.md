@@ -152,7 +152,7 @@ Agent configuration is adopted the same way as skills, so one file serves every 
 | source | linked to |
 | --- | --- |
 | `agents/claude/settings.json`, `agents/claude/hooks/*` | `~/.claude/` and every `~/.claude-accounts/*/` |
-| `agents/pi/AGENTS.md`, `agents/pi/extensions/*` | `~/.pi/agent/` |
+| `agents/pi/AGENTS.md`, `agents/pi/extensions/*`, `agents/pi/bin/*` | `~/.pi/agent/` |
 | `agents/herdr/config.toml` | `~/.config/herdr/config.toml` (then `herdr server reload-config`) |
 
 Two files are **seeded, never linked**: `agents/codex/config.toml` and `agents/pi/settings.json`.

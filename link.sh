@@ -127,6 +127,12 @@ agent_pairs() {
     [[ -e "$f" ]] || continue
     printf '%s\t%s\n' "agents/pi/extensions/$(basename "$f")" "$HOME/.pi/agent/extensions/$(basename "$f")"
   done
+  # helper scripts pi runs from its own bin dir (pi's managed files, e.g. `pi` and `fd`,
+  # live there too; only the names in this checkout are ours to own)
+  for f in "$ROOT"/agents/pi/bin/*; do
+    [[ -e "$f" ]] || continue
+    printf '%s\t%s\n' "agents/pi/bin/$(basename "$f")" "$HOME/.pi/agent/bin/$(basename "$f")"
+  done
   for f in "$ROOT"/agents/claude/hooks/*; do
     [[ -e "$f" ]] || continue
     printf '%s\t%s\n' "agents/claude/hooks/$(basename "$f")" "$HOME/.claude/hooks/$(basename "$f")"
