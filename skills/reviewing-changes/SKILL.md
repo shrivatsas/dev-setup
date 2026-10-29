@@ -43,4 +43,8 @@ rest. Re-run review mode on any new commits added since.
 
 ## Output
 
-Close with one verdict: mergeable or not, and whether the change completes its intended goal.
+Review and re-review mode: close with one verdict: mergeable or not, and whether the change
+completes its intended goal.
+
+Fix mode: no verdict; the reviewer decides. Close with what changed, where you pushed back
+or departed from a suggestion, and what the reviewer or user still has to decide.

@@ -319,8 +319,8 @@ skills:
     file_count: 2
   - name: reviewing-changes
     path: "reviewing-changes"
-    version: 1
-    sha256: "f8192652da9bc4a23c75d8de007625c995e6862d24d22ed72732b8b734bdb07c"
+    version: 2
+    sha256: "d2c3a94044a3e47fe8dff2259b590d2d0dd24f8c110af19981c124ffa4bbc53c"
     file_count: 1
   - name: reviewing-pr-fixes
     path: "reviewing-pr-fixes"

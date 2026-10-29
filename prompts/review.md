@@ -2,7 +2,9 @@
 description: Review PRs at full context — intent, then approach, then details
 argument-hint: "[PR numbers]"
 ---
-Review the PRs named in this request. If none are named, ask which.
+PR numbers: $ARGUMENTS
+
+Review the PRs named in this request. If none is named, ask which.
 
 The PR numbers in this request are the only ones to use. Never reuse a number from an
 earlier round or another conversation.
