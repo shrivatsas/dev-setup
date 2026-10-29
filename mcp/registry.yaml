@@ -21,6 +21,17 @@ mcp_servers:
       - mcp-remote@latest
       - https://mcp.sentry.dev/mcp
 
+  - name: grafana
+    enabled: true
+    description: Grafana dashboards, logs, alerts, and datasources.
+    command: uvx
+    args:
+      - mcp-grafana
+    env:
+      GRAFANA_URL: ${GRAFANA_URL}
+      GRAFANA_USERNAME: ${GRAFANA_USERNAME}
+      GRAFANA_PASSWORD: ${GRAFANA_PASSWORD}
+
   - name: applyto_realfast
     enabled: false
     description: Personal remote MCP for ApplyTo RealFast.
