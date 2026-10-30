@@ -320,7 +320,7 @@ skills:
   - name: reviewing-changes
     path: "reviewing-changes"
     version: 2
-    sha256: "d2c3a94044a3e47fe8dff2259b590d2d0dd24f8c110af19981c124ffa4bbc53c"
+    sha256: "944613c1c0e0526aedf5b3080852aecc0251bf5e1e6ee5ba9aded799ea364166"
     file_count: 1
   - name: reviewing-pr-fixes
     path: "reviewing-pr-fixes"
