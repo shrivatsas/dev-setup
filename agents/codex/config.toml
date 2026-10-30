@@ -1,8 +1,9 @@
-# Copied to ~/.codex/config.toml on a new machine. Codex (especially the Desktop app)
-# rewrites this file with its own plugin, marketplace and MCP state, so it is seeded once
-# and never linked back — otherwise the agent's state lands in a public repository.
+# Portable defaults synchronized by link.sh into each writable local config.toml.
+# Keep project trust, hook trust, credentials and runtime registrations out of this file.
 model = "gpt-6-astra"
 model_reasoning_effort = "medium"
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
 
 [features]
 hooks = true

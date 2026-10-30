@@ -1,0 +1,6 @@
+# Routine service reads may use host networking and the host credential store.
+# Keep writes and arbitrary API/GraphQL calls under the normal approval policy.
+prefix_rule(pattern=["gh", "pr", ["view", "list", "checks", "diff"]], decision="allow")
+prefix_rule(pattern=["gh", "issue", ["view", "list"]], decision="allow")
+prefix_rule(pattern=["gh", "run", ["view", "list"]], decision="allow")
+prefix_rule(pattern=["linear", "issue", ["view", "list"]], decision="allow")

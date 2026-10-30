@@ -6,6 +6,7 @@
 #
 #   ./link.sh            link skills and prompts into every agent directory
 #   ./link.sh --check    report drift only; exit 1 if anything is unwired
+#   ./link.sh --codex-only  sync Codex preferences and link command rules only
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -14,7 +15,14 @@ PROMPTS="$ROOT/prompts"
 SYNC="$ROOT/plugins/dev-skills/scripts/sync-dev-skills.sh"
 
 CHECK=0
-[[ "${1:-}" == "--check" ]] && CHECK=1
+CODEX_ONLY=0
+for arg in "$@"; do
+  case "$arg" in
+    --check) CHECK=1 ;;
+    --codex-only) CODEX_ONLY=1 ;;
+    *) echo "usage: $0 [--check] [--codex-only]" >&2; exit 2 ;;
+  esac
+done
 
 # Skill directories per agent:
 #   ~/.agents/skills, ~/.claude/skills, ~/.codex/skills — pi, claude and codex all read more
@@ -118,11 +126,17 @@ link_prompts() {
 
 # Agent configuration adopted from this checkout: one source, same as skills and prompts.
 agent_pairs() {
+  local f acct
+  # config.toml stays writable and local; command rules link to the shared source.
+  for acct in "$HOME/.codex" "$HOME"/.codex-accounts/*/; do
+    [[ "$acct" == "$HOME/.codex" || -d "$acct" ]] || continue
+    printf '%s\t%s\n' "agents/codex/rules/services.rules" "${acct%/}/rules/services.rules"
+  done
+  [[ "$CODEX_ONLY" -eq 0 ]] || return 0
   printf '%s\t%s\n' \
     "agents/pi/AGENTS.md"       "$HOME/.pi/agent/AGENTS.md" \
     "agents/herdr/config.toml"  "$HOME/.config/herdr/config.toml" \
     "agents/claude/settings.json" "$HOME/.claude/settings.json"
-  local f acct
   for f in "$ROOT"/agents/pi/extensions/*; do
     [[ -e "$f" ]] || continue
     printf '%s\t%s\n' "agents/pi/extensions/$(basename "$f")" "$HOME/.pi/agent/extensions/$(basename "$f")"
@@ -193,17 +207,28 @@ the skill it follows; the PR number comes from the invocation line.
 NOTE
 }
 
-link_skills
-link_prompts
+if [[ "$CODEX_ONLY" -eq 0 ]]; then
+  link_skills
+  link_prompts
+fi
+codex_args=()
+[[ "$CHECK" -eq 0 ]] || codex_args+=(--check)
+if ! python3 "$ROOT/agents/codex/sync-config.py" "${codex_args[@]}" \
+  "$ROOT/agents/codex/config.toml" "$HOME/.codex" "$HOME"/.codex-accounts/*/; then
+  fail=1
+  [[ "$CHECK" -eq 1 ]] || exit 1
+fi
 link_agents
 
 if [[ "$CHECK" -eq 1 ]]; then
   if [[ "$fail" -eq 0 ]]; then
-    echo "ok: skills and prompts are linked to $ROOT"
+    echo "ok: requested configuration matches $ROOT"
   else
     echo "unwired: run ./link.sh" >&2
     exit 1
   fi
 else
-  markdown_commands_note
+  if [[ "$CODEX_ONLY" -eq 0 ]]; then
+    markdown_commands_note
+  fi
 fi
