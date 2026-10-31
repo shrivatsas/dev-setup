@@ -154,11 +154,37 @@ Agent configuration is adopted the same way as skills, so one file serves every 
 | `agents/claude/settings.json`, `agents/claude/hooks/*` | `~/.claude/` and every `~/.claude-accounts/*/` |
 | `agents/pi/AGENTS.md`, `agents/pi/extensions/*`, `agents/pi/bin/*` | `~/.pi/agent/` |
 | `agents/herdr/config.toml` | `~/.config/herdr/config.toml` (then `herdr server reload-config`) |
+| `agents/codex/rules/services.rules` | `~/.codex/rules/services.rules` and every `~/.codex-accounts/*/rules/services.rules` |
 
 Two files are **seeded, never linked**: `agents/codex/config.toml` and `agents/pi/settings.json`.
 Pi and Codex rewrite those themselves — device ids, changelog markers, plugin and marketplace
 state — so a link would push the agent's own state into this repository. `install.sh` copies
-them only when the destination is missing, and leaves an existing file alone.
+them only when the destination is missing. For Codex, `link.sh` then refreshes only the
+portable settings from `agents/codex/config.toml` in the base and every existing account.
+
+The shared defaults include `approval_policy = "on-request"` and
+`approvals_reviewer = "auto_review"`. Start plain `codex`; no profile flag is required.
+The shared model default is GPT-6 Astra at medium effort; explicit CLI model options
+take precedence. Project trust, hook trust, credentials,
+local MCP endpoints, and Desktop runtime/plugin registrations remain in each local config.
+Do not copy those values into the shared defaults. Updating existing preferences saves a
+local `.bak-` copy first. The sync verifies that every other parsed setting is preserved.
+Rerun `link.sh` after editing the shared defaults. Python 3.11 or newer is required.
+The former `shared.config.toml` links into this repository are removed during migration;
+remove `--profile shared` from any launcher where you previously added it.
+
+To wire only Codex without changing the other agents:
+
+```bash
+./link.sh --codex-only
+./link.sh --codex-only --check
+```
+
+The shared command rules allow routine `gh pr`, `gh issue`, `gh run`, and `linear issue`
+read commands outside the sandbox without prompting. Writes and arbitrary API/GraphQL calls
+retain normal approval handling. Rules load at startup even without selecting the profile.
+A managed session policy that rejects sandbox escalation must be changed at its source;
+the shared defaults cannot override enforced policy. Restart Codex after wiring.
 
 When a real file is in the way and differs, `link.sh` saves a `.bak-` copy before linking, so
 the first run on an existing machine is reversible.
@@ -174,3 +200,21 @@ The scripts contain many commented-out sections for optional tools. Uncomment wh
 ## License
 
 MIT License - See [LICENSE](LICENSE) for details.
+
+
+### GitHub attribution for Codex
+
+`agents/codex/bin/agent-attribution` prints the required attribution line from the current
+session's rollout log. `./link.sh --codex-only` links it and the shared Codex `AGENTS.md` into
+`~/.codex` and each existing `~/.codex-accounts/*` directory.
+
+```bash
+python3 "${CODEX_HOME:-$HOME/.codex}/bin/agent-attribution"
+python3 agents/codex/tests/test_attribution.py
+```
+
+The helper uses `CODEX_THREAD_ID`, or accepts `--session <id>` and an optional `--log <path>`.
+It uses the latest recorded model and effort (including after a model switch), with cumulative
+input/output totals from the latest usage record, not a sum of cumulative records. Missing usage
+prints `tokens: unknown`; missing model or effort, ambiguous logs, and mismatched session IDs
+return an error. A partially written final log record is ignored. Requires Python 3 and no packages.

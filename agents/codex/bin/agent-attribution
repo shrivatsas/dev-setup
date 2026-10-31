@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""Print GitHub attribution from the current Codex session's recorded metadata."""
+
+import argparse
+import html
+import json
+import os
+from pathlib import Path
+
+
+def find_log(session):
+    roots = [Path.home() / '.codex' / 'sessions']
+    if os.environ.get('CODEX_HOME'):
+        roots.insert(0, Path(os.environ['CODEX_HOME']) / 'sessions')
+    roots.extend(Path.home().glob('.codex-accounts/*/sessions'))
+    matches = set()
+    for root in roots:
+        if root.is_dir():
+            matches.update(p.resolve() for p in root.rglob('rollout-*.jsonl')
+                           if p.name.endswith('-' + session + '.jsonl'))
+    if len(matches) != 1:
+        raise ValueError(f'expected one log for session ID {session}; found {len(matches)} (use --log)')
+    return matches.pop()
+
+
+def attribution(log, session):
+    recorded_session = None
+    context = {}
+    usage = None
+    with log.open() as stream:
+        for line in stream:
+            try:
+                event = json.loads(line)
+            except json.JSONDecodeError:
+                # A running session may still be writing its final record.
+                if not line.endswith('\n'):
+                    break
+                raise ValueError('invalid JSON record in session log') from None
+            payload = event.get('payload', {})
+            if event.get('type') == 'session_meta':
+                recorded_session = payload.get('id')
+            elif event.get('type') == 'turn_context':
+                context = payload
+            elif event.get('type') == 'event_msg' and payload.get('type') == 'token_count':
+                totals = (payload.get('info') or {}).get('total_token_usage')
+                if totals is not None:
+                    usage = totals
+    if recorded_session != session:
+        raise ValueError('session ID does not match session log metadata')
+    settings = (context.get('collaboration_mode') or {}).get('settings') or {}
+    model = context.get('model') or settings.get('model')
+    effort = context.get('effort') or settings.get('reasoning_effort')
+    if not model or not effort:
+        raise ValueError('model or reasoning effort missing from session log; do not guess')
+    tokens = 'unknown'
+    if usage is not None:
+        incoming, outgoing = usage.get('input_tokens'), usage.get('output_tokens')
+        if all(type(n) is int and n >= 0 for n in (incoming, outgoing)):
+            tokens = f'{incoming}/{outgoing}'
+    return (f'<sub>harness: codex · model: {html.escape(model)} ({html.escape(effort)})'
+            f' · session: {html.escape(session)} · tokens: {tokens}</sub>')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--session', default=os.environ.get('CODEX_THREAD_ID'),
+                        help='session ID (default: CODEX_THREAD_ID)')
+    parser.add_argument('--log', type=Path, help='explicit rollout log, instead of discovery')
+    args = parser.parse_args()
+    if not args.session:
+        parser.error('set CODEX_THREAD_ID or pass --session')
+    try:
+        print(attribution(args.log or find_log(args.session), args.session))
+    except (OSError, ValueError) as error:
+        parser.exit(1, f'agent-attribution: {error}\n')
+
+
+if __name__ == '__main__':
+    main()
