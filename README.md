@@ -200,3 +200,21 @@ The scripts contain many commented-out sections for optional tools. Uncomment wh
 ## License
 
 MIT License - See [LICENSE](LICENSE) for details.
+
+
+### GitHub attribution for Codex
+
+`agents/codex/bin/agent-attribution` prints the required attribution line from the current
+session's rollout log. `./link.sh --codex-only` links it and the shared Codex `AGENTS.md` into
+`~/.codex` and each existing `~/.codex-accounts/*` directory.
+
+```bash
+python3 "${CODEX_HOME:-$HOME/.codex}/bin/agent-attribution"
+python3 agents/codex/tests/test_attribution.py
+```
+
+The helper uses `CODEX_THREAD_ID`, or accepts `--session <id>` and an optional `--log <path>`.
+It uses the latest recorded model and effort (including after a model switch), with cumulative
+input/output totals from the latest usage record, not a sum of cumulative records. Missing usage
+prints `tokens: unknown`; missing model or effort, ambiguous logs, and mismatched session IDs
+return an error. A partially written final log record is ignored. Requires Python 3 and no packages.

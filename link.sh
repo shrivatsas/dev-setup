@@ -6,7 +6,7 @@
 #
 #   ./link.sh            link skills and prompts into every agent directory
 #   ./link.sh --check    report drift only; exit 1 if anything is unwired
-#   ./link.sh --codex-only  sync Codex preferences and link command rules only
+#   ./link.sh --codex-only  sync Codex preferences, instructions, helpers and command rules only
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -131,6 +131,8 @@ agent_pairs() {
   for acct in "$HOME/.codex" "$HOME"/.codex-accounts/*/; do
     [[ "$acct" == "$HOME/.codex" || -d "$acct" ]] || continue
     printf '%s\t%s\n' "agents/codex/rules/services.rules" "${acct%/}/rules/services.rules"
+    printf '%s\t%s\n' "agents/codex/AGENTS.md" "${acct%/}/AGENTS.md"
+    printf '%s\t%s\n' "agents/codex/bin/agent-attribution" "${acct%/}/bin/agent-attribution"
   done
   [[ "$CODEX_ONLY" -eq 0 ]] || return 0
   printf '%s\t%s\n' \
