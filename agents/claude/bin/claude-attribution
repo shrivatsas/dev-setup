@@ -1,0 +1,150 @@
+#!/usr/bin/env python3
+"""claude-attribution — print the GitHub attribution subtext line for claude-code sessions.
+
+Run immediately before posting and paste the output verbatim. Totals come from the
+session transcript at $CLAUDE_CONFIG_DIR/projects/<slug>/<session>.jsonl (default
+~/.claude), summing each assistant turn's input and output tokens. Falls back to
+`tokens: unknown` only when the transcript cannot be found or read.
+
+Session resolution: --session, then $CLAUDE_CODE_SESSION_ID, then the newest
+transcript in the current directory's project folder.
+"""
+
+import argparse
+import html
+import json
+import os
+import re
+import sys
+from pathlib import Path
+
+
+def config_dirs():
+    dirs = []
+    if os.environ.get("CLAUDE_CONFIG_DIR"):
+        dirs.append(Path(os.environ["CLAUDE_CONFIG_DIR"]))
+    dirs.append(Path.home() / ".claude")
+    dirs.extend(sorted(p for p in Path.home().glob(".claude-accounts/*") if p.is_dir()))
+    return dirs
+
+
+def project_slug(path):
+    # Claude Code maps a working directory onto a project folder name by replacing
+    # every character that is not alphanumeric with '-'.
+    return re.sub(r"[^A-Za-z0-9]", "-", str(path))
+
+
+def find_transcript(session, cwd):
+    name = f"{session}.jsonl"
+    local = []
+    anywhere = []
+    for config in config_dirs():
+        projects = config / "projects"
+        if not projects.is_dir():
+            continue
+        direct = projects / project_slug(cwd) / name
+        if direct.is_file():
+            local.append(direct)
+        anywhere.extend(projects.glob(f"*/{name}"))
+    if local:
+        return local[0]
+    if len(anywhere) == 1:
+        return anywhere[0]
+    return None
+
+
+def newest_transcript(cwd):
+    best = None
+    for config in config_dirs():
+        folder = config / "projects" / project_slug(cwd)
+        if not folder.is_dir():
+            continue
+        for path in folder.glob("*.jsonl"):
+            if best is None or path.stat().st_mtime > best.stat().st_mtime:
+                best = path
+    return best
+
+
+def summarize(transcript):
+    """Return (tokens, model, effort) read from a transcript, or (None, None, None)."""
+    total_in = total_out = 0
+    seen = set()
+    saw_usage = False
+    model = effort = None
+    try:
+        with transcript.open() as stream:
+            for line in stream:
+                try:
+                    event = json.loads(line)
+                except json.JSONDecodeError:
+                    # A running session may be mid-write on its final line.
+                    if not line.endswith("\n"):
+                        break
+                    continue
+                if not isinstance(event, dict) or event.get("type") != "assistant":
+                    continue
+                message = event.get("message")
+                if not isinstance(message, dict):
+                    continue
+                if message.get("model") and message["model"] != "<synthetic>":
+                    model = message["model"]
+                if event.get("perTurnEffort"):
+                    effort = event["perTurnEffort"]
+                usage = message.get("usage")
+                if not isinstance(usage, dict):
+                    continue
+                # Forked or resumed transcripts replay earlier turns; count each API
+                # response once.
+                key = message.get("id") or event.get("uuid")
+                if key in seen:
+                    continue
+                seen.add(key)
+                saw_usage = True
+                try:
+                    total_in += int(usage.get("input_tokens") or 0)
+                    total_in += int(usage.get("cache_creation_input_tokens") or 0)
+                    total_in += int(usage.get("cache_read_input_tokens") or 0)
+                    total_out += int(usage.get("output_tokens") or 0)
+                except (TypeError, ValueError):
+                    pass
+    except OSError:
+        return None, None, None
+    if not saw_usage:
+        # A transcript with no usage blocks must not claim a zero-token session.
+        return None, model, effort
+    return f"{total_in}/{total_out}", model, effort
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--session", default=os.environ.get("CLAUDE_CODE_SESSION_ID"),
+                        help="session ID (default: $CLAUDE_CODE_SESSION_ID)")
+    parser.add_argument("--transcript", type=Path, help="explicit transcript, instead of discovery")
+    args = parser.parse_args()
+
+    cwd = Path.cwd()
+    transcript = args.transcript
+    session = args.session
+    if transcript is None:
+        if session:
+            transcript = find_transcript(session, cwd)
+        if transcript is None:
+            transcript = newest_transcript(cwd)
+    if transcript is not None and not session:
+        session = transcript.stem
+
+    tokens = model = effort = None
+    if transcript is not None:
+        tokens, model, effort = summarize(transcript)
+
+    model = model or os.environ.get("ANTHROPIC_MODEL") or "unknown"
+    effort = effort or os.environ.get("CLAUDE_CODE_EFFORT_LEVEL") or "unknown"
+    esc = lambda value: html.escape(str(value), quote=False)
+    print(
+        f"<sub>harness: claude-code \u00b7 model: {esc(model)} ({esc(effort)}) "
+        f"\u00b7 session: {esc(session or 'unknown')} \u00b7 tokens: {tokens or 'unknown'}</sub>"
+    )
+
+
+if __name__ == "__main__":
+    sys.exit(main())
