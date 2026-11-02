@@ -153,6 +153,11 @@ agent_pairs() {
     [[ -e "$f" ]] || continue
     printf '%s\t%s\n' "agents/claude/hooks/$(basename "$f")" "$HOME/.claude/hooks/$(basename "$f")"
   done
+  # claude helper scripts sit on PATH rather than in its config dir
+  for f in "$ROOT"/agents/claude/bin/*; do
+    [[ -e "$f" ]] || continue
+    printf '%s\t%s\n' "agents/claude/bin/$(basename "$f")" "$HOME/.local/bin/$(basename "$f")"
+  done
   # claude reads its configuration from the active config dir, so each account needs the
   # same settings and hooks as ~/.claude.
   for acct in "$HOME"/.claude-accounts/*/; do
