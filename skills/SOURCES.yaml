@@ -404,9 +404,9 @@ skills:
     file_count: 2
   - name: test-signal-vs-waste
     path: "test-signal-vs-waste"
-    version: 1
-    sha256: "3a7c76b60780b949c9b6031b4a5fa9261492218c671b7e0af70af05de1dc03d0"
-    file_count: 1
+    version: 4
+    sha256: "61d7411f0faa17e0d68e9f56cb1cc0c448b56634fbd253fe587f060a4274f6d9"
+    file_count: 2
   - name: testing-anti-patterns
     path: "testing-anti-patterns"
     version: 2

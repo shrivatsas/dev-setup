@@ -2,7 +2,7 @@
 name: test-signal-vs-waste
 description: Use when judging test value — auditing an existing test suite for waste, deciding whether a new or AI-generated test is worth keeping, arguing against a suite that only measures coverage, or choosing which tests to keep when deleting or pruning
 when_to_use: when reviewing tests, evaluating AI-generated tests, pruning or auditing a suite, or deciding whether a failing test justifies a fix
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Test Signal vs. Waste
@@ -33,8 +33,12 @@ Before classifying anything, ask three questions about one test:
 
 ```
 1. Can it ever fail on a real behavior regression?
-   → mentally mutate the behavior (return wrong value, drop a check, reverse a condition).
-     If the test still passes, it guards nothing.
+   → name the exact production edit that should turn it red (return wrong value, drop a
+     guard, reverse a condition). If you cannot name one, it guards nothing.
+   → if the test asserts on a constant, list, or fixture, first trace where that value
+     comes from: a production artifact (schema JSON, contract, committed seed) means the
+     test guards that artifact; hand-written test data on both sides means it guards only
+     the test. A wrong mental mutation is worse than none — it produces confident deletion.
 
 2. Does it fail on implementation-only refactors?
    → rename an identifier, reorder internals, swap an internal data structure.
@@ -57,6 +61,7 @@ Before classifying anything, ask three questions about one test:
 | Specification | Documents intended behavior in executable form | "expired sessions redirect to login with a flash" |
 | Refactor-enabler | Lets you restructure internals without fear | Pure-function tests over the domain core |
 | Stop-trusting | Tells you an assumption or integration broke | Contract test against a real wire format |
+| Removal guard | Asserts a retired API, write path, or fallback is gone and stays gone; the mutation is re-adding it | `assert(M.cloneVersionForDraft === undefined)` — draft creation must keep going through governed source intake |
 
 ## Waste Categories
 
@@ -70,6 +75,23 @@ Before classifying anything, ask three questions about one test:
 | Zombie | Slow enough that people skip or background it; its failures arrive after the decision |
 | Never-failing | Snapshot or echo test whose diff is waved through; nothing would ever make you act on its red |
 | Sunk-cost | Exists because writing it took effort, not because it has ever told anyone anything |
+
+### Classification traps
+
+Three shapes look like waste and are not. Each trap below is a real deletion that a
+mutation run later proved was signal (see `TESTING.md` in this directory for the mutations
+and the verbatim rationalizations that produced them).
+
+- **Absence is not automatically waste.** A test asserting that something is *gone* has
+  one obvious mutation: put it back. Ask what wrong thing happens then. If re-adding the
+  export, storage key, or fallback would take a wrong route, it is a removal guard — keep
+  it. Only if re-adding changes nothing is it waste.
+- **Two lists compared are not automatically tautology.** Trace the constant to its
+  origin before calling it a data echo. A fixture derived from a production artifact is a
+  regression test on that artifact; the mutation lives in the artifact, not the fixture.
+- **"Implied by an existing test" is not a finding.** If you claim redundancy, name the
+  test function and the mutant it already kills. Without a named line you have not
+  checked; you have pattern-matched.
 
 ## Measurement: what to actually track
 
@@ -90,7 +112,7 @@ Never report coverage alone as evidence of suite health. Coverage is a floor for
 2. **Run the rubric on each sample.** Table of test → Q1/Q2/Q3 → category.
 3. **One spot mutation per module.** For each important module, make one deliberate behavior-breaking edit, run the module's tests, note which fail, revert. This calibrates the whole suite cheaply.
 4. **Pull the history.** Flake rates and real-failure counts from CI, not from memory.
-5. **Cut in confidence order.** Delete the unambiguous categories first: tautological, never-failing, sunk-cost. Batch the debatable ones for a human decision. Redundant and zombie tests need judgment about how much defense-in-depth is wanted.
+5. **Cut in confidence order.** Delete the unambiguous categories first: tautological, never-failing, sunk-cost. Batch the debatable ones for a human decision. Redundant and zombie tests need judgment about how much defense-in-depth is wanted. Removal guards and data-constant tests do not go in the delete batch until you have traced their origin and named their mutant.
 6. **Recheck.** After deletions, re-run one spot mutation. Detection power should hold; if it drops, you deleted signal and mislabeled waste.
 
 Report results as counts per category and one mutation-check summary. Do not report "deleted N tests" without the mutation comparison.
@@ -122,6 +144,31 @@ The gate, per test:
 For a batch of generated tests, do steps 2-3 on a sample plus any test guarding critical behavior. Never accept "tests pass, all green" as evidence — green is the waste hypothesis's starting state, not its refutation.
 
 When a generated test has good signal but terrible form (unreadable names, magic values, wrong home in the tree), fix the form and keep the signal. Signal is the expensive part to generate.
+
+## When You Cannot Run the Check
+
+Reading a test is not running the can-fail check. If you have no execution access — no
+repo, no runner, no time — then:
+
+- say which edits you would make and which test you would run, as an open question;
+- mark the classification **unverified** and cap your confidence at "needs the check";
+- never upgrade "I could not run it" to a confident delete, and never state an unverified
+  claim about the code as fact ("break the vocabulary and it stays green") — that sentence
+  is how a confident deletion gets made on a wrong mental mutation.
+
+The rubric is a claim about a mutant. A mutant you did not run is a hypothesis, not a
+result.
+
+## Rationalizations and Their Counters
+
+| Rationalization | Counter |
+|---|---|
+| "Its only red is that someone re-added a name." | Re-adding it is the mutation. Ask what the re-added path does wrong; if it bypasses a governed route, that red is the guard working. |
+| "Both sides are test data." | Trace the constant. If the fixture is generated from a production artifact, the mutation is in that artifact. |
+| "Implied by every other test in the file." | Name the test and the mutant. Otherwise you asserted a feeling. |
+| "The module already proves the API is gone." | It proves it today. The test is what keeps it gone across future edits. |
+| "Coverage is high and it all passes." | Green is the waste hypothesis's starting state, not its refutation. |
+| "I could not run the suite, so detection power is inferred" — stated with high confidence anyway. | Then the classification is unverified. Confidence follows the evidence you have, not the argument you built. |
 
 ## Judgment Calls
 
