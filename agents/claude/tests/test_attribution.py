@@ -88,6 +88,23 @@ class AttributionTests(unittest.TestCase):
         self.assertIn(f'session: {SESSION}', result.stdout)
         self.assertIn('tokens: 7/3', result.stdout)
 
+    def test_account_config_dir_listed_once(self):
+        # CLUADE_CONFIG_DIR inside ~/.claude-accounts is also matched by the glob;
+        # a duplicate would make the single-transcript fallback ambiguous.
+        home = Path(self._tmp.name) / 'home'
+        config = home / '.claude-accounts' / 'account'
+        project = config / 'projects' / '-elsewhere'
+        project.mkdir(parents=True)
+        (project / f'{SESSION}.jsonl').write_text(
+            json.dumps(self.turn('a', usage=self.usage(7, 3))) + '\n')
+        environ = dict(self.environ, HOME=str(home), CLAUDE_CONFIG_DIR=str(config),
+                       CLAUDE_CODE_SESSION_ID=SESSION)
+        result = subprocess.run(['python3', str(SCRIPT)], text=True, capture_output=True,
+                                env=environ, cwd=home)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn(f'session: {SESSION}', result.stdout)
+        self.assertIn('tokens: 7/3', result.stdout)
+
     def test_missing_transcript_degrades_to_unknown_tokens(self):
         result = self.invoke([], args=('--session', 'absent'), transcript=False)
         self.assertEqual(result.returncode, 0, result.stderr)

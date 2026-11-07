@@ -25,7 +25,7 @@ def config_dirs():
         dirs.append(Path(os.environ["CLAUDE_CONFIG_DIR"]))
     dirs.append(Path.home() / ".claude")
     dirs.extend(sorted(p for p in Path.home().glob(".claude-accounts/*") if p.is_dir()))
-    return dirs
+    return list(dict.fromkeys(p.resolve() for p in dirs))
 
 
 def project_slug(path):
