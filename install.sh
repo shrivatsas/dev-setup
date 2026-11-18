@@ -54,13 +54,22 @@ fi
 
 echo
 echo "== seeding agent-written config (copied, never linked)"
-# pi and codex rewrite these files themselves, so a link would push the agent's own state
-# into this repository.
+# pi, codex and claude rewrite these files themselves, so a link would push the agent's own
+# state into this repository.
 seed() {
-  local src="$ROOT/$1" dst="$2"
+  local src="$ROOT/$1" dst="$2" tmp
   [[ -f "$src" ]] || return 0
   mkdir -p "$(dirname "$dst")"
-  if [[ -e "$dst" ]]; then
+  # A link into this checkout would hand the agent's own rewrites straight back to the
+  # repository as a diff. Materialise whatever it points at, keeping the live content, and
+  # the file is machine-local from here on.
+  if [[ -L "$dst" ]] && [[ "$(readlink "$dst")" == "$ROOT"/* ]]; then
+    tmp="$(mktemp)"
+    cp -p "$dst" "$tmp"
+    rm -f "$dst"
+    mv "$tmp" "$dst"
+    printf '  %-34s %s\n' "${dst/#$HOME/~}" "unlinked, kept live content"
+  elif [[ -e "$dst" ]]; then
     printf '  %-34s %s\n' "${dst/#$HOME/~}" "exists, left alone"
   else
     cp "$src" "$dst"
@@ -69,6 +78,11 @@ seed() {
 }
 seed agents/codex/config.toml "$HOME/.codex/config.toml"
 seed agents/pi/settings.json  "$HOME/.pi/agent/settings.json"
+seed agents/claude/settings.json "$HOME/.claude/settings.json"
+for acct in "$HOME"/.claude-accounts/*/; do
+  [[ -d "$acct" ]] || continue
+  seed agents/claude/settings.json "${acct}settings.json"
+done
 
 echo
 echo "== wiring this checkout into the machine"

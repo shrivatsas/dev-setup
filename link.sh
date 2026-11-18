@@ -137,8 +137,7 @@ agent_pairs() {
   [[ "$CODEX_ONLY" -eq 0 ]] || return 0
   printf '%s\t%s\n' \
     "agents/pi/AGENTS.md"       "$HOME/.pi/agent/AGENTS.md" \
-    "agents/herdr/config.toml"  "$HOME/.config/herdr/config.toml" \
-    "agents/claude/settings.json" "$HOME/.claude/settings.json"
+    "agents/herdr/config.toml"  "$HOME/.config/herdr/config.toml"
   for f in "$ROOT"/agents/pi/extensions/*; do
     [[ -e "$f" ]] || continue
     printf '%s\t%s\n' "agents/pi/extensions/$(basename "$f")" "$HOME/.pi/agent/extensions/$(basename "$f")"
@@ -159,10 +158,10 @@ agent_pairs() {
     printf '%s\t%s\n' "agents/claude/bin/$(basename "$f")" "$HOME/.local/bin/$(basename "$f")"
   done
   # claude reads its configuration from the active config dir, so each account needs the
-  # same settings and hooks as ~/.claude.
+  # same hooks as ~/.claude. settings.json is seeded by install.sh, not linked: claude
+  # rewrites it (autoMode and friends), so a link pushes its own state into this repo.
   for acct in "$HOME"/.claude-accounts/*/; do
     [[ -d "$acct" ]] || continue
-    printf '%s\t%s\n' "agents/claude/settings.json" "${acct}settings.json"
     for f in "$ROOT"/agents/claude/hooks/*; do
       [[ -e "$f" ]] || continue
       printf '%s\t%s\n' "agents/claude/hooks/$(basename "$f")" "${acct}hooks/$(basename "$f")"
@@ -206,6 +205,31 @@ link_agents() {
   done < <(agent_pairs)
 }
 
+# Files an agent rewrites for itself are seeded by install.sh, never linked. A link into
+# this checkout hands the agent's own state back to the repository as a diff, so one counts
+# as drift rather than wiring.
+check_seeded() {
+  local seeded=(
+    "$HOME/.claude/settings.json"
+    "$HOME/.codex/config.toml"
+    "$HOME/.pi/agent/settings.json"
+  )
+  local acct dst target
+  for acct in "$HOME"/.claude-accounts/*/; do
+    [[ -d "$acct" ]] && seeded+=("${acct}settings.json")
+  done
+  for dst in "${seeded[@]}"; do
+    [[ -L "$dst" ]] || continue
+    target="$(readlink "$dst")"
+    case "$target" in
+      "$ROOT"/*)
+        echo "linked   ${dst/#$HOME/\~} -> $target (agent rewrites this; run ./install.sh)"
+        fail=1
+        ;;
+    esac
+  done
+}
+
 markdown_commands_note() {  cat <<'NOTE'
 
 Prompt templates are argument-free by design: pi substitutes $1/$@ and claude uses
@@ -226,6 +250,7 @@ if ! python3 "$ROOT/agents/codex/sync-config.py" "${codex_args[@]}" \
   [[ "$CHECK" -eq 1 ]] || exit 1
 fi
 link_agents
+[[ "$CHECK" -eq 0 ]] || check_seeded
 
 if [[ "$CHECK" -eq 1 ]]; then
   if [[ "$fail" -eq 0 ]]; then
