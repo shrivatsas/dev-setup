@@ -1,0 +1,263 @@
+#!/usr/bin/env python3
+"""Measure agent session cost from Codex rollout JSONL and Claude Code transcripts.
+
+Standing measurement for the flow-hardening work: a 20-turn session billed 82.5M
+input tokens, over half of it tool output re-entering context on later calls.
+Run this before and after a workflow change instead of arguing from one session.
+
+Usage:
+  agent-session-cost                      # per-session TSV
+  agent-session-cost --session 01a0bfe0   # one session anatomy
+  CODEX_SESSIONS_ROOT=/path CLAUDE_SESSIONS_ROOT=/path agent-session-cost
+
+Every Codex home on the machine is searched: a hardcoded
+`~/.codex-accounts/shrivatsa-dev/sessions` reported "no session matching" for a
+session that existed under another account (01a18b1e, ARC-617), which turned a
+cost line a handoff needs into "unavailable".
+
+Claude Code transcripts are `<CLAUDE_CONFIG_DIR or ~/.claude>/projects/<project>/<session id>.jsonl`.
+Input there is the whole prompt (uncached + cache writes + cache reads), so it compares with Codex's
+`input_tokens`; Claude Code does not report reasoning tokens separately.
+"""
+from __future__ import annotations
+
+import argparse
+import glob
+import json
+import os
+import statistics
+import re
+from dataclasses import dataclass, field
+
+CLAUDE_ROOT = os.path.join(os.path.expanduser(os.environ.get("CLAUDE_CONFIG_DIR", "~/.claude")), "projects")
+
+
+def default_roots() -> list[str]:
+    """Sessions roots for every Codex home this machine uses."""
+    roots: list[str] = []
+    home = os.environ.get("CODEX_HOME")
+    if home:
+        roots.append(os.path.join(home, "sessions"))
+    roots.append(os.path.expanduser("~/.codex/sessions"))
+    roots.extend(sorted(glob.glob(os.path.expanduser("~/.codex-accounts/*/sessions"))))
+    unique: list[str] = []
+    seen: set[str] = set()
+    for root in roots:
+        key = os.path.realpath(root)
+        if key in seen or not os.path.isdir(key):  # CODEX_HOME can be one of the accounts
+            continue
+        seen.add(key)
+        unique.append(root)
+    return unique
+
+
+@dataclass
+class Session:
+    sid: str
+    path: str
+    harness: str = "codex"
+    model: str = ""
+    base_model: str = ""
+    turns: int = 0
+    calls: int = 0
+    abort_ms: int = 0
+    compactions: int = 0
+    in_tokens: int = 0
+    cached: int = 0
+    out_tokens: int = 0
+    reasoning: int = 0
+    first_in: int = 0
+    dates: list[str] = field(default_factory=list)
+    calls_at: list[int] = field(default_factory=list)
+    out_chars: list[int] = field(default_factory=list)
+
+    @property
+    def in_out(self) -> int:
+        return round(self.in_tokens / self.out_tokens) if self.out_tokens else 0
+
+    def amplification(self) -> int:
+        """Tool-output tokens re-billed before the next compaction.
+
+        content goes resident at its call ordinal and is dropped by the next
+        `compacted` event, so each output's chars are multiplied by the number of
+        subsequent model calls in the same segment.
+        """
+        if not self.calls_at:
+            return 0
+        total = 0.0
+        for ordinal, chars in self.out_chars:
+            next_comp = 10**12
+            for comp in self.comps_at:
+                if comp > ordinal:
+                    next_comp = comp
+                    break
+            resident = sum(1 for call_ord in self.calls_at if ordinal < call_ord <= next_comp)
+            total += chars / 4 * resident
+        return int(total)
+
+    comps_at: list[int] = field(default_factory=list)
+
+
+def load(path: str) -> Session:
+    sid = "-".join(os.path.basename(path).replace(".jsonl", "").rsplit("-", 5)[-5:])
+    s = Session(sid=sid, path=path)
+    with open(path, errors="replace") as fh:
+        for line in fh:
+            if not any(k in line for k in (
+                "token_count", "task_started", "turn_aborted", "compacted",
+                "session_meta", "custom_tool_call", "total_token_usage", "model_switch",
+            )):
+                continue
+            try:
+                d = json.loads(line)
+            except Exception:
+                continue
+            t, p = d.get("type"), d.get("payload") or {}
+            if t == "session_meta":
+                base = p.get("base_instructions") or {}
+                s.base_model = base.get("model", "")
+                s.dates.append(d.get("timestamp", "")[:10])
+            elif t == "compacted":
+                s.compactions += 1
+                s.comps_at.append(d.get("ordinal", 0))
+            elif t == "event_msg":
+                st = p.get("type")
+                if st == "task_started":
+                    s.turns += 1
+                elif st == "turn_aborted":
+                    s.abort_ms += p.get("duration_ms") or 0
+                elif st == "token_count":
+                    u = (p.get("info") or {}).get("last_token_usage") or {}
+                    if "model" in p:
+                        s.model = p["model"]
+                    s.calls += 1
+                    s.calls_at.append(d.get("ordinal", 0))
+                    s.in_tokens += u.get("input_tokens", 0)
+                    s.cached += u.get("cached_input_tokens", 0)
+                    s.out_tokens += u.get("output_tokens", 0)
+                    s.reasoning += u.get("reasoning_output_tokens", 0)
+                    if s.first_in == 0:
+                        s.first_in = u.get("input_tokens", 0)
+            elif t == "response_item" and p.get("type") == "custom_tool_call_output":
+                out = p.get("output", "")
+                if not isinstance(out, str):
+                    out = json.dumps(out)
+                s.out_chars.append((d.get("ordinal", 0), len(out)))
+    return s
+
+
+def _tool_output_chars(block: dict) -> int:
+    content = block.get("content", "")
+    if isinstance(content, list):
+        return sum(len(part.get("text", "")) if isinstance(part, dict) else len(str(part)) for part in content)
+    return len(content) if isinstance(content, str) else len(json.dumps(content))
+
+
+def load_claude(path: str) -> Session:
+    """A Claude Code transcript. One model call can span several `assistant` lines that repeat its
+    message id and usage, so each id is counted once; line numbers stand in for Codex ordinals."""
+    s = Session(sid=os.path.basename(path).replace(".jsonl", ""), path=path, harness="claude")
+    seen: set[str] = set()
+    with open(path, errors="replace") as fh:
+        for ordinal, line in enumerate(fh):
+            try:
+                d = json.loads(line)
+            except Exception:
+                continue
+            t, message = d.get("type"), d.get("message") or {}
+            if d.get("timestamp") and not s.dates:
+                s.dates.append(d["timestamp"][:10])
+            if t == "system" and d.get("subtype") == "compact_boundary":
+                s.compactions += 1
+                s.comps_at.append(ordinal)
+            elif t == "assistant":
+                mid, u = message.get("id"), message.get("usage") or {}
+                if not mid or mid in seen or message.get("model") == "<synthetic>":
+                    continue
+                seen.add(mid)
+                s.model = message.get("model", s.model)
+                prompt = u.get("input_tokens", 0) + u.get("cache_creation_input_tokens", 0) + u.get("cache_read_input_tokens", 0)
+                s.calls += 1
+                s.calls_at.append(ordinal)
+                s.in_tokens += prompt
+                s.cached += u.get("cache_read_input_tokens", 0)
+                s.out_tokens += u.get("output_tokens", 0)
+                if s.first_in == 0:
+                    s.first_in = prompt
+            elif t == "user" and not d.get("isMeta"):
+                content = message.get("content")
+                blocks = content if isinstance(content, list) else []
+                results = [b for b in blocks if isinstance(b, dict) and b.get("type") == "tool_result"]
+                for block in results:
+                    s.out_chars.append((ordinal, _tool_output_chars(block)))
+                if not results and not d.get("isCompactSummary"):
+                    s.turns += 1
+    return s
+
+
+def paths(root: str, claude_root: str) -> list[tuple[str, str]]:
+    return ([(p, "codex") for p in glob.glob(os.path.join(root, "**", "rollout-*.jsonl"), recursive=True)]
+            + [(p, "claude") for p in glob.glob(os.path.join(claude_root, "*", "*.jsonl"))])
+
+
+def corpus(roots: list[str], claude_root: str) -> list[Session]:
+    rows = []
+    for root in roots:
+        for path, harness in sorted(paths(root, claude_root)):
+            s = load_claude(path) if harness == "claude" else load(path)
+            if s.calls:
+                rows.append(s)
+    rows.sort(key=lambda s: s.in_tokens, reverse=True)
+    return rows
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--root", action="append",
+                    help="Codex sessions root to search; repeatable; defaults to every Codex home")
+    ap.add_argument("--claude-root", default=os.environ.get("CLAUDE_SESSIONS_ROOT", CLAUDE_ROOT))
+    ap.add_argument("--session", help="substring of a session id for a detailed anatomy")
+    args = ap.parse_args()
+    env_root = os.environ.get("CODEX_SESSIONS_ROOT")
+    roots = args.root or ([env_root] if env_root else default_roots())
+
+    if args.session:
+        matches = [(p, "codex") for root in (args.root or roots)
+                   for p in glob.glob(os.path.join(root, "**", "rollout-*.jsonl"), recursive=True)]
+        matches += [(p, "claude") for p in glob.glob(os.path.join(args.claude_root, "*", "*.jsonl"))]
+        matches = [(p, h) for p, h in matches if args.session in os.path.basename(p)]
+        if not matches:
+            raise SystemExit(
+                f"no session matching {args.session!r} under {', '.join(roots) or '(no Codex sessions root)'}"
+                f" or {args.claude_root}")
+        path, harness = sorted(matches)[0]
+        s = load_claude(path) if harness == "claude" else load(path)
+        amp = s.amplification()
+        print(f"session {s.sid}  harness={s.harness}  model={s.model or s.base_model}")
+        print(f"turns={s.turns} calls={s.calls} compactions={s.compactions} abort={s.abort_ms/1000:.0f}s")
+        print(f"input={s.in_tokens:,} cached={100*s.cached/max(s.in_tokens,1):.0f}% "
+              f"output={s.out_tokens:,} (reasoning {s.reasoning:,}, {100*s.reasoning/max(s.out_tokens,1):.0f}%)")
+        print(f"in:out={s.in_out}:1  prefix={s.first_in:,}  in/call={s.in_tokens//max(s.calls,1):,}")
+        print(f"tool-output amplification={amp:,} ({100*amp/max(s.in_tokens,1):.0f}% of input)")
+        over = sum(1 for _, c in s.out_chars if c > 3000)
+        print(f"tool outputs={len(s.out_chars)}  >3000 chars={over}")
+        print("top outputs: " + ", ".join(str(c) for _, c in sorted(s.out_chars, key=lambda x: -x[1])[:10]))
+        return
+
+    rows = corpus(roots, args.claude_root)
+    print("date\tharness\tsession\tmodel\tturns\tcalls\tin\tout\treasoning\tin:out\tprefix\tcompactions\tin/call")
+    for s in rows:
+        print("\t".join(str(x) for x in (
+            s.dates[0] if s.dates else "-", s.harness, s.sid, s.model or s.base_model or "-",
+            s.turns, s.calls, s.in_tokens, s.out_tokens, s.reasoning, s.in_out,
+            s.first_in, s.compactions, s.in_tokens // max(s.calls, 1),
+        )))
+    total_in = sum(s.in_tokens for s in rows)
+    total_out = sum(s.out_tokens for s in rows)
+    med = statistics.median(s.in_tokens for s in rows) if rows else 0
+    print(f"\n# sessions={len(rows)} input={total_in:,} output={total_out:,} "
+          f"median_input={med:,.0f} in:out={total_in/max(total_out,1):.0f}:1")
+
+
+if __name__ == "__main__":
+    main()
