@@ -124,10 +124,9 @@ python scripts/pict_helper.py parse output.txt
 
 **To generate actual test cases**, the user can:
 1. Save the PICT model to a file (e.g., `model.txt`)
-2. Use online PICT tools like:
-   - https://pairwise.yuuniworks.com/
-   - https://pairwise.teremokgames.com/
-3. Or install PICT locally (see references/pict_syntax.md)
+2. Run PICT locally, built from https://github.com/microsoft/pict (see references/pict_syntax.md):
+   `pict model.txt`
+   Avoid pasting proprietary models into third-party online tools.
 
 ### 4. Determine Expected Outputs
 
@@ -295,7 +294,7 @@ constraints = [
 
 ### Script Errors
 
-- Ensure pypict is installed: `pip install pypict --break-system-packages`
+- Ensure pypict is installed: `pip install pypict` inside a virtual environment (`python3 -m venv .venv && . .venv/bin/activate`) or with `pipx`/`uv`
 - Check Python version (3.7+)
 - Verify model syntax is valid
 
@@ -306,7 +305,6 @@ constraints = [
 - **scripts/pict_helper.py** - Python utilities for model generation and output formatting
 - [PICT GitHub Repository](https://github.com/microsoft/pict) - Official PICT documentation
 - [pypict Documentation](https://github.com/kmaehashi/pypict) - Python binding documentation
-- [Online PICT Tools](https://pairwise.yuuniworks.com/) - Web-based PICT generator
 
 ## Examples
 
@@ -318,13 +316,13 @@ constraints = [
 - Parameters: dividend (number), divisor (number)
 - Values: Using equivalence partitioning and boundaries
   - Numbers: negative, zero, positive, large values
-- Constraints: Division by zero is invalid
+- Constraints: Zero divisor is an invalid input; keep it in the model but pair it with a single fixed dividend so it is not over-represented
 - Expected outputs: Result or error
 
 **PICT Model:**
 ```
 Dividend: -10, 0, 10, 1000
-Divisor: ~0, -5, 1, 5, 100
+Divisor: 0, -5, 1, 5, 100
 
 IF [Divisor] = "0" THEN [Dividend] = "10";
 ```

@@ -572,8 +572,16 @@ def topic_label_slug(topic_label_value: str) -> str:
 
 
 def write_output(path: Path, markdown: str) -> None:
+    """Append a batch to an existing inbox; never overwrite earlier batches."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(markdown, encoding="utf-8")
+    existing = safe_read(path) if path.exists() else ""
+    if not existing.strip():
+        path.write_text(markdown, encoding="utf-8")
+        return
+    # The page header (front matter, Tags) already exists; add only the new batch.
+    marker = markdown.find("- Generated::")
+    batch = markdown[marker:] if marker != -1 else markdown
+    path.write_text(existing.rstrip("\n") + "\n" + batch, encoding="utf-8")
 
 
 def safe_read(path: Path) -> str:

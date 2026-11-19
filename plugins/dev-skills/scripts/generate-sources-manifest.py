@@ -2,7 +2,7 @@
 """Generate a versioned YAML manifest for a skills directory.
 
 The manifest records, for each top-level skill folder, a monotonic version
-number, a SHA-256 checksum over all tracked files, and a file count.
+number, provenance (collection and upstream URL, preserved across runs), a SHA-256 checksum over all tracked files, and a file count.
 
 By default the script writes to <root>/SOURCES.yaml, but it can also print the
 manifest to stdout or validate the on-disk manifest with --check.
@@ -50,6 +50,10 @@ def load_previous_manifest(manifest_path: Path) -> Dict[str, Dict[str, object]]:
             current["version"] = int(stripped[len("version: ") :].strip())
         elif stripped.startswith("sha256: "):
             current["sha256"] = stripped[len("sha256: ") :].strip().strip('"')
+        elif stripped.startswith("collection: "):
+            current["collection"] = stripped[len("collection: ") :].strip().strip('"')
+        elif stripped.startswith("upstream: "):
+            current["upstream"] = stripped[len("upstream: ") :].strip().strip('"')
         elif stripped.startswith("file_count: "):
             current["file_count"] = int(stripped[len("file_count: ") :].strip())
 
@@ -123,6 +127,11 @@ def build_records(root: Path) -> List[Dict[str, object]]:
                 "file_count": file_count,
             }
         )
+        # Provenance is curated by hand and cannot be derived from the files, so carry it
+        # over from the previous manifest instead of dropping it on regeneration.
+        records[-1]["collection"] = prior.get("collection", "local")
+        if "upstream" in prior:
+            records[-1]["upstream"] = prior["upstream"]
 
     return records
 
@@ -142,10 +151,14 @@ def render_manifest(root: Path, records: List[Dict[str, object]]) -> str:
     ]
 
     for record in records:
+        provenance = [f'    collection: "{record["collection"]}"']
+        if "upstream" in record:
+            provenance.append(f'    upstream: "{record["upstream"]}"')
         lines.extend(
             [
                 f"  - name: {record['name']}",
                 f'    path: "{record["path"]}"',
+                *provenance,
                 f"    version: {record['version']}",
                 f'    sha256: "{record["sha256"]}"',
                 f"    file_count: {record['file_count']}",

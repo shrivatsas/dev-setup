@@ -13,7 +13,8 @@ A Python utility for:
 
 **Installation:**
 ```bash
-pip install pypict --break-system-packages
+python3 -m venv .venv && . .venv/bin/activate
+pip install pypict
 ```
 
 **Usage:**

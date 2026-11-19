@@ -335,10 +335,7 @@ When logging defects, include:
 If you need to generate additional test cases or modify the model:
 
 1. **Edit the PICT model** (Section 2) with new parameters or constraints
-2. **Use online PICT tools:**
-   - https://pairwise.yuuniworks.com/
-   - https://pairwise.teremokgames.com/
-3. **Or install PICT locally:**
+2. **Run PICT locally:**
    - Download from: https://github.com/microsoft/pict
    - Run: `pict atm_model.txt`
 
