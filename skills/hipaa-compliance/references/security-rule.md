@@ -223,7 +223,7 @@ HHS recommends NIST SP 800-30 for risk analysis methodology. NIST SP 800-66 is t
 - Enable CloudTrail (AWS), Activity Log (Azure), Cloud Audit Logs (GCP)
 - Log: API calls, data access, authentication events, configuration changes
 - Immutable log storage (S3 with Object Lock, etc.)
-- Retention: Minimum 6 years for HIPAA records
+- Retention: HIPAA does not set a log-specific period; the 6-year rule covers required documentation (§164.316(b)(2)). Set log retention by risk analysis and policy
 - Alert on anomalous access patterns
 
 **Network Security:**

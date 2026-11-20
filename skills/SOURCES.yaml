@@ -4,481 +4,659 @@ generator: "generate-sources-manifest.py"
 skills:
   - name: amazon-bedrock
     path: "amazon-bedrock"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/amazon-bedrock"
     version: 1
     sha256: "230207197c618fdf0e8d83def7c282a6d8cafae7861c12f06913fb6305750097"
     file_count: 38
   - name: architecture-docs
     path: "architecture-docs"
+    collection: "local"
     version: 1
     sha256: "58f928777677eb408f8215a4c1cbd214844ec1a78013db748f2cbf53680880cf"
     file_count: 5
   - name: article-extractor
     path: "article-extractor"
+    collection: "michalparkola/tapestry-skills"
+    upstream: "https://github.com/michalparkola/tapestry-skills/tree/main/article-extractor"
     version: 1
     sha256: "2a940bc89d2f21179fb2e446940b3fef80910aae433d6d98815a4da26c3117f1"
     file_count: 1
   - name: aws-ai-ml
     path: "aws-ai-ml"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-ai-ml"
     version: 1
     sha256: "a3a2c3d92da083065643311c9316aa395dfc74ec0b7eb7dea1abe0792274a288"
     file_count: 119
   - name: aws-auth
     path: "aws-auth"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-auth"
     version: 1
     sha256: "6caa55226f8be999a8cd5f4d509d0e289881135086a405df477363737512adeb"
     file_count: 11
   - name: aws-billing-and-cost-management
     path: "aws-billing-and-cost-management"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-billing-and-cost-management"
     version: 1
     sha256: "8a23f26e778c439e84114123d327be17bbbb4c28dae3d17b706ab39068001914"
     file_count: 17
   - name: aws-blocks
     path: "aws-blocks"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-blocks"
     version: 1
     sha256: "d8643901faa1741659f0389581be6689e6dfd32c04b7c4b6061f63e71d175913"
     file_count: 2
   - name: aws-cdk
     path: "aws-cdk"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-cdk"
     version: 1
     sha256: "0b374fc7feb6a454678755f22e37d210c39705c721204e2dafba5ed08c77defe"
     file_count: 12
   - name: aws-cloudformation
     path: "aws-cloudformation"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-cloudformation"
     version: 1
     sha256: "8dd9090fabcee0d3dadde419be4dd60c2940ebbdea90a8fe48579f329f5917c6"
     file_count: 17
   - name: aws-compute
     path: "aws-compute"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-compute"
     version: 1
     sha256: "01df48f4e7cac79ffdbc19c3bb8bbde2d30010a12092bd8ed5b758fed93056f7"
     file_count: 8
   - name: aws-containers
     path: "aws-containers"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-containers"
     version: 1
     sha256: "1ae3d8851b0304d81f992bd52f222a82a0ab7d8b8c62e678959406749560f67b"
     file_count: 18
   - name: aws-database
     path: "aws-database"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-database"
     version: 1
     sha256: "92440de375184c4d77aca7382c028492d57ddfb9409c99d85891cef7021ffbe4"
     file_count: 22
   - name: aws-deployment
     path: "aws-deployment"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-deployment"
     version: 1
     sha256: "29540fc8d5c9a44d13764031a9af684c30d7f8577805df8b3551a6db2a251f90"
     file_count: 8
   - name: aws-iam
     path: "aws-iam"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-iam"
     version: 1
     sha256: "1bc3b0bde904986f394fd9091c1b78b6ccd81704db492cfaf9b6df5c0e4043ea"
     file_count: 6
   - name: aws-messaging-and-streaming
     path: "aws-messaging-and-streaming"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-messaging-and-streaming"
     version: 1
     sha256: "7b701bd32d61ba718482d10773dd23734d66d2593a9514f3a2a4288ff7688463"
     file_count: 2
   - name: aws-networking
     path: "aws-networking"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-networking"
     version: 1
     sha256: "601211a1b3dc9610b9a1c741a0df095c165446fdafd7ca4170659df04b61d15e"
     file_count: 2
   - name: aws-observability
     path: "aws-observability"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-observability"
     version: 1
     sha256: "94feb7b129ccd12f81df8d4c4a150525fe4f3803880a8885c13834e5ac603fe7"
     file_count: 51
   - name: aws-sdk-js-v3-usage
     path: "aws-sdk-js-v3-usage"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-sdk-js-v3-usage"
     version: 1
     sha256: "a1733667b23169fc3d054c92f12476cbd67df6463032d120ce647feccafa4b7f"
     file_count: 13
   - name: aws-sdk-python-usage
     path: "aws-sdk-python-usage"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-sdk-python-usage"
     version: 1
     sha256: "608b25c818017e7fd897d80f1dd25716d97ba3f02a7b868d3c863c76d848b510"
     file_count: 9
   - name: aws-sdk-swift-usage
     path: "aws-sdk-swift-usage"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-sdk-swift-usage"
     version: 1
     sha256: "f3ae57779a383d91f3132a84ca2bafc95d0814025edf84f89169f415555f0f0e"
     file_count: 2
   - name: aws-security
     path: "aws-security"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-security"
     version: 1
     sha256: "fe8e490709a0549e3e732ffdb1753f88ade7a5776fa3b1ca78a8b788fb749e70"
     file_count: 25
   - name: aws-serverless
     path: "aws-serverless"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-serverless"
     version: 1
     sha256: "32f7f120524be7e4c826c974c0f0d66d4e8a0ad952846c2a2805ee92cc2298bd"
     file_count: 13
   - name: aws-storage
     path: "aws-storage"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-storage"
     version: 1
     sha256: "b03a9ee18e73d9ab2750bdc41ade14a92afd190d4183b3208bf093f0c85bf8a7"
     file_count: 14
   - name: aws-well-architected-review
     path: "aws-well-architected-review"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/aws-well-architected-review"
     version: 1
     sha256: "92af0ca8fd02a1f4d83d58b3ec76c8ff15eb871de9b298c2927189f6e027760e"
     file_count: 10
   - name: brainstorming
     path: "brainstorming"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/brainstorming"
     version: 1
     sha256: "31aab7fd68f917c6ab5475377e14001dd6f4f72a88679bc9faef9ac2c6cc17ca"
     file_count: 8
   - name: caveman
     path: "caveman"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/productivity/caveman"
     version: 1
     sha256: "7e2fa5f052ed8572bbe892d4c1baeea80ba8659d0b72e6432bfd7e8fb98abc0c"
     file_count: 1
   - name: codex
     path: "codex"
+    collection: "local"
     version: 1
     sha256: "26e7dfc244748ee2e39d01adf5693e1db75a79baeb22379a4008f1954150acd1"
     file_count: 1
   - name: collision-zone-thinking
     path: "collision-zone-thinking"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/problem-solving/collision-zone-thinking"
     version: 2
     sha256: "5c9244bac51d94b0714d93cb6cce51bf7c0a23ecea69fc10c07b4f0a8511c0e3"
     file_count: 1
   - name: condition-based-waiting
     path: "condition-based-waiting"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/testing/condition-based-waiting"
     version: 2
     sha256: "b3a56a4dcd9d12ce6cec087ca9be3a73371353759cb11d5c6184a9e5e8ceea7b"
     file_count: 2
   - name: defense-in-depth
     path: "defense-in-depth"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/debugging/defense-in-depth"
     version: 2
     sha256: "dac5eaff0d7e52ca8f918e63c8c84f108e4657ddbea6c11bca5e7bb08a4492eb"
     file_count: 1
   - name: diagnose
     path: "diagnose"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnose"
     version: 1
     sha256: "6b0d86fe514a8e13f67c846a8848b2f04a9d49b3ba53ef7cf745780480a98f1b"
     file_count: 2
   - name: dispatching-parallel-agents
     path: "dispatching-parallel-agents"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/dispatching-parallel-agents"
     version: 1
     sha256: "6f85a00af7ae36fae408382d663cbcb440964a8a53ee4ee12ae32fccb9b3a841"
     file_count: 1
   - name: domain-driven-design
     path: "domain-driven-design"
+    collection: "local"
     version: 2
     sha256: "3b11fbd6d7c6897fd086e87b4f2bfcaed41ee2a96974a71db02646539b8ea0dd"
     file_count: 5
   - name: executing-plans
     path: "executing-plans"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/executing-plans"
     version: 1
     sha256: "547f982d4ce5769963206a14fa3ba9dd1584173a06e18c04400dc55a5b83bfe7"
     file_count: 1
   - name: explain
     path: "explain"
+    collection: "local"
     version: 1
     sha256: "d3b8123c66f1af255efe843709f13b057c07c19457f8e19fa11930478e003df7"
     file_count: 1
   - name: finishing-a-development-branch
     path: "finishing-a-development-branch"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/finishing-a-development-branch"
     version: 1
     sha256: "a29b2da762c9d8705f422ad91b8057d2d5147cd069aa09a69bb809726619cdbe"
     file_count: 1
   - name: gardening-skills-wiki
     path: "gardening-skills-wiki"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/meta/gardening-skills-wiki"
     version: 2
     sha256: "5e444a052a4683f3e5a3d2c7f26e24dba5c5b222c4d49714bb1d2a1e59d12729"
     file_count: 6
   - name: grill-me
     path: "grill-me"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me"
     version: 1
     sha256: "0fe30e2291a6f990a5414f85205535bc06519622bf604980511d7c11dad327e0"
     file_count: 1
   - name: grill-with-docs
     path: "grill-with-docs"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs"
     version: 1
     sha256: "239939bf31313e6de6ca84e78cb77e1dc0011157a1dcf62594e495b0ada34b12"
     file_count: 3
   - name: handoff
     path: "handoff"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff"
     version: 1
     sha256: "478ba7f43732eb37517839d1360c630bc645a1eac6f39737cb3fb38d22a1194b"
     file_count: 1
   - name: hipaa-compliance
     path: "hipaa-compliance"
-    version: 1
-    sha256: "eb99ed2ed9f45efdc79a74ede25335858ed3eceea624012b37c58c40f039a160"
+    collection: "local"
+    version: 2
+    sha256: "e04e87600b88afa2d8e3fabbaa9b562a87993f4953e30993f982f621a7e06db1"
     file_count: 6
   - name: hypothesis-tests
     path: "hypothesis-tests"
+    collection: "honnibal/claude-skills"
+    upstream: "https://github.com/honnibal/claude-skills/blob/main/hypothesis-tests.md.txt"
     version: 1
     sha256: "b33a73cacb85f717c836a0eb12abaf612d71644c05c6306fbd276d7af18ba1ef"
     file_count: 1
   - name: improve-codebase-architecture
     path: "improve-codebase-architecture"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture"
     version: 1
     sha256: "326e2a53c622d19509f2b0c32111b4d8cb208eb3df1bd1dd8671308708bc245b"
     file_count: 5
   - name: inversion-exercise
     path: "inversion-exercise"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/problem-solving/inversion-exercise"
     version: 2
     sha256: "29d88892805ef180bcf32cb2757aa41cdd7c0db908a4144eda36d77cc5802ebf"
     file_count: 1
   - name: karpathy-guidelines
     path: "karpathy-guidelines"
+    collection: "heyAyushh/stacc"
+    upstream: "https://github.com/heyAyushh/stacc/tree/main/karpathy-guidelines"
     version: 1
     sha256: "5e8a1677df986d47abaf3d42f1ce0c7427ea030f50370c52baf9ba1e2c7c3db9"
     file_count: 1
   - name: launch-with-aws
     path: "launch-with-aws"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/launch-with-aws"
     version: 1
     sha256: "a51ed9d09be5cd8b12063be6619b8fa758aacb95011df8d64ecc153953164668"
     file_count: 9
   - name: logseq-flashcards
     path: "logseq-flashcards"
-    version: 1
-    sha256: "b4ed66a8d3b82cf2fbe8ea06c7bb017a5ba6cb1a167e93028c3d602e10409e93"
+    collection: "local"
+    version: 2
+    sha256: "3761c00276ea6a32967336d614cd5cdd5c3b447fa66721d55edbe2b466127c2c"
     file_count: 3
   - name: meta-pattern-recognition
     path: "meta-pattern-recognition"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/problem-solving/meta-pattern-recognition"
     version: 2
     sha256: "dd67c6d9c0cfc5cfdbfd6c76f57ecd5e9fe8ade48131c44bd926569c709a3ffd"
     file_count: 1
   - name: mutation-testing
     path: "mutation-testing"
+    collection: "honnibal/claude-skills"
+    upstream: "https://github.com/honnibal/claude-skills/blob/main/mutation-testing.md.txt"
     version: 1
     sha256: "833e54ac2b471107c999d8feaa8b3b48a98c6d5dc65bf1e808a075381b3eccf2"
     file_count: 1
   - name: pict-test-designer
     path: "pict-test-designer"
-    version: 1
-    sha256: "9dcda2f70058b7eeedfb52b67ca7757d92832423b92c853ca814c3e8cff53dbe"
+    collection: "local"
+    version: 2
+    sha256: "e8b2b80a87519f60d4dbd452c64cdf35ff0c83d22225b8739c1e75018348d923"
     file_count: 10
   - name: pkm-curation
     path: "pkm-curation"
+    collection: "local"
     version: 1
     sha256: "485a198467a90b476e30e67ee0b9fb7ece1e895a8303f3e629ad24da4b752806"
     file_count: 2
   - name: pre-mortem
     path: "pre-mortem"
+    collection: "honnibal/claude-skills"
+    upstream: "https://github.com/honnibal/claude-skills/blob/main/pre-mortem.md.txt"
     version: 1
     sha256: "2ea11e46ec738fb685208138f0f79b070ead70d6e1b57bbfcee83805e85794d3"
     file_count: 1
   - name: preserving-productive-tensions
     path: "preserving-productive-tensions"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/architecture/preserving-productive-tensions"
     version: 2
     sha256: "8523daf1b7b697185ccb3e03b70d187f004a186d0e3dc416d16b5e67c4826ae7"
     file_count: 1
   - name: prototype
     path: "prototype"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/engineering/prototype"
     version: 1
     sha256: "76829cdb04f2cf3924e58f90d298a2e39029a3031f76f68131dbe5ae9a9a3f83"
     file_count: 3
   - name: pulling-updates-from-skills-repository
     path: "pulling-updates-from-skills-repository"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/meta/pulling-updates-from-skills-repository"
     version: 2
     sha256: "65969ca44480a5f7f577e5331f783e63555f82d74cd31109086b13c77fea9320"
     file_count: 1
   - name: receiving-code-review
     path: "receiving-code-review"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/receiving-code-review"
     version: 1
     sha256: "b90b1e180f11fa06053fc0f9fb0a957935dce35168897d1aff6be33e14545b3e"
     file_count: 1
   - name: remembering-conversations
     path: "remembering-conversations"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/remembering-conversations"
     version: 2
     sha256: "4331a1cc6091ab415c973a39cef8a9cb127dd59c9af8ed17a62769b34cc47048"
     file_count: 29
   - name: requesting-code-review
     path: "requesting-code-review"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/requesting-code-review"
     version: 1
     sha256: "4ac36baa8e00f0460ea480baf965e83b837a65e66a784055c46ee24f5f94a7c1"
     file_count: 2
   - name: research
     path: "research"
+    collection: "Weizhena/Deep-Research-skills"
+    upstream: "https://github.com/Weizhena/Deep-Research-skills/tree/master/skills/research-codex-en/research"
     version: 1
     sha256: "07724821c56c4570f40915a558d4684e208a679bcde08d77aae963cf029ed312"
     file_count: 2
   - name: research-add-fields
     path: "research-add-fields"
+    collection: "Weizhena/Deep-Research-skills"
+    upstream: "https://github.com/Weizhena/Deep-Research-skills/tree/master/skills/research-codex-en/research-add-fields"
     version: 1
     sha256: "810571e74f19a50b1c9eb2e79cb757616ca7a2df2b11cdcbb126c5596750ed31"
     file_count: 2
   - name: research-add-items
     path: "research-add-items"
+    collection: "Weizhena/Deep-Research-skills"
+    upstream: "https://github.com/Weizhena/Deep-Research-skills/tree/master/skills/research-codex-en/research-add-items"
     version: 1
     sha256: "ac2406168ad3e7eb297176a0eff2e09b7a68b63306359d960583e18c53c8c190"
     file_count: 2
   - name: research-deep
     path: "research-deep"
+    collection: "Weizhena/Deep-Research-skills"
+    upstream: "https://github.com/Weizhena/Deep-Research-skills/tree/master/skills/research-codex-en/research-deep"
     version: 1
     sha256: "afe0658093d966752d4943b4a9b9ef2fededb840cc5e6bd9d50734352f3ce012"
     file_count: 2
   - name: research-report
     path: "research-report"
+    collection: "Weizhena/Deep-Research-skills"
+    upstream: "https://github.com/Weizhena/Deep-Research-skills/tree/master/skills/research-codex-en/research-report"
     version: 1
     sha256: "455038afa644af0d2c87195005acaa1c2aceddd7a1086a883a775101f1efab74"
     file_count: 2
   - name: reviewing-changes
     path: "reviewing-changes"
+    collection: "local"
     version: 3
     sha256: "d2c3a94044a3e47fe8dff2259b590d2d0dd24f8c110af19981c124ffa4bbc53c"
     file_count: 1
   - name: reviewing-pr-fixes
     path: "reviewing-pr-fixes"
+    collection: "local"
     version: 1
     sha256: "76c78ce8997673527814bf5aa07bb502494eee7fb8ad78549b30f3a84f80b517"
     file_count: 1
   - name: root-cause-tracing
     path: "root-cause-tracing"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/debugging/root-cause-tracing"
     version: 2
     sha256: "fe369821d24c38b8afb86082f9b40f3e847a2a883c2550e8086c206a48ad3d4e"
     file_count: 2
   - name: scale-game
     path: "scale-game"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/problem-solving/scale-game"
     version: 2
     sha256: "a0ff75cebf0351afec6656431b3b620af54d5c8170d81856f477ac554b43b816"
     file_count: 1
   - name: setup-matt-pocock-skills
     path: "setup-matt-pocock-skills"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/engineering/setup-matt-pocock-skills"
     version: 1
     sha256: "29befdc65614366b29a89284af9235e581ddf5b0f7ab3e6fb826dddf7b7e3548"
     file_count: 6
   - name: sharing-skills
     path: "sharing-skills"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/meta/sharing-skills"
     version: 2
     sha256: "302dd8988893f0a03db870d3de46a130865f0c595ab5d343c95aba43f6bc3c77"
     file_count: 1
   - name: ship-it
     path: "ship-it"
+    collection: "local"
     version: 1
     sha256: "4777c4675f67b1941d098160423d3c0f331aa2b0f84f4957473acc30d56aaa48"
     file_count: 2
   - name: ship-learn-next
     path: "ship-learn-next"
+    collection: "michalparkola/tapestry-skills"
+    upstream: "https://github.com/michalparkola/tapestry-skills/tree/main/ship-learn-next"
     version: 1
     sha256: "f780832426ea584139e9e239089655b2e4057b48f947659d09c5bd8416483ff8"
     file_count: 1
   - name: signing-in-to-aws
     path: "signing-in-to-aws"
+    collection: "aws/agent-toolkit-for-aws skills/core-skills"
+    upstream: "https://github.com/aws/agent-toolkit-for-aws/tree/main/skills/core-skills/signing-in-to-aws"
     version: 1
     sha256: "afa7c89ac20f8eff5618d9eff1e19ee46e7c3f649afe4e72315dc0c9d540a6b2"
     file_count: 2
   - name: simplification-cascades
     path: "simplification-cascades"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/problem-solving/simplification-cascades"
     version: 2
     sha256: "5b0cf8ea5804eab8aa95ea20d21639fcf6698e60960072001272fe7d40f38eaf"
     file_count: 1
   - name: skill-creator
     path: "skill-creator"
+    collection: "openai/skills .system/skill-creator"
+    upstream: "https://github.com/openai/skills/tree/main/skills/.system/skill-creator"
     version: 2
     sha256: "f3fdc1fc5b2f5e9acacc3f67e9177a6dc37df3a8e7da3941ae44b14dbba8d763"
     file_count: 9
   - name: slack-search
     path: "slack-search"
+    collection: "local"
     version: 1
     sha256: "b2417ebda4ac6d843e0aed6dd6af19fd5ea4fd44e8d16265d94473632d71f476"
     file_count: 1
   - name: software-architect
     path: "software-architect"
+    collection: "local"
     version: 1
     sha256: "664ff6a2d9d7c887ca215773c5d8c772625e53b2e291afe2cfa2db32f1f97531"
     file_count: 6
   - name: subagent-driven-development
     path: "subagent-driven-development"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/subagent-driven-development"
     version: 1
     sha256: "1a5b2633feb47c7317f46b748747806209b2a393c22dc3fa96a923f0f283ef77"
     file_count: 4
   - name: systematic-debugging
     path: "systematic-debugging"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/debugging/systematic-debugging"
     version: 1
     sha256: "81f5e240ad23978fa09d6701bb75190f0ff03c08addbba2bc07f23be7707b349"
     file_count: 11
   - name: tdd
     path: "tdd"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd"
     version: 1
     sha256: "d5826cecfb40ba4616d23eceb721b5c97a55ab36777c5cc5288094488f3bbbc6"
     file_count: 6
   - name: test-driven-development
     path: "test-driven-development"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/testing/test-driven-development"
     version: 1
     sha256: "b078532e190983b849818c11a7d4797dcbae9dfe04fadabf9b90ca5ee63650c8"
     file_count: 2
   - name: test-signal-vs-waste
     path: "test-signal-vs-waste"
+    collection: "local"
     version: 4
     sha256: "61d7411f0faa17e0d68e9f56cb1cc0c448b56634fbd253fe587f060a4274f6d9"
     file_count: 2
   - name: testing-anti-patterns
     path: "testing-anti-patterns"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/testing/testing-anti-patterns"
     version: 2
     sha256: "343e31e5e4c936dc50d309b5dadd9061f22361b9f7dbf0b1ea5656736fa1c494"
     file_count: 1
   - name: testing-skills-with-subagents
     path: "testing-skills-with-subagents"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/meta/testing-skills-with-subagents"
     version: 2
     sha256: "622a115ae9f943b346d7e1fd277ac378c92f6a11d72384d42cf948d36f0c8834"
     file_count: 2
   - name: to-issues
     path: "to-issues"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/engineering/to-issues"
     version: 1
     sha256: "3fc7c307251c4f08a50326236e7e70faffe1dadb99ee35a3d854b1b7a0b79418"
     file_count: 1
   - name: to-prd
     path: "to-prd"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/engineering/to-prd"
     version: 1
     sha256: "a9a42e82d98fc26a289ee525b29af933b81a5b937f58284bda69128c88e49b3d"
     file_count: 1
   - name: tracing-knowledge-lineages
     path: "tracing-knowledge-lineages"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/research/tracing-knowledge-lineages"
     version: 2
     sha256: "9144bb21bb7c9f59c03fa6cb0d41ec2deb5c237204c563084de1db5a8e0667a8"
     file_count: 1
   - name: triage
     path: "triage"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/engineering/triage"
     version: 1
     sha256: "4e735cfcce7f614cef6849ba5cec4355cb6d42e507601e63cfbd707dd0be9c1c"
     file_count: 3
   - name: using-git-worktrees
     path: "using-git-worktrees"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/using-git-worktrees"
     version: 1
     sha256: "20806a49e07faff9d830c15d882fbad4f9e40a6762c34c64f42f07a02c28d3bd"
     file_count: 1
   - name: using-skills
     path: "using-skills"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/using-skills"
     version: 2
     sha256: "4525351789f943583510ff28d8773666582204b97565f37bc4fed88331a17998"
     file_count: 3
   - name: using-superpowers
     path: "using-superpowers"
+    collection: "obra/superpowers"
+    upstream: "https://github.com/obra/superpowers/tree/main/skills/using-superpowers"
     version: 1
     sha256: "b3ead3c48558d7cec17c078a2ecba24404e6e8b2df6246d352cc14823741d170"
     file_count: 4
   - name: verification-before-completion
     path: "verification-before-completion"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/debugging/verification-before-completion"
     version: 1
     sha256: "9f704f1335e61a3ce258270d9f492cf487af55f1db0b9fc1bc5fa2173ebd38fa"
     file_count: 1
   - name: write-a-skill
     path: "write-a-skill"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/productivity/write-a-skill"
     version: 1
     sha256: "03840258378476cbefa13fd3f7bf70db93ec1c3cdd7d0dc4edb9431e71a2a24d"
     file_count: 1
   - name: writing-plans
     path: "writing-plans"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/collaboration/writing-plans"
     version: 1
     sha256: "6d34ebebd29f4131bf098bbd85dc0ed59b12c84beff1c911770896f6a7183c73"
     file_count: 2
   - name: writing-skills
     path: "writing-skills"
+    collection: "obra/superpowers-skills"
+    upstream: "https://github.com/obra/superpowers-skills/tree/main/skills/meta/writing-skills"
     version: 1
     sha256: "125cf2c0e5424a646210ce0a8f8b1903b4c6603a66c38147915a23e43762d674"
     file_count: 7
   - name: youtube-transcript
     path: "youtube-transcript"
+    collection: "michalparkola/tapestry-skills"
+    upstream: "https://github.com/michalparkola/tapestry-skills/tree/main/youtube-transcript"
     version: 1
     sha256: "775dd751c772d84628d8d3a16580beae43b64a34b3a8a6c0665b382b011dae8d"
     file_count: 1
   - name: zoom-out
     path: "zoom-out"
+    collection: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills/tree/main/skills/engineering/zoom-out"
     version: 1
     sha256: "34f4bab271b9b9bbad01e08413d5a096ec84d1ee983d747de9219f77afc5e897"
     file_count: 1

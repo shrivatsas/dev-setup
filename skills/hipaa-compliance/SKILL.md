@@ -1,15 +1,13 @@
 ---
 name: hipaa-compliance
 description: >
-  Expert HIPAA compliance assistant for healthcare and software contexts. Use this skill whenever
+  HIPAA compliance assistant for US healthcare and health-software contexts. Use this skill when
   the user mentions HIPAA, PHI (Protected Health Information), ePHI, covered entities, business
-  associates, healthcare data privacy, medical records, health information security, BAA (Business
-  Associate Agreements), or any compliance review involving patient data. Also trigger for requests
-  to draft privacy notices, HIPAA policies, consent forms, security risk assessments, or breach
-  notification letters. Use for developers building healthcare software who need technical safeguard
-  guidance (encryption, access controls, audit logs), compliance officers reviewing documents or
-  procedures, and anyone asking "is this HIPAA compliant?" or "what does HIPAA require for X?".
-  When in doubt about whether a healthcare or data privacy question falls under this skill — use it.
+  associates, BAAs (Business Associate Agreements), or asks for a compliance review of patient
+  data handling. Also use it for drafting HIPAA privacy notices, policies, authorization forms,
+  security risk assessments, or breach notification letters, and for "is this HIPAA compliant?" or
+  "what does HIPAA require for X?". Do not use it for general data-privacy questions (GDPR, CCPA,
+  non-health data) unless HIPAA is explicitly involved.
 ---
 
 # HIPAA Compliance Skill
@@ -129,7 +127,7 @@ Structure technical advice as:
 - In practice, encryption (AES-256 at rest, TLS 1.2+ in transit) is the industry standard
 - Cloud providers: AWS, Azure, GCP all offer HIPAA-eligible services — a BAA is still required
 - Audit logs must capture: who accessed what PHI, when, from where
-- Minimum retention: 6 years for HIPAA-related records
+- Retention: HIPAA's 6-year rule (45 CFR §164.316(b)(2), §164.530(j)) applies to required *documentation* (policies, risk analyses, BAAs, training and breach records), not to medical records. Medical record retention is set by state law and other rules; audit-log retention is not fixed by HIPAA — choose it from your risk analysis and policy (many organizations align with 6 years)
 
 ### 4. Education & Explanation
 
@@ -154,12 +152,14 @@ When explaining HIPAA concepts:
 ### What is PHI?
 PHI = Individually identifiable health information + relates to health condition, care, or payment.
 
-**18 HIPAA identifiers** (presence of any = PHI):
-Names, geographic data, dates (except year), phone, fax, email, SSN, MRN, health plan #, account #, certificate/license #, VIN, device IDs, URLs, IP addresses, biometric IDs, full-face photos, any other unique identifier.
+PHI is identifiable health information held or transmitted by a covered entity or business associate. The 18 identifiers are the Safe Harbor list (45 CFR §164.514(b)(2)); they are not a definition of PHI. Health data containing any of them is generally identifiable, but data with no listed identifier can still be PHI if there is a reasonable basis to identify the individual, and identifiers in data that is not health information held by a CE/BA (e.g. a plain customer list) are not PHI by themselves.
+
+**The 18 Safe Harbor identifiers:**
+Names, geographic subdivisions smaller than a state (limited 3-digit ZIP exception), all date elements except year (and all ages over 89), phone, fax, email, SSN, MRN, health plan #, account #, certificate/license #, VIN, device IDs, URLs, IP addresses, biometric IDs, full-face photos, any other unique identifier.
 
 **De-identification methods:**
-- **Safe Harbor**: Remove all 18 identifiers + no actual knowledge re-identification is possible
-- **Expert Determination**: Statistical/scientific expert certifies very small re-identification risk
+- **Safe Harbor** (§164.514(b)(2)): Remove all 18 identifiers of the individual and of relatives, employers, and household members, and have no actual knowledge that the remainder could identify the individual
+- **Expert Determination** (§164.514(b)(1)): A qualified expert applies statistical/scientific methods, determines re-identification risk is very small, and documents the analysis
 
 ### Permitted Uses Without Authorization (TPO + More)
 - **Treatment, Payment, Operations (TPO)** — Core permitted uses

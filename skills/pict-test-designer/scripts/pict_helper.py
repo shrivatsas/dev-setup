@@ -7,7 +7,7 @@ This script provides utilities for working with PICT models and test cases.
 Note: This is a placeholder/example script. Full implementation coming soon!
 
 Requirements:
-    pip install pypict --break-system-packages
+    pip install pypict  # inside a virtualenv
 
 Usage:
     python pict_helper.py generate config.json
