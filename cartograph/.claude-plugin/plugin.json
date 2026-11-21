@@ -1,0 +1,14 @@
+{
+  "name": "cartograph",
+  "version": "0.2.0",
+  "description": "Evaluate large projects, new or existing, as a fog-of-war map: areas x layers, explored one expedition at a time, with every decision judged against a shortlisted set of software design principles. Existing systems are walked as built and get an advisory verdict per area.",
+  "license": "MIT",
+  "keywords": [
+    "architecture",
+    "design-principles",
+    "adr",
+    "planning",
+    "fog-of-war",
+    "brownfield"
+  ]
+}

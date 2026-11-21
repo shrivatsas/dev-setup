@@ -1,0 +1,10 @@
+# Every patch of fog we chose to walk through.
+# status: open | confirmed | broken
+# blocking: true when building on this assumption must wait until it is confirmed.
+A-001:
+  cell: <area-id>.<layer>
+  statement: <what we are assuming>
+  made_in: <expedition log file>
+  revisit_when: <date, event or metric threshold>
+  status: open
+  blocking: false
