@@ -27,12 +27,16 @@ done
 # Skill directories per agent:
 #   ~/.agents/skills, ~/.claude/skills, ~/.codex/skills — pi, claude and codex all read more
 #     than one of these, so keeping all three populated means no agent goes without skills
+#   ~/.gemini/config/skills — antigravity-cli (agy) reads skills only from a customization
+#     root: the workspace's .agents/skills (nothing to link there) or its global config dir,
+#     ~/.gemini/config/, which is the one location shared by every project
 #   ~/.claude-accounts/*/skills — claude's skill root lives inside its config dir, so each
 #     account needs its own links
 SKILL_TARGETS=(
   "$HOME/.agents/skills"
   "$HOME/.claude/skills"
   "$HOME/.codex/skills"
+  "$HOME/.gemini/config/skills"
 )
 for acct in "$HOME"/.claude-accounts/*/; do
   [[ -d "$acct" ]] && SKILL_TARGETS+=("${acct}skills")
@@ -213,6 +217,7 @@ check_seeded() {
     "$HOME/.claude/settings.json"
     "$HOME/.codex/config.toml"
     "$HOME/.pi/agent/settings.json"
+    "$HOME/.gemini/config/config.json"
   )
   local acct dst target
   for acct in "$HOME"/.claude-accounts/*/; do
