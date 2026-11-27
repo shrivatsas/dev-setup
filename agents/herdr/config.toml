@@ -8,3 +8,6 @@ description = "toggle model capacity"
 [theme]
 name = "gruvbox"
 auto_switch = false
+
+[ui]
+sidebar_collapsed_mode = "compact"
