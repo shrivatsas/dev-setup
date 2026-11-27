@@ -101,6 +101,37 @@ plugins/dev-skills/scripts/sync-dev-skills.sh --repo . --dry-run
 plugins/dev-skills/scripts/sync-dev-skills.sh --repo .
 ```
 
+### Cartograph Plugin
+
+Treat a project as a fog-of-war map — areas crossed with layers — and explore it one expedition at a time, judging every decision against a shortlisted set of design principles. Existing systems are walked as built and get an advisory verdict per area. Seven skills live in `plugins/cartograph/`:
+
+| Skill | What it does |
+| --- | --- |
+| `cartograph-survey` | Build the map, run a wide first pass, pick the judging principles |
+| `cartograph-expedition` | Take the next frontier cell through scout, decide, prove, hand off |
+| `cartograph-map` | Keep the map honest — validate, render `MAP.md`, rank the frontier |
+| `cartograph-decide` | Settle one decision; one-way or two-way door, with a record |
+| `cartograph-inspect` | Walk an existing system as built, advisory verdict per area |
+| `cartograph-review` | Review a diff, PR or plan on the principles axis |
+| `cartograph-principles` | The principles catalogue and the conflict ladder |
+
+Like `dev-skills`, the plugin is installed explicitly — `./link.sh` wires only the top-level `skills/`. Manifests ship for Claude Code (`.claude-plugin/`) and Codex (`.codex-plugin/`), and each skill carries an `agents/openai.yaml` interface block for pi, agy and Codex:
+
+| Agent | Install |
+| --- | --- |
+| Claude Code | install the folder as a plugin, or copy `skills/*` to `.claude/skills/` or `~/.claude/skills/` |
+| Codex | register `.codex-plugin/plugin.json`, or copy `skills/*` to `~/.codex/skills/` |
+| pi | copy `skills/*` to `~/.agents/skills/`, or the workspace's `.agents/skills/` |
+| agy | copy `skills/*` to `~/.gemini/config/skills/` |
+
+The map script needs Python 3 and PyYAML (`pyyaml` is in `conda-packages.txt`):
+
+```bash
+plugins/cartograph/skills/cartograph-map/scripts/map.py validate <map-dir>
+python3 plugins/cartograph/tests/test_map.py
+python3 plugins/cartograph/tests/test_manifests.py
+```
+
 ### MCP Setup
 
 MCP stands for Model Context Protocol. It is a standard way for an assistant to connect to external tools and data sources through a structured server interface.

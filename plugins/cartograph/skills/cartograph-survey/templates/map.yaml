@@ -1,0 +1,28 @@
+# Cartograph map — source of truth. MAP.md is generated from this file.
+# Layers (fixed order): intent, domain, structure, data, runtime, delivery
+# States: fog | sighted | scouted | charted | verified | contested
+# Missing cells default to fog.
+version: 1
+project: <project name>
+
+areas:
+  <area-id>:                     # kebab-case, stable; rename via map-keeping only
+    title: <Human title>
+    parent: null                 # set to an area-id when this is a sub-area (zoom)
+    origin: new                  # new | existing (already built: mapped as built, no layer gate)
+    depends_on: []               # area-ids this area relies on
+    on_path: false               # true when needed for the next build slice
+    cells:
+      intent:
+        state: sighted
+        irreversibility: medium  # low | medium | high (how one-way its decisions look)
+        uncertainty: high        # low | medium | high
+        open_questions: []
+        decisions: []            # decision ids or light-record anchors
+        assumptions: []          # ids from assumptions.yaml
+        one_way_pending: []      # one-way decisions charted but not yet verified
+        evidence: []             # required when verified
+        last_visited: null
+
+# Areas we suspect exist but haven't named properly yet.
+undiscovered: []

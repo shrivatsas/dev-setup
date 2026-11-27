@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cartograph Principles"
+  short_description: "The principles catalogue and the decision ladder"
+  default_prompt: "Show the Cartograph principles catalogue: the design principles, the conflict-resolution ladder, and the per-layer exit criteria."

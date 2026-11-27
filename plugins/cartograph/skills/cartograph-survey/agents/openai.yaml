@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cartograph Survey"
+  short_description: "Map a new or existing project as areas x layers"
+  default_prompt: "Survey this repository with Cartograph: build the fog-of-war map of areas and layers, run a wide first pass, and select and weight the principles that will judge decisions."

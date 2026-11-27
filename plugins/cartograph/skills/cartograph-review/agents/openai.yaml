@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cartograph Review"
+  short_description: "Review changes on the principles axis"
+  default_prompt: "Review this change on the Cartograph principles axis: does it honour PRINCIPLES.md and the accepted decisions of the areas it touches, and does it hide any undocumented one-way doors?"

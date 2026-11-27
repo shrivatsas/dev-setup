@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cartograph Map"
+  short_description: "Keep the project map honest and rendered"
+  default_prompt: "Update the Cartograph map: move cells between fog, sighted, scouted, charted, verified and contested, then validate, render MAP.md and rank the frontier."
