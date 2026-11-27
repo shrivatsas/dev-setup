@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cartograph Expedition"
+  short_description: "Take the next frontier cell end to end"
+  default_prompt: "Run the next Cartograph expedition: take the next cell from the map's frontier, scout it, decide, prove any one-way doors, and update the map."

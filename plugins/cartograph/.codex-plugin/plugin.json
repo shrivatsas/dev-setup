@@ -1,0 +1,43 @@
+{
+  "name": "cartograph",
+  "version": "0.2.0",
+  "description": "Evaluate large projects, new or existing, as a fog-of-war map: areas x layers, explored one expedition at a time, with every decision judged against a shortlisted set of software design principles. Existing systems are walked as built and get an advisory verdict per area.",
+  "author": {
+    "name": "Shrivatsa",
+    "email": "",
+    "url": "https://github.com/shrivatsas"
+  },
+  "homepage": "https://github.com/shrivatsas/dev-setup",
+  "repository": "https://github.com/shrivatsas/dev-setup",
+  "license": "MIT",
+  "keywords": [
+    "architecture",
+    "design-principles",
+    "adr",
+    "planning",
+    "fog-of-war",
+    "brownfield"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Cartograph",
+    "shortDescription": "Map a project as areas and layers, then explore it one expedition at a time.",
+    "longDescription": "Treats a project as a fog-of-war map: areas crossed with layers, explored one expedition at a time, with every decision judged against a shortlisted set of software design principles. Existing systems are walked as built and get an advisory verdict per area. Seven skills cover survey, expedition, map upkeep, decisions, brownfield inspection, review and the principles catalogue.",
+    "developerName": "Shrivatsa",
+    "category": "Planning",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Automation"
+    ],
+    "websiteURL": "https://github.com/shrivatsas/dev-setup",
+    "privacyPolicyURL": "https://github.com/shrivatsas/dev-setup",
+    "termsOfServiceURL": "https://github.com/shrivatsas/dev-setup",
+    "defaultPrompt": [
+      "Survey this repository as a Cartograph map.",
+      "Run the next Cartograph expedition.",
+      "Inspect this existing system area by area."
+    ],
+    "brandColor": "#0F766E"
+  }
+}

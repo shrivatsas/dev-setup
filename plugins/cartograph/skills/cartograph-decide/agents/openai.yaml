@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cartograph Decide"
+  short_description: "Settle one design decision against the principles"
+  default_prompt: "Record this design decision with Cartograph: classify it as a one-way or two-way door, score the options against the project's weighted principles, and write the record with revisit triggers."

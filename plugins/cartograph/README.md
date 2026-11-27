@@ -79,4 +79,15 @@ Cartograph delegates when these are installed and falls back to inline behaviour
 
 ## Install
 
-Claude Code: copy `skills/*` into `.claude/skills/` (project) or `~/.claude/skills/` (user), or install this folder as a plugin. The map script needs Python 3 and PyYAML.
+`link.sh` wires the top-level `skills/` collection only, so a plugin installs explicitly. Every agent reads skills from its own root:
+
+| Agent | Install |
+| --- | --- |
+| Claude Code | install this folder as a plugin, or copy `skills/*` into `.claude/skills/` (project) or `~/.claude/skills/` (user) |
+| Codex | this folder ships `.codex-plugin/plugin.json`; register it, or copy `skills/*` into `~/.codex/skills/` |
+| pi | copy `skills/*` into `~/.agents/skills/`, or the workspace's `.agents/skills/` |
+| agy (antigravity-cli) | copy `skills/*` into `~/.gemini/config/skills/`, agy's global customization root |
+
+Each skill carries an `agents/openai.yaml` interface block, which is how pi, agy and Codex surface its display name and starting prompt.
+
+The map script needs Python 3 and PyYAML.

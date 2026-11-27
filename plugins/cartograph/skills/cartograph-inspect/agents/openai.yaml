@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cartograph Inspect"
+  short_description: "Walk an existing system as built, with a verdict per area"
+  default_prompt: "Inspect this existing system with Cartograph: show what the code, schemas and config reveal area by area, confirm it with me one question at a time, record it on the map, and give an advisory verdict per area."
