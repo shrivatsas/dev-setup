@@ -1,6 +1,6 @@
 # Portable defaults synchronized by link.sh into each writable local config.toml.
 # Keep project trust, hook trust, credentials and runtime registrations out of this file.
-model = "gpt-6-astra"
+model = "gpt-6.2-astra"
 model_reasoning_effort = "medium"
 approval_policy = "on-request"
 approvals_reviewer = "auto_review"
